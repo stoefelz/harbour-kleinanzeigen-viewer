@@ -1,30 +1,36 @@
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
+import io.thp.pyotherside 1.5
 
 Page {
+    property string id: ""
     id: page
+    property var search_result: []
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
-    SilicaListView {
-        id: listView
-        model: 20
-        anchors.fill: parent
-        header: PageHeader {
-            title: qsTr("Nested Page")
-        }
-        delegate: BackgroundItem {
-            id: delegate
-
-            Label {
-                x: Theme.horizontalPageMargin
-                text: qsTr("Item") + " " + index
-                anchors.verticalCenter: parent.verticalCenter
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-            }
-            onClicked: console.log("Clicked " + index)
-        }
-        VerticalScrollDecorator {}
+    TextField {
+        id: textfield
+        anchors.top: parent.top
     }
+
+    Label {
+        id: label
+        text: "Ramonna"
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
+    Button {
+        id: button
+        text: "Click me not" + id
+        anchors.bottom: parent.bottom
+
+        onClicked: {
+
+        }
+    }
+
+
+
 }

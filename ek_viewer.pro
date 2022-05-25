@@ -20,6 +20,11 @@ DISTFILES += qml/ek_viewer.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/SecondPage.qml \
+    qml/pages/datadownloaders.py \
+    qml/pages/filter_page.qml \
+    qml/pages/get_search_entries.py \
+    qml/pages/mypython.py \
+    qml/pages/suche.html \
     rpm/ek_viewer.changes.in \
     rpm/ek_viewer.changes.run.in \
     rpm/ek_viewer.spec \
