@@ -123,6 +123,7 @@ Page {
                     //wrapMode: "WordWrap"
                     clip: true
                     //TODO truncationMode -> für überlauf
+                    //truncationMode: TruncationMode.Fade
                 }
 
                 //price

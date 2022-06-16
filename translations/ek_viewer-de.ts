@@ -35,4 +35,23 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>SilicaListView_for_Item</name>
+    <message>
+        <source>Viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link to Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

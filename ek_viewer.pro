@@ -19,10 +19,14 @@ SOURCES += src/ek_viewer.cpp
 DISTFILES += qml/ek_viewer.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
+    qml/pages/PictureCarussel.qml \
     qml/pages/SecondPage.qml \
+    qml/pages/SilicaListView_for_Item.qml \
     qml/pages/datadownloaders.py \
     qml/pages/filter_page.qml \
+    qml/pages/get_item_entry.py \
     qml/pages/get_search_entries.py \
+    qml/pages/item.html \
     qml/pages/mypython.py \
     qml/pages/suche.html \
     rpm/ek_viewer.changes.in \
