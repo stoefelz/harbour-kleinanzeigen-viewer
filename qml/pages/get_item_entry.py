@@ -35,11 +35,11 @@ def get_item(item_id):
         #without headers ebay-kleinanzeigen blocks request TODO uncomment
     #headers = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0' }
     #html_site = requests.get(url, headers=headers)
-    #soup = BeautifulSoup(html_site.text, "lxml")
+    #soup = BeautifulSoup(html_site.text, "html.parser")
 
         #TODO only for testing
     with open("item.html") as fp:
-       soup = BeautifulSoup(fp, "lxml",)
+       soup = BeautifulSoup(fp, "html.parser",)
 
 
         # in every article tag is one complete search entry

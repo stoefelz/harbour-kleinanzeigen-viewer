@@ -3,11 +3,25 @@ import Sailfish.Silica 1.0
 import io.thp.pyotherside 1.5
 
 SilicaFlickable {
+    property int detail_list_length: item_array[8].length
+    property int check_list_length: item_array[9].length
 
     function fill_models() {
         for(var i = 0; i < item_array[2].length; ++i) {
             picture_urls.append({"image_url": item_array[2][i]})
+
         }
+
+        for(var i = 0; i < item_array[8].length; ++i) {
+            detail_item_list.append({"detail_description": item_array[8][i][1], "detail_content": item_array[8][i][0]})
+        }
+
+        for(var i = 0; i < item_array[9].length; ++i) {
+            check_list_model.append({"check_list_item": item_array[9][i]})
+        }
+
+
+
     }
     //for loader qml -> requires following array with name "item_array"
     //[[username, userinfo], [big_pics, .. , big_pics], [small_pics, .., small_pics], heading, price, zip, date, views, [[detaillistright, detaillistleft], .., [detaillistright, detaillistleft]], [checktags, .. , checktags], text, link]
@@ -15,7 +29,7 @@ SilicaFlickable {
 
     //TODO datei umbenennen ist keine Silivaview sondern flickable
     anchors.fill: parent
-    contentHeight: header.height + item_details.height + item_footer.height + pic_carussel.height + section_header_description.height
+    contentHeight: header.height + item_details.height + description.height + pic_carussel.height + section_header_description.height + section_header_details.height + detail_list.height + check_list.height + section_header_checklist.height + section_header_footer.height + linkbutton.height + userinfo.height + 3*Theme.paddingLarge
 
 
 
@@ -120,14 +134,86 @@ SilicaFlickable {
     }
 
     SectionHeader {
-        id: section_header_description
-        text: qsTr("Description")
+        id: section_header_details
+        text: qsTr("Details")
         anchors.top: item_details.bottom
     }
 
+    SilicaListView {
+        id: detail_list
+        anchors.top: section_header_details.bottom
+        width: parent.width
+        height: Theme.itemSizeExtraSmall / 1.25 * detail_list_length
+
+        model: ListModel { id: detail_item_list }
+
+        delegate: DetailItem {
+            id: detail_item
+            height: Theme.itemSizeExtraSmall / 1.25
+            //clip: true
+
+            label: detail_description
+            value: detail_content
+        }
+    }
+
+    SectionHeader {
+        id: section_header_checklist
+        text: qsTr("Features")
+        anchors.top: detail_list.bottom
+    }
+
+    SilicaGridView {
+        id: check_list
+        anchors.top: section_header_checklist.bottom
+        width: parent.width
+        height: check_list_length % 2.0  ?
+                    (check_list.cellHeight * check_list_length / 2 + 1) : (check_list.cellHeight * check_list_length / 2)
+
+        anchors {
+            right: parent.right; //rightMargin: Theme.horizontalPageMargin
+            left: parent.left; leftMargin: Theme.horizontalPageMargin
+        }
+
+        cellWidth: width/2
+        cellHeight: Theme.itemSizeExtraSmall / 1.25
+
+        model: ListModel {
+            id: check_list_model
+        }
+        delegate: Item {
+            id: item
+            width: check_list.cellWidth //- Theme.horizontalPageMargin
+            height: check_list.cellHeight
+            clip: true
+
+
+            Label {
+                text: check_list_item
+                width: parent.width
+                anchors {
+                    verticalCenter: parent.verticalCenter
+
+                }
+
+                font.pixelSize: Theme.fontSizeMedium
+                truncationMode: TruncationMode.Fade
+            }
+        }
+
+
+
+    }
+
+    SectionHeader {
+        id: section_header_description
+        text: qsTr("Description")
+        anchors.top: check_list.bottom
+    }
+
     Rectangle {
-        id: item_footer
-        height: text.height + linkbutton.height + userinfo.height
+        id: description
+        height: text.height
         color: "transparent"
 
         anchors {
@@ -143,130 +229,41 @@ SilicaFlickable {
             text: item_array[10]
             wrapMode: Text.WordWrap
         }
-
-        Button {
-            id: linkbutton
-            anchors {
-                top: text.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            text: qsTr("Link to Item")
-            onClicked: {
-                Qt.openUrlExternally(item_array[11]);
-            }
-
-
-        }
-
-        Rectangle {
-            id: userinfo
-            //TODO i dont know why
-            height: userinfo_text.height * 2
-            anchors {
-                top: linkbutton.bottom
-            }
-
-            Label {
-                id: userinfo_text
-                text: item_array[0][0] + ": " + item_array[0][1]
-            }
-        }
     }
 
 
-//        model: ListModel { id: list_of_search_result }
+    SectionHeader {
+        id: section_header_footer
+        text: qsTr("Info")
+        anchors.top: description.bottom
+    }
 
-//        delegate: ListItem {
-//            id: search_result_item
-//            contentHeight: Theme.itemSizeHuge
-//            clip: true
+    Label {
+        id: userinfo
+        text: item_array[0][0] + ": " + item_array[0][1]
+        anchors {
+            top: section_header_footer.bottom
+            left: parent.left; leftMargin: Theme.horizontalPageMargin
+            right: parent.right; rightMargin: Theme.horizontalPageMargin
+        }
+        width: parent.width
+        truncationMode: TruncationMode.Fade
+    }
 
-//            //rectangle contains image, heading for item, price and zip code
-//            Rectangle {
-//                width: parent.width
-//                color: "transparent"
-//                //margin for left and right of screen and top and bottom of listitem
-//                anchors {
-//                    left: parent.left; leftMargin: Theme.horizontalPageMargin
-//                    right: parent.right; rightMargin: Theme.horizontalPageMargin
-//                    top: parent.top; topMargin: Theme.paddingMedium
-//                    bottom: parent.bottom; bottomMargin: Theme.paddingMedium
-//                }
+    Button {
+        id: linkbutton
+        anchors {
+            top: userinfo.bottom; topMargin: Theme.paddingLarge
+            horizontalCenter: parent.horizontalCenter
+        }
 
-//                Image {
-//                    id: image_item
-//                    source: image_url
-//                    height: parent.height
-//                    width: image_item.height
-//                    fillMode: Image.PreserveAspectCrop
-//                    //clip: true
-//                    //image should have rounded corners
-//                    layer.enabled: true
-//                        layer.effect: OpacityMask {
-//                            maskSource: mask
-//                        }
-//                }
 
-//                //mask for image with rounded corners
-//                Rectangle {
-//                    id: mask
-//                    height: image_item.height
-//                    width: image_item.height
-//                    radius: 5
-//                    visible: false
-//                }
+        text: qsTr("Link to Item")
+        onClicked: {
+            Qt.openUrlExternally(item_array[11]);
+        }
+    }
 
-//                //heading -> at ebay-kleinanzeigen the headings are max 70 characters (2022)
-//                Label {
-//                    id: heading_item
-
-//                    width: parent.width - image_item.width
-//                    anchors {
-//                        top: parent.top
-//                        bottom: price_item.top
-//                        left: image_item.right; leftMargin: Theme.paddingMedium
-//                    }
-
-//                    text: heading
-//                    font.pixelSize: Theme.fontSizeSmall
-//                    wrapMode: Text.WordWrap
-//                    clip: true
-//                }
-
-//                //zip code
-//                Label {
-//                    id: zip_code_item
-
-//                    width: parent.width - image_item.width - price_item.width - 2 * Theme.paddingMedium
-//                    anchors.bottom: image_item.bottom
-//                    anchors.left: image_item.right
-//                    anchors.leftMargin: Theme.paddingMedium
-//                    anchors.bottomMargin: Theme.paddingSmall
-//                    text: zip
-//                    font.pixelSize: Theme.fontSizeTiny
-//                    //wrapMode: "WordWrap"
-//                    clip: true
-//                }
-
-//                //price
-//                Label {
-//                    id: price_item
-//                    anchors.right: parent.right
-//                    anchors.bottom: parent.bottom
-//                    text: price
-//                    color: Theme.highlightColor
-//                }
-
-//            }
-
-//            click on ListItem
-//            onClicked: {
-//                //go to item page
-//                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {id: item_id})
-
-//            }
-//        }
 
     PullDownMenu {
 

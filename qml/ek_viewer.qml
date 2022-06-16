@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 import "pages"
 
 ApplicationWindow {
-    initialPage: Component { SecondPage{ } }
+    initialPage: Component { FirstPage{ } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 }

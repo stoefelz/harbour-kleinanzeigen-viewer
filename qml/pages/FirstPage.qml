@@ -123,6 +123,7 @@ Page {
                     //wrapMode: "WordWrap"
                     clip: true
                     //TODO truncationMode -> für überlauf
+                    //truncationMode: TruncationMode.Fade
                 }
 
                 //price
@@ -139,7 +140,7 @@ Page {
             //click on ListItem
             onClicked: {
                 //go to item page
-                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {id: "2115482518"})
+                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {id: "2115482518"}) //{item_id: item_id})
 
             }
         }

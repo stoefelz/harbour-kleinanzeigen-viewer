@@ -31,7 +31,7 @@ def get_search_entries(search_term, site = 1, sorting = "neu"):
     #headers = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0' }
     #html_site = requests.get(url, headers=headers)
     #TODO lxml on sailfish not ready
-    #soup = BeautifulSoup(html_site.text, "lxml")
+    #soup = BeautifulSoup(html_site.text, "html.parser")
 
 
         #TODO only for testing
