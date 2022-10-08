@@ -11,9 +11,17 @@ Page{
     //[[username, userinfo], [big_pics, .. , big_pics], [small_pics, .., small_pics], heading, price, zip, date, views, [[detaillistright, detaillistleft], .., [detaillistright, detaillistleft]], [checktags, .. , checktags], text, link]
     property var item_array: []
 
+    PageBusyIndicator {
+        id: busy_indicator
+        running: true
+    }
+
     Loader {
         id: pageLoader
         anchors.fill: parent
+        onLoaded: {
+            busy_indicator.running = false
+        }
     }
 
     Python {
@@ -30,6 +38,7 @@ Page{
 
             //start first "search" when opening app
             get_item(item_id)
+
         }
 
         onError: {
@@ -43,8 +52,12 @@ Page{
         function get_item(id) {
             call('get_item_entry.get_item', [id], function(return_value) {
                 item_array = JSON.parse(return_value)
-                //todo if empty load error.qml else thirdpage.qml
-                pageLoader.source = "SilicaListView_for_Item.qml"
+                console.log("answer from python script: " + item_array)
+                //if empty load error page
+                if(item_array == undefined || item_array.length == 0)
+                    pageLoader.source = "Error_Page.qml"
+                else
+                    pageLoader.source = "SilicaListView_for_Item.qml"
             })
         }
 

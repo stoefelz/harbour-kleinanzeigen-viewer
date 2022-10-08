@@ -7,7 +7,14 @@ Page {
     allowedOrientations: Orientation.All
     property int page_number: 1
     property string search_term: " "
-    property SearchField search_field_property: null;
+    property int results_length: 1
+    property bool page_attached: false
+
+    PageBusyIndicator {
+        id: busy_indicator
+        running: true
+    }
+
 //TODO null abfrage
     //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
     SilicaListView {
@@ -41,10 +48,24 @@ Page {
                     search_term = search_field.text
                     python.start_search(search_field.text, page_number)
 
+
                 }
 
                 //set search_field as property
-                Component.onCompleted: search_field_property=search_field
+                Component.onCompleted: search_field_property = search_field
+
+            }
+
+            ViewPlaceholder {
+                id: no_search_entries
+                enabled: {
+                    if(results_length <= 0 && busy_indicator.running == false)
+                        true
+                    else
+                        false
+                }
+                text: qsTr("Search Error")
+                hintText: qsTr("Maybe there are no results")
             }
         }
 
@@ -53,7 +74,9 @@ Page {
 
         delegate: ListItem {
             id: search_result_item
-            contentHeight: Theme.itemSizeHuge
+            //yeah, i'll burn in hell
+            contentHeight: price_item.height * 5
+
             clip: true
 
             //rectangle contains image, heading for item, price and zip code
@@ -71,10 +94,10 @@ Page {
                 Image {
                     id: image_item
                     source: image_url
-                    height: parent.height
+                    height: Theme.itemSizeHuge
+                    anchors.verticalCenter: parent.verticalCenter
                     width: image_item.height
                     fillMode: Image.PreserveAspectCrop
-                    //clip: true
                     //image should have rounded corners
                     layer.enabled: true
                         layer.effect: OpacityMask {
@@ -94,8 +117,8 @@ Page {
                 //heading -> at ebay-kleinanzeigen the headings are max 70 characters (2022)
                 Label {
                     id: heading_item
-
                     width: parent.width - image_item.width
+                    //these anchors are from hell
                     anchors {
                         top: parent.top
                         bottom: price_item.top
@@ -104,7 +127,8 @@ Page {
 
                     text: heading
                     font.pixelSize: Theme.fontSizeSmall
-                    wrapMode: Text.WordWrap
+                    wrapMode: Text.Wrap
+                    //you cant see overflow with clip enabled
                     clip: true
 
                 }
@@ -114,16 +138,12 @@ Page {
                     id: zip_code_item
 
                     width: parent.width - image_item.width - price_item.width - 2 * Theme.paddingMedium
-                    anchors.bottom: image_item.bottom
+                    anchors.bottom: parent.bottom
                     anchors.left: image_item.right
                     anchors.leftMargin: Theme.paddingMedium
-                    anchors.bottomMargin: Theme.paddingSmall
                     text: zip
                     font.pixelSize: Theme.fontSizeTiny
-                    //wrapMode: "WordWrap"
                     clip: true
-                    //TODO truncationMode -> für überlauf
-                    //truncationMode: TruncationMode.Fade
                 }
 
                 //price
@@ -140,19 +160,41 @@ Page {
             //click on ListItem
             onClicked: {
                 //go to item page
-                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {id: "2115482518"}) //{item_id: item_id})
+                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {item_id: item_id})
 
+            }
+
+            menu: ContextMenu {
+                 MenuItem {
+                     text: qsTr("Open in browser")
+                     onClicked: Qt.openUrlExternally("https://www.ebay-kleinanzeigen.de/s-anzeige/" + item_id);
+                 }
             }
         }
 
         PullDownMenu {
 
             MenuItem {
-                text: qsTr("About this App")
+                text: qsTr("About")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("About_Page.qml"))
+                }
             }
+
             MenuItem {
-                text: qsTr("Reload")
+                text: qsTr("Delete all filter")
+                onClicked: {
+                    sorting = ""
+                    seller = ""
+                    typ = ""
+                    min_price = 0
+                    max_price = 1000000
+
+                    python.start_search(search_term, page_number)
+                }
+
             }
+
             MenuItem {
                 text: qsTr("Focus Search Field")
                 onClicked: {
@@ -164,6 +206,7 @@ Page {
         }
 
         PushUpMenu {
+            id: pushup_menu
             quickSelect: true
 
             MenuItem {
@@ -205,27 +248,46 @@ Page {
             }
 
             function start_search(search_string, site) {
+                if(page_number <= 1)
+                    busy_indicator.running = true
+                else
+                    pushup_menu.busy = true
+
                 //TODO liste_search-result leeren -> aber nicht bei seite 2 anzeigen, dann sollte anfoch angefügt werden
                 if(site === 1)
                     list_of_search_result.clear()
-                call('get_search_entries.get_search_entries', [search_string, page_number.toString()], function(return_value) {
+                call('get_search_entries.get_search_entries', [search_string, page_number.toString(), sorting, seller, typ, min_price, max_price], function(return_value) {
                     var result_array = JSON.parse(return_value)
+                    results_length = result_array.length
                     for(var i = 0; i < result_array.length; i++) {
                         list_of_search_result.append({"item_id": result_array[i][0], "zip": result_array[i][4], "date": result_array[i][5], "price": result_array[i][3],"heading": result_array[i][1], "image_url": result_array[i][6]})
                     }
+                    busy_indicator.running = false
+                    pushup_menu.busy = false
                 })
+
             }
 
         }
 
         VerticalScrollDecorator {}
 
-
-
     }
-    onStatusChanged: {
-        if (status == PageStatus.Active)
+    onStatusChanged:  {
+
+
+        if (status == PageStatus.Active && !page_attached) {
             pageStack.pushAttached(Qt.resolvedUrl("filter_page.qml"))
+            page_attached = true
+        }
+
+        if(status == PageStatus.Active && reload_search) {
+            python.start_search(search_term, page_number)
+            reload_search = false
+        }
+
 
     }
+
+
 }

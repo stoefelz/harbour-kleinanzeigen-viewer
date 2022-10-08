@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
 
 SilicaFlickable {
@@ -28,17 +29,17 @@ SilicaFlickable {
     //          0                       1                               2                3      4       5   6       7                                       8                                                           9         10    11
 
     //TODO datei umbenennen ist keine Silivaview sondern flickable
-    anchors.fill: parent
-    contentHeight: header.height + item_details.height + description.height + pic_carussel.height + section_header_description.height + section_header_details.height + detail_list.height + check_list.height + section_header_checklist.height + section_header_footer.height + linkbutton.height + userinfo.height + 3*Theme.paddingLarge
+    //anchors.fill: parent
+    contentHeight: header.height + item_details.height + description.height + pic_carussel.height + section_header_description.height + section_header_details.height + detail_list.height + check_list.height + section_header_checklist.height + section_header_footer.height + userinfo.height + 3*Theme.paddingLarge
 
 
 
-    //TODO immer checken ob arrayplatz leer, weil wenn, dann zeug net anzeigen
+
 //TODO schauen ob nicht verfügbar mehr
     PageHeader {
         id: header
         anchors.top: parent.top
-        title: qsTr("Viewer")
+        title: qsTr("Picture Gallery with details")
     }
 
     SlideshowView {
@@ -70,7 +71,27 @@ SilicaFlickable {
                 }
             }
         }
+
+        visible: item_array[2].length > 0 ? true : false
     }
+
+
+
+        /*Icon {
+            source: "image://theme/icon-m-arrow-left-green"
+
+        anchors {
+            verticalCenter: pic_carussel.verticalCenter
+            left: parent.left + Theme.paddingLarge
+
+
+        }
+
+color: "black"
+
+        }*/
+
+
 
 
     Rectangle {
@@ -79,7 +100,8 @@ SilicaFlickable {
         color: "transparent"
 
         anchors {
-            top: pic_carussel.bottom; topMargin: Theme.paddingLarge
+            top: pic_carussel.visible ? pic_carussel.bottom : header.bottom;
+                                topMargin: Theme.paddingLarge
             left: parent.left; leftMargin: Theme.horizontalPageMargin
             right: parent.right; rightMargin: Theme.horizontalPageMargin
         }
@@ -101,7 +123,7 @@ SilicaFlickable {
             color: Theme.secondaryHighlightColor
             font.pixelSize: Theme.fontSizeLarge
         }
-
+/* // views are empty in python script
         Label {
             id: views
             text: item_array[7] + " " + qsTr("Views")
@@ -110,12 +132,12 @@ SilicaFlickable {
             anchors.topMargin: Theme.paddingSmall
             font.pixelSize: Theme.fontSizeSmall
         }
-
+*/
         Label {
             id: date
             text: item_array[6]
             anchors.bottom: price.bottom
-            anchors.left: views.right
+           // anchors.left: views.right
             anchors.topMargin: Theme.paddingSmall
             anchors.leftMargin: Theme.paddingMedium
             font.pixelSize: Theme.fontSizeSmall
@@ -125,7 +147,7 @@ SilicaFlickable {
             id: zip
             text: item_array[5]
             anchors.top: price.bottom
-            anchors.left: parent.left
+            //anchors.left: parent.left
             font.pixelSize: Theme.fontSizeSmall
             width: parent.width
             wrapMode: Text.WordWrap
@@ -137,11 +159,12 @@ SilicaFlickable {
         id: section_header_details
         text: qsTr("Details")
         anchors.top: item_details.bottom
+        visible: detail_list_length > 0 ? true : false
     }
 
     SilicaListView {
         id: detail_list
-        anchors.top: section_header_details.bottom
+        anchors.top: section_header_details.visible ? section_header_details.bottom : item_details.bottom
         width: parent.width
         height: Theme.itemSizeExtraSmall / 1.25 * detail_list_length
 
@@ -160,12 +183,13 @@ SilicaFlickable {
     SectionHeader {
         id: section_header_checklist
         text: qsTr("Features")
-        anchors.top: detail_list.bottom
+        anchors.top: section_header_details.visible ? detail_list.bottom: item_details.bottom
+        visible: check_list_length > 0 ? true : false
     }
 
     SilicaGridView {
         id: check_list
-        anchors.top: section_header_checklist.bottom
+        anchors.top: section_header_checklist.visible ? section_header_checklist.bottom: detail_list.bottom
         width: parent.width
         height: check_list_length % 2.0  ?
                     (check_list.cellHeight * check_list_length / 2 + 1) : (check_list.cellHeight * check_list_length / 2)
@@ -247,9 +271,11 @@ SilicaFlickable {
             right: parent.right; rightMargin: Theme.horizontalPageMargin
         }
         width: parent.width
+        wrapMode: Text.WordWrap
         truncationMode: TruncationMode.Fade
     }
 
+    /* not needed
     Button {
         id: linkbutton
         anchors {
@@ -262,18 +288,17 @@ SilicaFlickable {
         onClicked: {
             Qt.openUrlExternally(item_array[11]);
         }
-    }
+    }*/
 
 
     PullDownMenu {
 
         MenuItem {
-            text: qsTr("Link to Item")
+            text: qsTr("Open item in Browser")
+            onClicked: {
+                Qt.openUrlExternally(item_array[11]);
+            }
         }
-        MenuItem {
-            text: qsTr("Reload")
-        }
-
     }
 
 

@@ -30,6 +30,9 @@ PkgConfigBR:
 # Runtime dependencies which are not automatically detected
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
+  - pyotherside-qml-plugin-python3-qt5 >= 1.5
+  - python3-requests
+  - python3-pip
 
 # All installed files
 Files:
