@@ -19,9 +19,9 @@ Download the rpm and install it - before the first start execute
   <img alt="App image" src="screenshots/itemview1.png" width="22%">
   <img alt="App image" src="screenshots/itemview2.png" width="22%">
 </div>
+<p>
 
-
-The main goal of this project is to get a rough idea of how to create an Sailfish OS app. 
+The main goal of this project is to get a rough idea of how to create a Sailfish OS app. 
 
 
 
