@@ -14,10 +14,10 @@ Download the rpm and install it - before the first start execute
 
 # Screenshots
 <div style="display:flex;">
-  <img alt="App image" src="screenshots/search.png" width="25%">
-  <img alt="App image" src="screenshots/filter.png" width="25%">
-  <img alt="App image" src="screenshots/itemview1.png" width="25%">
-  <img alt="App image" src="screenshots/itemview2.png" width="25%">
+  <img alt="App image" src="screenshots/search.png" width="22%">
+  <img alt="App image" src="screenshots/filter.png" width="22%">
+  <img alt="App image" src="screenshots/itemview1.png" width="22%">
+  <img alt="App image" src="screenshots/itemview2.png" width="22%">
 </div>
 
 
