@@ -4,20 +4,48 @@ import Sailfish.Silica 1.0
 CoverBackground {
 
     Image {
-        anchors.fill: parent
+        width: parent.width / 2
+        height: width
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+        }
+
+        rotation: 3
+
         fillMode: Image.PreserveAspectCrop
-        opacity: 0.4
-        source: "https://sailfishos.org/content/uploads/2021/02/SF4.svg"
+        opacity: 0.3
+        source: "ek_viewer.svg"
     }
 
     Label {
+        width: parent.width - 2*Theme.horizontalPageMargin
            anchors {
                horizontalCenter: parent.horizontalCenter
                top: parent.top
                topMargin: Theme.paddingLarge
+
            }
            color: Theme.highlightColor
-           text: qsTr("EK Viewer")
+           text: qsTr("Ebay - Kleinanzeigen")
+           //font.pixelSize: Theme.fontSizeLarge
+           font.weight: Font.DemiBold
+           wrapMode: Text.WordWrap
+
        }
+    CoverActionList {
+        CoverAction {
+
+            iconSource: "image://theme/icon-cover-search"
+            onTriggered: {
+                while(pageStack.depth > 1) {
+                    pageStack.pop()
+                    pageStack.completeAnimation()
+                }
+                appWindow.activate()
+                pageStack.currentPage.focusSearch()
+            }
+        }
+    }
 
 }

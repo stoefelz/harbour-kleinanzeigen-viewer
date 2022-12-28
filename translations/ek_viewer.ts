@@ -17,10 +17,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;a href=&apos;https://ek-viewer.stoefelz.com&apos;&gt;ek-viewer.stoefelz.com&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Thanks</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29,14 +25,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;a href=&apos;https://www.github.com/stoefelz/ek-simple-parser&apos;&gt;EK Simple Parser&lt;/a&gt;</source>
+        <source>EK Simple Parser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ebay Kleinanzeigen Viewer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>EK Viewer</source>
+        <source>Ebay - Kleinanzeigen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -53,10 +53,6 @@
 </context>
 <context>
     <name>FirstPage</name>
-    <message>
-        <source>Viewer</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Search your product</source>
         <translation type="unfinished"></translation>
@@ -89,6 +85,10 @@
         <source>Maybe there are no results</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ebay Kleinanzeigen Viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SilicaListView_for_Item</name>
@@ -112,8 +112,15 @@
         <source>Open item in Browser</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>WebView</name>
     <message>
-        <source>Picture Gallery with details</source>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

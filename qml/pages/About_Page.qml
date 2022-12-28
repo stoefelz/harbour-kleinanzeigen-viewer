@@ -1,19 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+
 Page {
     allowedOrientations: Orientation.All
     id: about_page
+
     SilicaFlickable {
         anchors.fill: parent
-
         contentHeight: column.height
         anchors.bottomMargin: Theme.paddingLarge * 2
+
         Column {
             id: column
-            //anchors.fill: parent
             spacing: Theme.paddingLarge
-            width: about_page.width
-
+            width: parent.width - 2 * Theme.horizontalPageMargin
+            x: Theme.horizontalPageMargin
 
             PageHeader {
                 id: page_header
@@ -25,13 +26,13 @@ Page {
                 width: Theme.itemSizeHuge
                 height: Theme.itemSizeHuge
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "https://sailfishos.org/content/uploads/2021/02/SF4.svg"
+                source: "../cover/ek_viewer.svg" //"https://sailfishos.org/content/uploads/2021/02/SF4.svg"
             }
 
             Label {
                 text: qsTr("Ebay Kleinanzeigen viewer. My first app for Sailfish OS.")
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - (2 * Theme.horizontalPageMargin)
+                width: parent.width
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
             }
@@ -45,14 +46,18 @@ Page {
 
             Label {
                 id: link_label
-                text: qsTr("<a href='https://ek-viewer.stoefelz.com'>ek-viewer.stoefelz.com</a>")
+                text: qsTr("Ebay Kleinanzeigen Viewer")
                 anchors.horizontalCenter: parent.horizontalCenter
-
-
                 font.pixelSize: Theme.fontSizeSmall
-                linkColor: Theme.highlightColor
-                onLinkActivated: Qt.openUrlExternally(link)
+                color: Theme.highlightColor
+                font.underline: true
 
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/ek_viewer"})
+                    }
+                }
             }
 
             SectionHeader {
@@ -62,27 +67,26 @@ Page {
             Label {
                 text: qsTr("This app uses EK Simple Parser (Thanks to myself)")
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - (2 * Theme.horizontalPageMargin)
+                width: parent.width
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
+
             }
-
-
 
             Label {
-                text: qsTr("<a href='https://www.github.com/stoefelz/ek-simple-parser'>EK Simple Parser</a>")
+                text: qsTr("EK Simple Parser")
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: Theme.fontSizeSmall
-                linkColor: Theme.highlightColor
-                onLinkActivated: Qt.openUrlExternally(link)
+                color: Theme.highlightColor
+                font.underline: true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.github.com/stoefelz/ek_simple_parser"})
+                    }
+                }
             }
-
-
-
-
         }
-
-
     }
-
 }

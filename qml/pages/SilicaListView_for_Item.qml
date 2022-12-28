@@ -4,25 +4,29 @@ import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
 
 SilicaFlickable {
+
     property int detail_list_length: item_array[8].length
     property int check_list_length: item_array[9].length
-
+    contentHeight: contentColumn.height
     function fill_models() {
-        for(var i = 0; i < item_array[2].length; ++i) {
-            picture_urls.append({"image_url": item_array[2][i]})
-
+        for (var i = 0; i < item_array[2].length; ++i) {
+            picture_urls.append({
+                                    "image_url": item_array[2][i]
+                                })
         }
 
-        for(var i = 0; i < item_array[8].length; ++i) {
-            detail_item_list.append({"detail_description": item_array[8][i][1], "detail_content": item_array[8][i][0]})
+        for (var i = 0; i < item_array[8].length; ++i) {
+            detail_item_list.append({
+                                        "detail_description": item_array[8][i][1],
+                                        "detail_content": item_array[8][i][0]
+                                    })
         }
 
-        for(var i = 0; i < item_array[9].length; ++i) {
-            check_list_model.append({"check_list_item": item_array[9][i]})
+        for (var i = 0; i < item_array[9].length; ++i) {
+            check_grid_model.append({
+                                        "check_grid_item": item_array[9][i]
+                                    })
         }
-
-
-
     }
     //for loader qml -> requires following array with name "item_array"
     //[[username, userinfo], [big_pics, .. , big_pics], [small_pics, .., small_pics], heading, price, zip, date, views, [[detaillistright, detaillistleft], .., [detaillistright, detaillistleft]], [checktags, .. , checktags], text, link]
@@ -30,31 +34,29 @@ SilicaFlickable {
 
     //TODO datei umbenennen ist keine Silivaview sondern flickable
     //anchors.fill: parent
-    contentHeight: header.height + item_details.height + description.height + pic_carussel.height + section_header_description.height + section_header_details.height + detail_list.height + check_list.height + section_header_checklist.height + section_header_footer.height + userinfo.height + 3*Theme.paddingLarge
 
+    //TODO schauen ob nicht verfügbar mehr
+Column {
+    id: contentColumn
+    x: Theme.horizontalPageMargin
+    width: parent.width - 2*Theme.horizontalPageMargin
+    spacing: Theme.paddingMedium
 
-
-
-//TODO schauen ob nicht verfügbar mehr
-    PageHeader {
-        id: header
-        anchors.top: parent.top
-        title: qsTr("Picture Gallery with details")
+    Label {
+      id: marginTop
+      width: parent.width
+      height: Theme.paddingLarge * 1.5
     }
 
     SlideshowView {
         id: pic_carussel
-        height:  pic_carussel.width
+        height: pic_carussel.width
         width: parent.width
         clip: true
-        anchors {
-            top: header.bottom
-            right: parent.right; rightMargin: Theme.horizontalPageMargin
-            left: parent.left; leftMargin: Theme.horizontalPageMargin
 
+        model: ListModel {
+            id: picture_urls
         }
-
-        model: ListModel { id: picture_urls }
 
         delegate: Image {
             id: image_item
@@ -67,7 +69,10 @@ SilicaFlickable {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {big_pic_urls: item_array[1], current_index: pic_carussel.currentIndex})
+                    pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
+                                       "big_pic_urls": item_array[1],
+                                       "current_index": pic_carussel.currentIndex
+                                   })
                 }
             }
         }
@@ -76,12 +81,11 @@ SilicaFlickable {
     }
 
 
-
-        /*Icon {
+    /*Icon {
             source: "image://theme/icon-m-arrow-left-green"
 
         anchors {
-            verticalCenter: pic_carussel.verticalCenter
+            //verticalCenter: pic_carussel.verticalCenter
             left: parent.left + Theme.paddingLarge
 
 
@@ -90,21 +94,10 @@ SilicaFlickable {
 color: "black"
 
         }*/
-
-
-
-
-    Rectangle {
+    Item {
         id: item_details
         height: heading.height + price.height + zip.height
-        color: "transparent"
-
-        anchors {
-            top: pic_carussel.visible ? pic_carussel.bottom : header.bottom;
-                                topMargin: Theme.paddingLarge
-            left: parent.left; leftMargin: Theme.horizontalPageMargin
-            right: parent.right; rightMargin: Theme.horizontalPageMargin
-        }
+        width: parent.width
 
         Label {
             id: heading
@@ -123,7 +116,8 @@ color: "black"
             color: Theme.secondaryHighlightColor
             font.pixelSize: Theme.fontSizeLarge
         }
-/* // views are empty in python script
+
+        /* // views are empty in python script
         Label {
             id: views
             text: item_array[7] + " " + qsTr("Views")
@@ -131,15 +125,12 @@ color: "black"
             anchors.left: parent.left
             anchors.topMargin: Theme.paddingSmall
             font.pixelSize: Theme.fontSizeSmall
-        }
-*/
+        }*/
+
         Label {
             id: date
             text: item_array[6]
             anchors.bottom: price.bottom
-           // anchors.left: views.right
-            anchors.topMargin: Theme.paddingSmall
-            anchors.leftMargin: Theme.paddingMedium
             font.pixelSize: Theme.fontSizeSmall
         }
 
@@ -147,166 +138,121 @@ color: "black"
             id: zip
             text: item_array[5]
             anchors.top: price.bottom
-            //anchors.left: parent.left
             font.pixelSize: Theme.fontSizeSmall
             width: parent.width
-            wrapMode: Text.WordWrap
-        }
+            truncationMode: TruncationMode.Fade
 
+        }
     }
 
     SectionHeader {
         id: section_header_details
         text: qsTr("Details")
-        anchors.top: item_details.bottom
         visible: detail_list_length > 0 ? true : false
     }
 
     SilicaListView {
         id: detail_list
-        anchors.top: section_header_details.visible ? section_header_details.bottom : item_details.bottom
         width: parent.width
-        height: Theme.itemSizeExtraSmall / 1.25 * detail_list_length
 
-        model: ListModel { id: detail_item_list }
+        height: Theme.itemSizeSmall / 1.15 * detail_list_length
+        interactive: false
+
+        model: ListModel {
+            id: detail_item_list
+        }
 
         delegate: DetailItem {
             id: detail_item
-            height: Theme.itemSizeExtraSmall / 1.25
-            //clip: true
-
+            height: Theme.itemSizeSmall / 1.15
             label: detail_description
             value: detail_content
         }
+
     }
 
     SectionHeader {
         id: section_header_checklist
         text: qsTr("Features")
-        anchors.top: section_header_details.visible ? detail_list.bottom: item_details.bottom
         visible: check_list_length > 0 ? true : false
     }
 
-    SilicaGridView {
-        id: check_list
-        anchors.top: section_header_checklist.visible ? section_header_checklist.bottom: detail_list.bottom
+    SilicaListView {
+        id: check_grid
         width: parent.width
-        height: check_list_length % 2.0  ?
-                    (check_list.cellHeight * check_list_length / 2 + 1) : (check_list.cellHeight * check_list_length / 2)
-
-        anchors {
-            right: parent.right; //rightMargin: Theme.horizontalPageMargin
-            left: parent.left; leftMargin: Theme.horizontalPageMargin
-        }
-
-        cellWidth: width/2
-        cellHeight: Theme.itemSizeExtraSmall / 1.25
+        height: check_list_length * Theme.itemSizeExtraSmall / 1.5
+        spacing: Theme.paddingSmall
+        interactive: false
 
         model: ListModel {
-            id: check_list_model
+            id: check_grid_model
         }
-        delegate: Item {
-            id: item
-            width: check_list.cellWidth //- Theme.horizontalPageMargin
-            height: check_list.cellHeight
-            clip: true
 
-
-            Label {
-                text: check_list_item
+        delegate: Label {
+                id: gridLabel
+                text: check_grid_item
                 width: parent.width
-                anchors {
-                    verticalCenter: parent.verticalCenter
-
-                }
-
-                font.pixelSize: Theme.fontSizeMedium
-                truncationMode: TruncationMode.Fade
-            }
+                height: Theme.itemSizeExtraSmall / 1.5
+                wrapMode: Text.WordWrap
         }
-
-
-
     }
 
     SectionHeader {
         id: section_header_description
         text: qsTr("Description")
-        anchors.top: check_list.bottom
     }
 
-    Rectangle {
-        id: description
-        height: text.height
-        color: "transparent"
 
-        anchors {
-            top: section_header_description.bottom
-            left: parent.left; leftMargin: Theme.horizontalPageMargin
-            right: parent.right; rightMargin: Theme.horizontalPageMargin
-        }
-
-
-        Label {
-            id: text
-            width: parent.width
-            text: item_array[10]
-            wrapMode: Text.WordWrap
-        }
+    Label {
+        id: text
+        width: parent.width
+        text: item_array[10]
+        wrapMode: Text.Wrap
     }
 
 
     SectionHeader {
         id: section_header_footer
         text: qsTr("Info")
-        anchors.top: description.bottom
     }
 
     Label {
         id: userinfo
-        text: item_array[0][0] + ": " + item_array[0][1]
-        anchors {
-            top: section_header_footer.bottom
-            left: parent.left; leftMargin: Theme.horizontalPageMargin
-            right: parent.right; rightMargin: Theme.horizontalPageMargin
-        }
         width: parent.width
+        text: {
+            if(item_array[0][0] == "")
+                item_array[0][1]
+            else
+                item_array[0][0] + ": " + item_array[0][1]
+        }
         wrapMode: Text.WordWrap
-        truncationMode: TruncationMode.Fade
     }
 
-    /* not needed
-    Button {
-        id: linkbutton
-        anchors {
-            top: userinfo.bottom; topMargin: Theme.paddingLarge
-            horizontalCenter: parent.horizontalCenter
-        }
-
-
-        text: qsTr("Link to Item")
-        onClicked: {
-            Qt.openUrlExternally(item_array[11]);
-        }
-    }*/
-
+    Label {
+      id: marginBottom
+      width: parent.width
+      height: Theme.paddingLarge
+    }
+}
 
     PullDownMenu {
 
         MenuItem {
             text: qsTr("Open item in Browser")
             onClicked: {
-                Qt.openUrlExternally(item_array[11]);
+                //pageStack.push(Qt.resolvedUrl("WebView.qml"), {itemUrl: item_array[11]})
+                Qt.openUrlExternally(item_array[11])
             }
         }
     }
 
-
-
     VerticalScrollDecorator {}
 
     Component.onCompleted: {
-        fill_models();
-    }
+        fill_models()
+        pageStack.pushAttached(Qt.resolvedUrl("WebView.qml"), {
+                                   "itemUrl": item_array[11]
+                               })
 
+    }
 }

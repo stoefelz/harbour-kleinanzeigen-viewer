@@ -14,6 +14,8 @@ TARGET = ek_viewer
 
 CONFIG += sailfishapp
 
+PKGCONFIG += qt5embedwidget
+
 SOURCES += src/ek_viewer.cpp
 
 DISTFILES += qml/ek_viewer.qml \
@@ -24,6 +26,7 @@ DISTFILES += qml/ek_viewer.qml \
     qml/pages/PictureCarussel.qml \
     qml/pages/SecondPage.qml \
     qml/pages/SilicaListView_for_Item.qml \
+    qml/pages/WebView.qml \
     qml/pages/filter_page.qml \
     qml/pages/get_item_entry.py \
     qml/pages/get_search_entries.py \
