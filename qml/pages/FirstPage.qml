@@ -27,11 +27,10 @@ Page {
         header: Column {
             id: header_column
             width: parent.width
-            spacing: Theme.paddingSmall
 
             PageHeader {
                 id: header
-                title: qsTr("Ebay Kleinanzeigen Viewer")
+                title: qsTr("Items")
             }
 
             SearchField {
@@ -297,7 +296,7 @@ Page {
     onStatusChanged: {
 
         if (status == PageStatus.Active && !page_attached) {
-            pageStack.pushAttached(Qt.resolvedUrl("filter_page.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("FilterPage.qml"))
             page_attached = true
         }
 

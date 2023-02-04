@@ -22,12 +22,13 @@ DISTFILES += qml/ek_viewer.qml \
     qml/cover/CoverPage.qml \
     qml/pages/About_Page.qml \
     qml/pages/Error_Page.qml \
+    qml/pages/FilterPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/PictureCarussel.qml \
     qml/pages/SecondPage.qml \
     qml/pages/SilicaListView_for_Item.qml \
     qml/pages/WebView.qml \
-    qml/pages/filter_page.qml \
+    qml/pages/ZipSelection.qml \
     qml/pages/get_item_entry.py \
     qml/pages/get_search_entries.py \
     rpm/ek_viewer.changes.in \

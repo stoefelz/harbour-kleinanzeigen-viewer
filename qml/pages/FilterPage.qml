@@ -8,6 +8,7 @@ Page {
     //    property string typ: ""
     //    property int min_price: 0
     //    property int max_price: 0
+
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
@@ -20,6 +21,43 @@ Page {
             PageHeader {
                 id: header
                 title: qsTr("Filters")
+            }
+
+            BackgroundItem {
+                Column {
+                    Row {
+                        x: Theme.horizontalPageMargin
+                        Label {
+
+                            text: "Place "
+                        }
+                        Label {
+                            color: Theme.highlightColor
+                            text: "Germany"
+                        }
+                    }
+                    Label {
+                        x: Theme.horizontalPageMargin
+                        color: Theme.secondaryColor
+                        font.pixelSize: Theme.fontSizeExtraSmallBase
+                        text: "jsonID"
+
+                    }
+                }
+                onClicked:  pageStack.push(Qt.resolvedUrl("ZipSelection.qml"))
+            }
+
+
+            ComboBox {
+                width: parent.width
+                label: "Radius"
+
+                menu: ContextMenu {
+                    MenuItem { text: "Ganzer Ort" }
+                    MenuItem { text: "+5km" }
+                    MenuItem { text: "+10km" }
+                    MenuItem { text: "+15km" }
+                }
             }
 
             ComboBox {
