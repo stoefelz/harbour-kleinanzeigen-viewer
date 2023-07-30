@@ -15,7 +15,6 @@ FullscreenContentPage {
         }
     }
 
-
     SlideshowView {
         id: slideshow
         anchors.fill: parent

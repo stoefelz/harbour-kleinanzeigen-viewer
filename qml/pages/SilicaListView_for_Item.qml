@@ -48,36 +48,60 @@ Column {
       height: Theme.paddingLarge * 1.5
     }
 
-    SlideshowView {
-        id: pic_carussel
-        height: pic_carussel.width
+    // picture carussel with picture count in text format
+    Item {
+        height: pic_carussel.height
         width: parent.width
-        clip: true
 
-        model: ListModel {
-            id: picture_urls
+        SlideshowView {
+            id: pic_carussel
+            height: pic_carussel.width
+            width: parent.width
+            clip: true
+
+            model: ListModel {
+                id: picture_urls
+            }
+
+            delegate: Image {
+                id: image_item
+                source: image_url
+
+                width: parent.width
+                height: parent.height
+                fillMode: Image.PreserveAspectFit
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
+                                           "big_pic_urls": item_array[1],
+                                           "current_index": pic_carussel.currentIndex
+                                       })
+                    }
+                }
+            }
+
+            visible: item_array[2].length > 0 ? true : false
         }
 
-        delegate: Image {
-            id: image_item
-            source: image_url
+        Rectangle {
+            anchors.bottom: pic_carussel.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: pic_text.contentWidth + 2 * Theme.paddingSmall
+            height: pic_text.contentHeight + Theme.paddingSmall
+            color: "#f0f8ff"
+            opacity: 0.5
+            radius: 10
 
-            width: parent.width
-            height: parent.height
-            fillMode: Image.PreserveAspectFit
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
-                                       "big_pic_urls": item_array[1],
-                                       "current_index": pic_carussel.currentIndex
-                                   })
-                }
+            Label {
+                id: pic_text
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "black"
+                text: (pic_carussel.currentIndex + 1) + "/" + item_array[1].length
             }
         }
 
-        visible: item_array[2].length > 0 ? true : false
     }
 
 

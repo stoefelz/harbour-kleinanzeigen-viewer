@@ -176,10 +176,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Features</source>
         <translation type="unfinished"></translation>
     </message>
@@ -189,6 +185,10 @@
     </message>
     <message>
         <source>Open item in Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -214,7 +214,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Maybe there are no results</source>
+        <source>There are no results</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
