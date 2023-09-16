@@ -133,27 +133,11 @@
 <context>
     <name>FirstPage</name>
     <message>
+        <source>Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Search your product</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Focus Search Field</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -165,7 +149,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Items</source>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Focus Search Field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load more</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -180,15 +180,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open item in Browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

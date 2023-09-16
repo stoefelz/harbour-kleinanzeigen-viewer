@@ -8,7 +8,7 @@ Page {
     function getZipList(string) {
 
         var request = new XMLHttpRequest()
-        request.open('GET', 'https://www.ebay-kleinanzeigen.de/s-ort-empfehlungen.json?query=' + string, true);
+        request.open('GET', 'https://www.kleinanzeigen.de/s-ort-empfehlungen.json?query=' + string, true);
         request.onreadystatechange = function() {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status && request.status === 200) {

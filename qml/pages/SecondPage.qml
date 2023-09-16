@@ -6,9 +6,7 @@ Page {
     allowedOrientations: Orientation.All
     //item id gets by FirstPage
     property string item_id: "2312064628"
-    //item array consists of:
-    //[[username, userinfo], [big_pics, .. , big_pics], [small_pics, .., small_pics], heading, price, zip, date, views, [[detaillistright, detaillistleft], .., [detaillistright, detaillistleft]], [checktags, .. , checktags], text, link]
-    property var item_array: []
+    property var item_object: ({})
 
     PageBusyIndicator {
         id: busy_indicator
@@ -33,7 +31,7 @@ Page {
                 console.log('python message ' + return_msg)
             })
 
-            importModule('get_item_entry', function () {})
+            importModule('get_item', function () {})
 
             //start first "search" when opening app
             get_item(item_id)
@@ -48,11 +46,13 @@ Page {
         }
 
         function get_item(id) {
-            call('get_item_entry.get_item', [id], function (return_value) {
-                item_array = JSON.parse(return_value)
-                console.log("answer from python script: " + item_array)
+            call('get_item.get_item', [id], function (return_value) {
+                console.log(return_value)
+                item_object = JSON.parse(return_value)
+                console.log(item_object)
+                console.log("answer from python script: " + item_object)
                 //if empty load error page
-                if (item_array == undefined || item_array.length == 0)
+                if (item_object == undefined || item_object.length == 0)
                     pageLoader.source = "Error_Page.qml"
                 else
                     pageLoader.source = "SilicaListView_for_Item.qml"

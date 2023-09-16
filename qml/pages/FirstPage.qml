@@ -270,19 +270,27 @@ Page {
                 //TODO liste_search-result leeren -> aber nicht bei seite 2 anzeigen, dann sollte anfoch angefügt werden
                 if (site === 1)
                     list_of_search_result.clear()
+                console.log(min_price, max_price)
                 call('get_search_entries.get_search_entries',
-                     [search_string, page_number.toString(), sorting, seller, typ, min_price, max_price],
+                     [search_string, {
+                          'site-number': page_number,
+                          'sorting': sorting,
+                          'seller': seller,
+                          'typ': typ,
+                          'min_price': min_price.toString(),
+                          'max_price': max_price.toString()
+                      }],
                      function (return_value) {
-                         var result_array = JSON.parse(return_value)
-                         results_length = result_array.length
-                         for (var i = 0; i < result_array.length; i++) {
+                         var result_object = JSON.parse(return_value)
+                         results_length = result_object.length
+                         for (var i = 0; i < result_object.length; i++) {
                              list_of_search_result.append({
-                                                              "item_id": result_array[i][0],
-                                                              "zip": result_array[i][4],
-                                                              "date": result_array[i][5],
-                                                              "price": result_array[i][3],
-                                                              "heading": result_array[i][1],
-                                                              "image_url": result_array[i][6]
+                                                              "item_id": result_object[i]["id"],
+                                                              "zip": result_object[i]["zip-code"],
+                                                              "date": result_object[i]["date"],
+                                                              "price": result_object[i]["price"],
+                                                              "heading": result_object[i]["heading"],
+                                                              "image_url": result_object[i]["image-url"],
                                                           })
                          }
                          busyIndicatorProperty.running = false

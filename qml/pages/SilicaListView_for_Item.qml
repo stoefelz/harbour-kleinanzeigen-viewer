@@ -5,26 +5,26 @@ import io.thp.pyotherside 1.5
 
 SilicaFlickable {
 
-    property int detail_list_length: item_array[8].length
-    property int check_list_length: item_array[9].length
+    property int detail_list_length: item_object.details.length
+    property int check_list_length: item_object.checktags.length
     contentHeight: contentColumn.height
     function fill_models() {
-        for (var i = 0; i < item_array[2].length; ++i) {
+        for (var i = 0; i < item_object["small-pictures"].length; ++i) {
             picture_urls.append({
-                                    "image_url": item_array[2][i]
+                                    "image_url": item_object["small-pictures"][i]
                                 })
         }
 
-        for (var i = 0; i < item_array[8].length; ++i) {
+        for (var i = 0; i < item_object.details.length; ++i) {
             detail_item_list.append({
-                                        "detail_description": item_array[8][i][1],
-                                        "detail_content": item_array[8][i][0]
+                                        "detail_description": item_object.details[i].key,
+                                        "detail_content": item_object.details[i].value
                                     })
         }
 
-        for (var i = 0; i < item_array[9].length; ++i) {
+        for (var i = 0; i < item_object.checktags.length; ++i) {
             check_grid_model.append({
-                                        "check_grid_item": item_array[9][i]
+                                        "check_grid_item": item_object.checktags[i]
                                     })
         }
     }
@@ -75,14 +75,14 @@ Column {
                     anchors.fill: parent
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
-                                           "big_pic_urls": item_array[1],
+                                           "big_pic_urls": item_object["large-pictures"],
                                            "current_index": pic_carussel.currentIndex
                                        })
                     }
                 }
             }
 
-            visible: item_array[2].length > 0 ? true : false
+            visible: item_object["small-pictures"].length > 0 ? true : false
         }
 
         Rectangle {
@@ -98,7 +98,7 @@ Column {
                 id: pic_text
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "black"
-                text: (pic_carussel.currentIndex + 1) + "/" + item_array[1].length
+                text: (pic_carussel.currentIndex + 1) + "/" + item_object["large-pictures"].length
             }
         }
 
@@ -126,7 +126,7 @@ color: "black"
         Label {
             id: heading
             width: parent.width
-            text: item_array[3]
+            text: item_object.heading
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
@@ -134,7 +134,7 @@ color: "black"
 
         Label {
             id: price
-            text: item_array[4]
+            text: item_object.price
             anchors.top: heading.bottom
             anchors.right: parent.right
             color: Theme.secondaryHighlightColor
@@ -153,14 +153,14 @@ color: "black"
 
         Label {
             id: date
-            text: item_array[6]
+            text: item_object.date
             anchors.bottom: price.bottom
             font.pixelSize: Theme.fontSizeSmall
         }
 
         Label {
             id: zip
-            text: item_array[5]
+            text: item_object["zip-code"]
             anchors.top: price.bottom
             font.pixelSize: Theme.fontSizeSmall
             width: parent.width
@@ -230,7 +230,7 @@ color: "black"
     Label {
         id: text
         width: parent.width
-        text: item_array[10]
+        text: item_object.text
         wrapMode: Text.Wrap
     }
 
@@ -243,12 +243,12 @@ color: "black"
     Label {
         id: userinfo
         width: parent.width
-        text: {
+        text: item_object["user-info"] /*{
             if(item_array[0][0] == "")
                 item_array[0][1]
             else
                 item_array[0][0] + ": " + item_array[0][1]
-        }
+        }*/
         wrapMode: Text.WordWrap
     }
 
@@ -264,8 +264,8 @@ color: "black"
         MenuItem {
             text: qsTr("Open item in Browser")
             onClicked: {
-                //pageStack.push(Qt.resolvedUrl("WebView.qml"), {itemUrl: item_array[11]})
-                Qt.openUrlExternally(item_array[11])
+                //pageStack.push(Qt.resolvedUrl("WebView.qml"), {itemUrl: item_object.link})
+                Qt.openUrlExternally(item_object.link)
             }
         }
     }
@@ -275,7 +275,7 @@ color: "black"
     Component.onCompleted: {
         fill_models()
         pageStack.pushAttached(Qt.resolvedUrl("WebView.qml"), {
-                                   "itemUrl": item_array[11]
+                                   "itemUrl": item_object.link
                                })
 
     }
