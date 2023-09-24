@@ -5,34 +5,31 @@ import io.thp.pyotherside 1.5
 
 SilicaFlickable {
 
-    property int detail_list_length: item_object.details.length
-    property int check_list_length: item_object.checktags.length
+    property int detailListLength: itemObject.details.length
+    property int checkListLength: itemObject.checktags.length
     contentHeight: contentColumn.height
-    function fill_models() {
-        for (var i = 0; i < item_object["small-pictures"].length; ++i) {
-            picture_urls.append({
-                                    "image_url": item_object["small-pictures"][i]
+    function fillModels() {
+        for (var i = 0; i < itemObject["small-pictures"].length; ++i) {
+            pictureUrls.append({
+                                    "imageUrl": itemObject["small-pictures"][i]
                                 })
         }
 
-        for (var i = 0; i < item_object.details.length; ++i) {
-            detail_item_list.append({
-                                        "detail_description": item_object.details[i].key,
-                                        "detail_content": item_object.details[i].value
+        for (var i = 0; i < itemObject.details.length; ++i) {
+            detailItemList.append({
+                                        "detailDescription": itemObject.details[i].key,
+                                        "detailContent": itemObject.details[i].value
                                     })
         }
 
-        for (var i = 0; i < item_object.checktags.length; ++i) {
-            check_grid_model.append({
-                                        "check_grid_item": item_object.checktags[i]
+        for (var i = 0; i < itemObject.checktags.length; ++i) {
+            checkGridModel.append({
+                                        "checkGridItem": itemObject.checktags[i]
                                     })
         }
     }
-    //for loader qml -> requires following array with name "item_array"
-    //[[username, userinfo], [big_pics, .. , big_pics], [small_pics, .., small_pics], heading, price, zip, date, views, [[detaillistright, detaillistleft], .., [detaillistright, detaillistleft]], [checktags, .. , checktags], text, link]
-    //          0                       1                               2                3      4       5   6       7                                       8                                                           9         10    11
+    //for loader qml -> requires following object with name "itemObject"
 
-    //TODO datei umbenennen ist keine Silivaview sondern flickable
     //anchors.fill: parent
 
     //TODO schauen ob nicht verfügbar mehr
@@ -50,22 +47,23 @@ Column {
 
     // picture carussel with picture count in text format
     Item {
-        height: pic_carussel.height
+        height: picCarussel.height
         width: parent.width
+        visible: itemObject["small-pictures"].length > 0 ? true : false
 
         SlideshowView {
-            id: pic_carussel
-            height: pic_carussel.width
+            id: picCarussel
+            height: picCarussel.width
             width: parent.width
             clip: true
 
             model: ListModel {
-                id: picture_urls
+                id: pictureUrls
             }
 
             delegate: Image {
-                id: image_item
-                source: image_url
+                id: imageItem
+                source: imageUrl
 
                 width: parent.width
                 height: parent.height
@@ -75,58 +73,44 @@ Column {
                     anchors.fill: parent
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
-                                           "big_pic_urls": item_object["large-pictures"],
-                                           "current_index": pic_carussel.currentIndex
-                                       })
+                                           "bigPicUrls": itemObject["large-pictures"],
+                                           "currentIndex": picCarussel.currentIndex
+                        })
                     }
                 }
             }
 
-            visible: item_object["small-pictures"].length > 0 ? true : false
         }
 
         Rectangle {
-            anchors.bottom: pic_carussel.bottom
+            anchors.bottom: picCarussel.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            width: pic_text.contentWidth + 2 * Theme.paddingSmall
-            height: pic_text.contentHeight + Theme.paddingSmall
+            width: picText.contentWidth + 2 * Theme.paddingSmall
+            height: picText.contentHeight + Theme.paddingSmall
             color: "#f0f8ff"
             opacity: 0.5
             radius: 10
 
             Label {
-                id: pic_text
+                id: picText
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "black"
-                text: (pic_carussel.currentIndex + 1) + "/" + item_object["large-pictures"].length
+                text: (picCarussel.currentIndex + 1) + "/" + itemObject["large-pictures"].length
             }
         }
 
     }
 
 
-    /*Icon {
-            source: "image://theme/icon-m-arrow-left-green"
-
-        anchors {
-            //verticalCenter: pic_carussel.verticalCenter
-            left: parent.left + Theme.paddingLarge
-
-
-        }
-
-color: "black"
-
-        }*/
     Item {
-        id: item_details
+        id: itemDetails
         height: heading.height + price.height + zip.height
         width: parent.width
 
         Label {
             id: heading
             width: parent.width
-            text: item_object.heading
+            text: itemObject.heading
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
@@ -134,7 +118,7 @@ color: "black"
 
         Label {
             id: price
-            text: item_object.price
+            text: itemObject.price
             anchors.top: heading.bottom
             anchors.right: parent.right
             color: Theme.secondaryHighlightColor
@@ -153,14 +137,14 @@ color: "black"
 
         Label {
             id: date
-            text: item_object.date
+            text: itemObject.date
             anchors.bottom: price.bottom
             font.pixelSize: Theme.fontSizeSmall
         }
 
         Label {
             id: zip
-            text: item_object["zip-code"]
+            text: itemObject["zip-code"]
             anchors.top: price.bottom
             font.pixelSize: Theme.fontSizeSmall
             width: parent.width
@@ -170,51 +154,51 @@ color: "black"
     }
 
     SectionHeader {
-        id: section_header_details
+        id: sectionHeaderDetails
         text: qsTr("Details")
-        visible: detail_list_length > 0 ? true : false
+        visible: detailListLength > 0 ? true : false
     }
 
     SilicaListView {
-        id: detail_list
+        id: detailList
         width: parent.width
 
-        height: Theme.itemSizeSmall / 1.15 * detail_list_length
+        height: Theme.itemSizeSmall / 1.15 * detailListLength
         interactive: false
 
         model: ListModel {
-            id: detail_item_list
+            id: detailItemList
         }
 
         delegate: DetailItem {
-            id: detail_item
+            id: detailItem
             height: Theme.itemSizeSmall / 1.15
-            label: detail_description
-            value: detail_content
+            label: detailDescription
+            value: detailContent
         }
 
     }
 
     SectionHeader {
-        id: section_header_checklist
+        id: sectionHeaderChecklist
         text: qsTr("Features")
-        visible: check_list_length > 0 ? true : false
+        visible: checkListLength > 0 ? true : false
     }
 
     SilicaListView {
-        id: check_grid
+        id: checkGrid
         width: parent.width
-        height: check_list_length * Theme.itemSizeExtraSmall / 1.5
+        height: checkListLength * Theme.itemSizeExtraSmall / 1.5
         spacing: Theme.paddingSmall
         interactive: false
 
         model: ListModel {
-            id: check_grid_model
+            id: checkGridModel
         }
 
         delegate: Label {
                 id: gridLabel
-                text: check_grid_item
+                text: checkGridItem
                 width: parent.width
                 height: Theme.itemSizeExtraSmall / 1.5
                 wrapMode: Text.WordWrap
@@ -222,7 +206,7 @@ color: "black"
     }
 
     SectionHeader {
-        id: section_header_description
+        id: sectionHeaderDescription
         text: qsTr("Description")
     }
 
@@ -230,20 +214,20 @@ color: "black"
     Label {
         id: text
         width: parent.width
-        text: item_object.text
+        text: itemObject.text
         wrapMode: Text.Wrap
     }
 
 
     SectionHeader {
-        id: section_header_footer
+        id: sectionHeaderFooter
         text: qsTr("Info")
     }
 
     Label {
         id: userinfo
         width: parent.width
-        text: item_object["user-info"] /*{
+        text: itemObject["username"] + ": " + itemObject["userinfo"] /*{
             if(item_array[0][0] == "")
                 item_array[0][1]
             else
@@ -264,8 +248,8 @@ color: "black"
         MenuItem {
             text: qsTr("Open item in Browser")
             onClicked: {
-                //pageStack.push(Qt.resolvedUrl("WebView.qml"), {itemUrl: item_object.link})
-                Qt.openUrlExternally(item_object.link)
+                //pageStack.push(Qt.resolvedUrl("WebView.qml"), {itemUrl: itemObject.link})
+                Qt.openUrlExternally(itemObject.link)
             }
         }
     }
@@ -273,9 +257,9 @@ color: "black"
     VerticalScrollDecorator {}
 
     Component.onCompleted: {
-        fill_models()
+        fillModels()
         pageStack.pushAttached(Qt.resolvedUrl("WebView.qml"), {
-                                   "itemUrl": item_object.link
+                                   "itemUrl": itemObject.link
                                })
 
     }

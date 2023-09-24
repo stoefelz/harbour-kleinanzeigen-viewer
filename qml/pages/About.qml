@@ -3,7 +3,6 @@ import Sailfish.Silica 1.0
 
 Page {
     allowedOrientations: Orientation.All
-    id: about_page
 
     SilicaFlickable {
         anchors.fill: parent
@@ -17,12 +16,10 @@ Page {
             x: Theme.horizontalPageMargin
 
             PageHeader {
-                id: page_header
-                title: qsTr("About EK-Viewer")
+                title: qsTr("About Kleinanzeigen Viewer")
             }
 
             Image {
-                id: about_image
                 width: Theme.itemSizeHuge
                 height: Theme.itemSizeHuge
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -30,7 +27,7 @@ Page {
             }
 
             Label {
-                text: qsTr("Ebay Kleinanzeigen viewer. My first app for Sailfish OS.")
+                text: qsTr("Kleinanzeigen Viewer. My first app for Sailfish OS.")
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
@@ -38,15 +35,14 @@ Page {
             }
 
             Label {
-                text: qsTr("© Pascal Stöfelz \n #nolife")
+                text: qsTr("© Pascal Stöfelz")
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Label {
-                id: link_label
-                text: qsTr("Ebay Kleinanzeigen Viewer")
+                text: qsTr("Kleinanzeigen Viewer")
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
@@ -55,7 +51,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/ek_viewer"})
+                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/kleinanzeigen_viewer"})
                     }
                 }
             }
@@ -65,7 +61,7 @@ Page {
             }
 
             Label {
-                text: qsTr("This app uses EK Simple Parser (Thanks to myself)")
+                text: qsTr("This app uses Kleinanzeigen Parser (Thanks to myself)")
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
@@ -74,7 +70,7 @@ Page {
             }
 
             Label {
-                text: qsTr("EK Simple Parser")
+                text: qsTr("Kleinanzeigen Parser")
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
@@ -83,7 +79,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.github.com/stoefelz/ek_simple_parser"})
+                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.github.com/stoefelz/kleinanzeigen_parser"})
                     }
                 }
             }

@@ -4,13 +4,13 @@ import Sailfish.Silica 1.0
 FullscreenContentPage {
 
     anchors.fill: parent
-    property var big_pic_urls: []
-    property int current_index: 0
+    property var bigPicUrls: []
+    property int currentIndex: 0
 
-    function fill_model() {
-        for (var i = 0; i < big_pic_urls.length; ++i) {
-            picture_urls.append({
-                                    "picture_url": big_pic_urls[i]
+    function fillModel() {
+        for (var i = 0; i < bigPicUrls.length; ++i) {
+            pictureUrls.append({
+                                    "pictureUrl": bigPicUrls[i]
                                 })
         }
     }
@@ -19,14 +19,14 @@ FullscreenContentPage {
         id: slideshow
         anchors.fill: parent
         model: ListModel {
-            id: picture_urls
+            id: pictureUrls
         }
 
         delegate: Image {
             id: image
             width: parent.width
             height: parent.height
-            source: picture_url
+            source: pictureUrl
             fillMode: Image.PreserveAspectFit
 
             PinchArea {
@@ -53,7 +53,7 @@ FullscreenContentPage {
     }
 
     Component.onCompleted: {
-        fill_model()
-        slideshow.positionViewAtIndex(current_index - 1, slideshow.Beginning)
+        fillModel()
+        slideshow.positionViewAtIndex(currentIndex - 1, slideshow.Beginning)
     }
 }

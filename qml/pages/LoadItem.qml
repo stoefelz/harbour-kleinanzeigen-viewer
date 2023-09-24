@@ -5,11 +5,11 @@ import io.thp.pyotherside 1.5
 Page {
     allowedOrientations: Orientation.All
     //item id gets by FirstPage
-    property string item_id: "2312064628"
-    property var item_object: ({})
+    property string itemId: "2312064628"
+    property var itemObject: ({})
 
     PageBusyIndicator {
-        id: busy_indicator
+        id: busyIndicator
         running: true
     }
 
@@ -17,7 +17,7 @@ Page {
         id: pageLoader
         anchors.fill: parent
         onLoaded: {
-            busy_indicator.running = false
+            busyIndicator.running = false
         }
     }
 
@@ -27,14 +27,14 @@ Page {
         Component.onCompleted: {
             addImportPath(Qt.resolvedUrl('.'))
 
-            setHandler('msg', function (return_msg) {
-                console.log('python message ' + return_msg)
+            setHandler('msg', function (returnMsg) {
+                console.log('python message ' + returnMsg)
             })
 
             importModule('get_item', function () {})
 
             //start first "search" when opening app
-            get_item(item_id)
+            getItem(itemId)
         }
 
         onError: {
@@ -45,17 +45,17 @@ Page {
             console.log('python: ' + data)
         }
 
-        function get_item(id) {
-            call('get_item.get_item', [id], function (return_value) {
-                console.log(return_value)
-                item_object = JSON.parse(return_value)
-                console.log(item_object)
-                console.log("answer from python script: " + item_object)
+        function getItem(id) {
+            call('get_item.get_item', [id], function (returnValue) {
+                console.log(returnValue)
+                itemObject = JSON.parse(returnValue)
+                console.log(itemObject)
+                console.log("answer from python script: " + itemObject)
                 //if empty load error page
-                if (item_object == undefined || item_object.length == 0)
-                    pageLoader.source = "Error_Page.qml"
+                if (itemObject == undefined || itemObject.length == 0)
+                    pageLoader.source = "Error.qml"
                 else
-                    pageLoader.source = "SilicaListView_for_Item.qml"
+                    pageLoader.source = "ItemView.qml"
             })
         }
     }

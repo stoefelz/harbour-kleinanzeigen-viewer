@@ -3,7 +3,8 @@ import Sailfish.Silica 1.0
 import Sailfish.WebView 1.0
 
 Page {
-    property string itemUrl: "https://www.ebay-kleinanzeigen.de"
+    // itemUrl is handed over from previous page
+    property string itemUrl: websiteUrl
 
     WebView {
         id: webView

@@ -169,7 +169,7 @@ Page {
             //click on ListItem
             onClicked: {
                 //go to item page
-                pageStack.push(Qt.resolvedUrl("SecondPage.qml"), {
+                pageStack.push(Qt.resolvedUrl("LoadItem.qml"), {
                                    "item_id": item_id
                                })
             }
@@ -188,7 +188,7 @@ Page {
             MenuItem {
                 text: qsTr("About")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About_Page.qml"))
+                    pageStack.push(Qt.resolvedUrl("About.qml"))
                 }
             }
 
@@ -304,7 +304,7 @@ Page {
     onStatusChanged: {
 
         if (status == PageStatus.Active && !page_attached) {
-            pageStack.pushAttached(Qt.resolvedUrl("FilterPage.qml"))
+            pageStack.pushAttached(Qt.resolvedUrl("Filter.qml"))
             page_attached = true
         }
 

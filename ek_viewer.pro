@@ -20,16 +20,17 @@ SOURCES += src/ek_viewer.cpp
 
 DISTFILES += qml/ek_viewer.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/About_Page.qml \
-    qml/pages/Error_Page.qml \
-    qml/pages/FilterPage.qml \
-    qml/pages/FirstPage.qml \
+    qml/pages/About.qml \
+    qml/pages/Error.qml \
+    qml/pages/Filter.qml \
+    qml/pages/FilterProperties.qml \
+    qml/pages/ItemView.qml \
+    qml/pages/LoadItem.qml \
     qml/pages/PictureCarussel.qml \
-    qml/pages/SecondPage.qml \
-    qml/pages/SilicaListView_for_Item.qml \
+    qml/pages/PossibleFilterValues.qml \
+    qml/pages/StartPageWithSearchResults.qml \
     qml/pages/WebView.qml \
     qml/pages/ZipSelection.qml \
-    qml/pages/get_item_entry.py \
     qml/pages/get_search_entries.py \
     rpm/ek_viewer.changes.in \
     rpm/ek_viewer.changes.run.in \

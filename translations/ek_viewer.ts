@@ -2,18 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>About_Page</name>
+    <name>About</name>
     <message>
-        <source>About EK-Viewer</source>
+        <source>About Kleinanzeigen Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ebay Kleinanzeigen viewer. My first app for Sailfish OS.</source>
+        <source>Kleinanzeigen Viewer. My first app for Sailfish OS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>© Pascal Stöfelz 
- #nolife</source>
+        <source>© Pascal Stöfelz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kleinanzeigen Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -21,15 +24,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This app uses EK Simple Parser (Thanks to myself)</source>
+        <source>This app uses Kleinanzeigen Parser (Thanks to myself)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>EK Simple Parser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ebay Kleinanzeigen Viewer</source>
+        <source>Kleinanzeigen Parser</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -41,7 +40,7 @@
     </message>
 </context>
 <context>
-    <name>Error_Page</name>
+    <name>Error</name>
     <message>
         <source>An error occured</source>
         <translation type="unfinished"></translation>
@@ -52,7 +51,7 @@
     </message>
 </context>
 <context>
-    <name>FilterPage</name>
+    <name>Filter</name>
     <message>
         <source>Filters</source>
         <translation type="unfinished"></translation>
@@ -129,9 +128,60 @@
         <source>max</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>When adding max price all free items will disappear in search results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select city or zip code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add search radius to your city</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entire city</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>ItemView</name>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open item in Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StartPageWithSearchResults</name>
     <message>
         <source>Items</source>
         <translation type="unfinished"></translation>
@@ -166,29 +216,6 @@
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SilicaListView_for_Item</name>
-    <message>
-        <source>Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Features</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open item in Browser</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

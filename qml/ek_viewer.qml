@@ -1,20 +1,16 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
 import "pages"
 
 ApplicationWindow {
     id: appWindow
-    property string sorting: ""
-    property string seller: ""
-    property string typ: ""
-    property int min_price: 0
-    property int max_price: 1000000
-    property bool reload_search: false
-    property int page_number: 1
-    property SearchField search_field_property: null;
+    readonly property string websiteUrl: "https://www.kleinanzeigen.de"
+    property SearchField searchFieldProperty: null;
+    FilterProperties {
+        id: filterProperties
+    }
 
-    initialPage: Component { FirstPage{ } }
+    initialPage: Component { StartPageWithSearchResults{ } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 }
