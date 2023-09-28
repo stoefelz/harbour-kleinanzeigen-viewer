@@ -2,13 +2,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: zipPage
     allowedOrientations: Orientation.All
 
     function getZipList(string) {
-
         var request = new XMLHttpRequest()
-        request.open('GET', websiteUrl + '/s-ort-empfehlungen.json?query=' + string, true);
+        request.open('GET', websiteUrl + '/s-ort-empfehlungen.json?query=' + string, true)
         request.onreadystatechange = function() {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status && request.status === 200) {
@@ -31,7 +29,6 @@ Page {
                 }
             }
         }
-
         request.send()
     }
 
@@ -58,12 +55,7 @@ Page {
             }
 
             ViewPlaceholder {
-                enabled: {
-                    if (zipResultList.count == 0)
-                        true
-                    else
-                        false
-                }
+                enabled: zipResultList.count == 0 ? true: false
                 text: qsTr("Search for your city")
                 hintText: qsTr("There are no results")
             }

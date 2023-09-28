@@ -3,53 +3,72 @@ import Sailfish.Silica 1.0
 
 Page {
 
-    PossibleFilterValues {
-        id: possibleFilterValues
-    }
     //Set page_numer = 1 and reload_search = true after every change, because search must be fully loaded again
     function reloadSearch() {
         filterProperties.pageNumber = 1
         filterProperties.reloadSearch = true
     }
 
+    PossibleFilterValues {
+        id: possibleFilterValues
+    }
+
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
-        contentHeight: headerColumn.height
+        contentHeight: filterContent.height
 
         Column {
-            id: headerColumn
+            id: filterContent
             width: parent.width
 
             PageHeader {
-                id: header
                 title: qsTr("Filters")
             }
 
             BackgroundItem {
-                Column {
-                    Row {
-                        x: Theme.horizontalPageMargin
-                        Label {
+                Row {
+                    width: parent.width
 
-                            text: qsTr("City") + " "
+                    Column {
+                        Row {
+                            x: Theme.horizontalPageMargin
+                            Label {
+                                text: qsTr("City") + " "
+                            }
+                            Label {
+                                color: Theme.highlightColor
+                                text: filterProperties.zipName === "" ? qsTr("Germany") : filterProperties.zipName
+                            }
                         }
                         Label {
-                            color: Theme.highlightColor
-                            text: filterProperties.zipName === "" ? qsTr("Germany") : filterProperties.zipName
+                            x: Theme.horizontalPageMargin
+                            color: Theme.secondaryColor
+                            font.pixelSize: Theme.fontSizeExtraSmallBase
+                            text: qsTr("Select city or zip code")
                         }
                     }
-                    Label {
-                        x: Theme.horizontalPageMargin
-                        color: Theme.secondaryColor
-                        font.pixelSize: Theme.fontSizeExtraSmallBase
-                        text: qsTr("Select city or zip code")
+
+                }
+
+                IconButton {
+                    icon.source: "image://theme/icon-m-clear"
+                    anchors.right: parent.right
+                    onClicked: {
+                        if(filterProperties.zipName !== "") {
+                            filterProperties.zipJSONCode = ""
+                            filterProperties.zipName = ""
+                            filterProperties.zipRadius = ""
+                            comboRadius.currentItem = noRadius
+                            reloadSearch()
+                        }
+
 
                     }
                 }
-                onClicked:  pageStack.push(Qt.resolvedUrl("ZipSelection.qml"))
-            }
 
+                onClicked: pageStack.push(Qt.resolvedUrl("ZipSelection.qml"))
+            }
 
             ComboBox {
                 id: comboRadius
@@ -73,6 +92,7 @@ Page {
                         }
                     }
                 }
+
                 onValueChanged: {
                     if(comboRadius.currentItem == noRadius) {
                         filterProperties.zipRadius = ""
@@ -102,11 +122,14 @@ Page {
                         text: qsTr("cheapest")
                     }
                 }
+
                 onValueChanged: {
-                    if (comboSorting.currentItem == latest)
+                    if (comboSorting.currentItem == latest) {
                         filterProperties.sorting = possibleFilterValues.sortingValues.dateSorting
-                    else
+                    }
+                    else {
                         filterProperties.sorting = possibleFilterValues.sortingValues.priceSorting
+                    }
                     reloadSearch()
                 }
             }
@@ -117,12 +140,15 @@ Page {
                 label: qsTr("Seller")
                 description: qsTr("Private or commercial seller")
                 currentItem: {
-                    if (filterProperties.seller === possibleFilterValues.sellerValues.privateSeller)
+                    if (filterProperties.seller === possibleFilterValues.sellerValues.privateSeller) {
                         privat
-                    else if (filterProperties.seller === possibleFilterValues.sellerValues.commercialSeller)
+                    }
+                    else if (filterProperties.seller === possibleFilterValues.sellerValues.commercialSeller) {
                         commercial
-                    else
+                    }
+                    else {
                         privatAndCommercial
+                    }
                 }
 
                 menu: ContextMenu {
@@ -141,12 +167,15 @@ Page {
                 }
 
                 onValueChanged: {
-                    if (comboSeller.currentItem == privat)
+                    if (comboSeller.currentItem == privat) {
                         filterProperties.seller = possibleFilterValues.sellerValues.privateSeller
-                    else if (comboSeller.currentItem == commercial)
+                    }
+                    else if (comboSeller.currentItem == commercial) {
                         filterProperties.seller = possibleFilterValues.sellerValues.commercialSeller
-                    else
+                    }
+                    else {
                         filterProperties.seller = ""
+                    }
                     reloadSearch()
                 }
             }
@@ -157,12 +186,15 @@ Page {
                 label: qsTr("Type")
                 description: qsTr("Offer Type")
                 currentItem: {
-                    if (filterProperties.typ === possibleFilterValues.typeValues.offerType)
+                    if (filterProperties.typ === possibleFilterValues.typeValues.offerType) {
                         offer
-                    else if (filterProperties.typ === possibleFilterValues.typeValues.wantedType)
+                    }
+                    else if (filterProperties.typ === possibleFilterValues.typeValues.wantedType) {
                         request
-                    else
+                    }
+                    else {
                         offerAndRequest
+                    }
                 }
                 menu: ContextMenu {
                     MenuItem {
@@ -179,23 +211,24 @@ Page {
                     }
                 }
                 onValueChanged: {
-                    if (comboTyp.currentItem == offer)
+                    if (comboTyp.currentItem == offer){
                         filterProperties.typ = possibleFilterValues.typeValues.offerType
-                    else if (comboTyp.currentItem == request)
+                    }
+                    else if (comboTyp.currentItem == request) {
                         filterProperties.typ = possibleFilterValues.typeValues.wantedType
-                    else
+                    }
+                    else {
                         filterProperties.typ = ""
+                    }
                     reloadSearch()
                 }
             }
 
             SectionHeader {
-                id: sectionPrice
                 text: qsTr("Price")
             }
 
             Rectangle {
-                id: priceRect
                 width: parent.width
                 height: minPriceField.height
                 color: "transparent"
@@ -215,14 +248,16 @@ Page {
                     }
                     strictValidation: true
                     text: {
-                        if (filterProperties.minPrice > 0 && filterProperties.minPrice < 1000000000)
+                        if (filterProperties.minPrice > 0 && filterProperties.minPrice < 1000000000) {
                             filterProperties.minPrice
-                        else
+                        }
+                        else {
                             ""
+                        }
                     }
                     EnterKey.onClicked: focus = false
                     onTextChanged: {
-                        if(minPriceField.text == "") {
+                        if(minPriceField.text === "") {
                             filterProperties.minPrice = ""
                         }
                         else {
@@ -239,10 +274,12 @@ Page {
                     placeholderText: qsTr("max")
                     label: qsTr("max")
                     description: {
-                        if(maxPriceField.text.length === 0)
+                        if(maxPriceField.text.length === 0) {
                             ""
-                        else
+                        }
+                        else {
                             qsTr("When adding max price all free items will disappear in search results")
+                        }
                     }
                     rightItem: Label {
                         text: qsTr("€")
@@ -254,21 +291,66 @@ Page {
                     }
                     strictValidation: true
                     text: {
-                        if (filterProperties.maxPrice >= 0 && filterProperties.maxPrice < 1000000000)
+                        if (filterProperties.maxPrice >= 0 && filterProperties.maxPrice < 1000000000) {
                             filterProperties.maxPrice
-                        else
+                        }
+                        else {
                             ""
+                        }
                     }
                     EnterKey.onClicked: focus = false
                     onTextChanged: {
-                        if(maxPriceField.text === "")
+                        if(maxPriceField.text === "") {
                             filterProperties.maxPrice = ""
-                        else
+                        }
+                        else {
                             filterProperties.maxPrice = maxPriceField.text.toString()
+                        }
                         reloadSearch()
                     }
                 }
             }
         }
+
+
+        PullDownMenu {
+            quickSelect: true
+
+            MenuItem {
+                text: qsTr("Delete all filter")
+                onClicked: {
+                    filterProperties.pageNumber = 1
+                    filterProperties.sorting = ""
+                    filterProperties.seller = ""
+                    filterProperties.typ = ""
+                    filterProperties.minPrice = ""
+                    filterProperties.maxPrice = ""
+                    filterProperties.zipJSONCode = ""
+                    filterProperties.zipName = ""
+                    filterProperties.zipRadius = ""
+                    filterProperties.reloadSearch = true
+                    comboRadius.currentItem = noRadius
+                    comboSorting.currentItem = latest
+                    comboSeller.currentItem = privatAndCommercial
+                    comboTyp.currentItem = offerAndRequest
+
+
+
+
+                }
+            }
+        }
+
     }
+
+
+
+    //without it, focus stays on fields if clicked in
+    onActiveFocusChanged: {
+        minPriceField.focus = false
+        maxPriceField.focus = false
+    }
+
+
+
 }

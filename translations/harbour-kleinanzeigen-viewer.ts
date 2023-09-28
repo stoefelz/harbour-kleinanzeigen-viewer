@@ -20,22 +20,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Thanks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This app uses Kleinanzeigen Parser (Thanks to myself)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Kleinanzeigen Parser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beautiful Soup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Ebay - Kleinanzeigen</source>
+        <source>Kleinanzeigen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -156,6 +160,10 @@
         <source>Entire city</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete all filter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemView</name>
@@ -207,15 +215,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete all filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Focus Search Field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Load more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No more results</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

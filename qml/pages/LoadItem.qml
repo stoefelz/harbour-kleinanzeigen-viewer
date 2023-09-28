@@ -5,7 +5,7 @@ import io.thp.pyotherside 1.5
 Page {
     allowedOrientations: Orientation.All
     //item id gets by FirstPage
-    property string itemId: "2312064628"
+    property string itemId
     property var itemObject: ({})
 
     PageBusyIndicator {
@@ -52,10 +52,12 @@ Page {
                 console.log(itemObject)
                 console.log("answer from python script: " + itemObject)
                 //if empty load error page
-                if (itemObject == undefined || itemObject.length == 0)
+                if (itemObject == undefined || itemObject.length === 0) {
                     pageLoader.source = "Error.qml"
-                else
+                }
+                else {
                     pageLoader.source = "ItemView.qml"
+                }
             })
         }
     }

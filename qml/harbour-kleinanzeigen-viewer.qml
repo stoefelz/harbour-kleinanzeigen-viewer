@@ -6,6 +6,7 @@ ApplicationWindow {
     id: appWindow
     readonly property string websiteUrl: "https://www.kleinanzeigen.de"
     property SearchField searchFieldProperty: null;
+    //to have access to all filter properties all time
     FilterProperties {
         id: filterProperties
     }

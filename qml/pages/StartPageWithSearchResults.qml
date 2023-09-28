@@ -7,10 +7,14 @@ Page {
     id: searchPage
     allowedOrientations: Orientation.All
 
+    //default searchTerm is an blank because so you get the startsite kleinanzeigen items
     property string searchTerm: " "
+    //to know if there is anything to show -> when 0: Error Page
     property int resultsLength: 1
-    property bool filterPageAttached: false
-    property PageBusyIndicator busyIndicatorProperty: null;
+    property bool filterPageAttached
+    property PageBusyIndicator busyIndicatorProperty: null
+    property string previousSearchResult
+    property bool lastSearchPage
 
     function focusSearch() {
         searchFieldProperty.forceActiveFocus()
@@ -19,17 +23,14 @@ Page {
     //TODO null abfrage
     //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
     SilicaListView {
-
         anchors.fill: parent
 
         //TODO offline modus
         //header with search field and heading
         header: Column {
-            id: headerColumn
             width: parent.width
 
             PageHeader {
-                id: header
                 title: qsTr("Items")
             }
 
@@ -43,7 +44,6 @@ Page {
 
                 //click should initiate new search -> keyboard should loss focus and properties set to new search
                 EnterKey.onClicked: {
-
                     focus = false
                     filterProperties.pageNumber = 1
                     searchTerm = searchField.text
@@ -62,15 +62,8 @@ Page {
                 Component.onCompleted: busyIndicatorProperty = busyIndicator
             }
 
-
             ViewPlaceholder {
-                id: noSearchEntries
-                enabled: {
-                    if (resultsLength <= 0 && busyIndicator.running == false)
-                        true
-                    else
-                        false
-                }
+                enabled: (resultsLength <= 0 && busyIndicator.running == false) ? true : false
                 text: qsTr("Search Error")
                 hintText: qsTr("Maybe there are no results")
             }
@@ -83,7 +76,6 @@ Page {
         delegate: ListItem {
             //yeah, i'll burn in hell
             contentHeight: priceItem.height * 5
-
             clip: true
 
             //rectangle contains image, heading for item, price and zip code
@@ -109,22 +101,21 @@ Page {
                     //image should have rounded corners
                     layer.enabled: true
                     layer.effect: OpacityMask {
-                        maskSource: mask
+                        maskSource: roundMask
                     }
                 }
 
                 //mask for image with rounded corners
                 Rectangle {
-                    id: mask
+                    id: roundMask
                     height: imageItem.height
                     width: imageItem.height
                     radius: 5
                     visible: false
                 }
 
-                //heading -> at ebay-kleinanzeigen the headings are max 70 characters (2022)
+                //heading -> at kleinanzeigen the headings are max 70 characters (2022)
                 Label {
-                    id: headingItem
                     width: parent.width - imageItem.width
                     //these anchors are from hell
                     anchors {
@@ -166,17 +157,13 @@ Page {
             //click on ListItem
             onClicked: {
                 //go to item page
-                pageStack.push(Qt.resolvedUrl("LoadItem.qml"), {
-                                   "itemId": itemId
-                               })
+                pageStack.push(Qt.resolvedUrl("LoadItem.qml"), {"itemId": itemId})
             }
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Open in browser")
-                    onClicked: Qt.openUrlExternally(
-                                   websiteUrl + "/s-anzeige/" + itemId)
-                }
+                    onClicked: Qt.openUrlExternally(websiteUrl + "/s-anzeige/" + itemId)}
             }
         }
 
@@ -184,33 +171,13 @@ Page {
 
             MenuItem {
                 text: qsTr("About")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About.qml"))
-                }
-            }
+                onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
 
-            MenuItem {
-                text: qsTr("Delete all filter")
-                onClicked: {
-                    filterProperties.pageNumber = 1
-                    filterProperties.sorting = ""
-                    filterProperties.seller = ""
-                    filterProperties.typ = ""
-                    filterProperties.minPrice = ""
-                    filterProperties.maxPrice = ""
-                    filterProperties.zipJSONCode = ""
-                    filterProperties.zipJSONCode = ""
-                    filterProperties.zipRadius = ""
-
-                    python.startSearch(searchTerm, filterProperties.pageNumber)
-                }
             }
 
             MenuItem {
                 text: qsTr("Focus Search Field")
-                onClicked: {
-                    searchFieldProperty.forceActiveFocus()
-                }
+                onClicked: searchFieldProperty.forceActiveFocus()
             }
         }
 
@@ -219,16 +186,10 @@ Page {
             quickSelect: true
 
             MenuItem {
-                text: qsTr("Load more")
+                id: loadNextPage
+                text: enabled ? qsTr("Load more") : qsTr("No more results")
+                enabled:(resultsLength > 0 && busyIndicatorProperty.running === false && lastSearchPage === false) ? true : false
 
-                enabled: {
-                    if (resultsLength > 0 && busyIndicatorProperty.running == false)
-                        true
-                    else
-                        false
-                }
-
-                //TODO nachladen muss begrenzt werden
                 onClicked: {
                     filterProperties.pageNumber += 1
                     //TODO schlecht, weil in searchfield kann schon was anderes stehen, aber man möchte beim alten weiter
@@ -261,18 +222,21 @@ Page {
                 console.log('python: ' + data)
             }
 
-            function startSearch(searchString, site) {
-                if (filterProperties.pageNumber <= 1)
-                    busyIndicatorProperty.running = true
-                else
-                    pushupMenu.busy = true
-
-                //TODO liste_search-result leeren -> aber nicht bei seite 2 anzeigen, dann sollte anfoch angefügt werden
-                if (site === 1)
+            function startSearch(searchString, pageNumber) {
+                //clean results with new search (== page=1)
+                if (pageNumber === 1) {
                     listOfSearchResult.clear()
+                    previousSearchResult = ""
+                    lastSearchPage = false
+                    busyIndicatorProperty.running = true
+                }
+                else {
+                    pushupMenu.busy = true
+                }
 
+                //add search arguments as dictionary
                 var filterArguments = {
-                    'site-number': filterProperties.pageNumber
+                    'site_number': filterProperties.pageNumber.toString()
                 }
                 if(filterProperties.sorting !== "")
                     filterArguments['sorting'] = filterProperties.sorting
@@ -289,22 +253,36 @@ Page {
                 if(filterProperties.zipRadius !== "")
                     filterArguments['zip_radius'] = filterProperties.zipRadius
 
-
                 call('get_search_entries.get_search_entries',
                      [searchString, filterArguments],
                      function (returnValue) {
                          var resultObject = JSON.parse(returnValue)
-                         resultsLength = resultObject.length
-                         for (var i = 0; i < resultObject.length; i++) {
-                             listOfSearchResult.append({
-                                                              "itemId": resultObject[i]["id"],
-                                                              "zip": resultObject[i]["zip-code"],
-                                                              "date": resultObject[i]["date"],
-                                                              "price": resultObject[i]["price"],
-                                                              "heading": resultObject[i]["heading"],
-                                                              "imageUrl": resultObject[i]["image-url"],
-                                                          })
+
+                         if (JSON.stringify(resultObject) === previousSearchResult) {
+                             lastSearchPage = true
                          }
+                         else {
+                             resultsLength = resultObject.length
+                             for (var i = 0; i < resultObject.length; i++) {
+                                 listOfSearchResult.append({
+                                      "itemId": resultObject[i]["id"],
+                                      "zip": resultObject[i]["zip-code"],
+                                      "date": resultObject[i]["date"],
+                                      "price": resultObject[i]["price"],
+                                      "heading": resultObject[i]["heading"],
+                                      "imageUrl": resultObject[i]["image-url"],
+                                  })
+                       /*          console.log(resultObject[i]["id"])
+                                 console.log(resultObject[i]["zip-code"])
+                                 console.log(resultObject[i]["date"])
+                                 console.log(resultObject[i]["price"])
+                                 console.log(resultObject[i]["heading"])
+                                 console.log(resultObject[i]["image-url"])*/
+                             }
+                         }
+
+                         previousSearchResult = JSON.stringify(resultObject)
+
                          busyIndicatorProperty.running = false
                          pushupMenu.busy = false
                      })

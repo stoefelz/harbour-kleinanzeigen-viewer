@@ -5,244 +5,252 @@
     <name>About</name>
     <message>
         <source>About Kleinanzeigen Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Kleinanzeigen Viewer</translation>
     </message>
     <message>
         <source>Kleinanzeigen Viewer. My first app for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinanzeigen Viewer. Meine erste App für Sailfish OS.</translation>
     </message>
     <message>
         <source>© Pascal Stöfelz</source>
-        <translation type="unfinished"></translation>
+        <translation>© Pascal Stöfelz</translation>
     </message>
     <message>
         <source>Kleinanzeigen Viewer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thanks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This app uses Kleinanzeigen Parser (Thanks to myself)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinanzeigen Viewer</translation>
     </message>
     <message>
         <source>Kleinanzeigen Parser</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinanzeigen Parser</translation>
+    </message>
+    <message>
+        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)</source>
+        <translation>Diese App nutzt Beautiful Soup (Danke an Leonard Richardson und sein Team) und den Kleinanzeigen Parser (Danke an mich selbst)</translation>
+    </message>
+    <message>
+        <source>Beautiful Soup</source>
+        <translation>Beautiful Soup</translation>
+    </message>
+    <message>
+        <source>Credits</source>
+        <translation>Danksagung</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Ebay - Kleinanzeigen</source>
-        <translation type="unfinished"></translation>
+        <source>Kleinanzeigen</source>
+        <translation>Kleinanzeigen</translation>
     </message>
 </context>
 <context>
     <name>Error</name>
     <message>
         <source>An error occured</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Fehler ist aufgetreten.</translation>
     </message>
     <message>
         <source>Please wait and try again later</source>
-        <translation type="unfinished"></translation>
+        <translation>Warte kurz und versuche es später nochmal.</translation>
     </message>
 </context>
 <context>
     <name>Filter</name>
     <message>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorting</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Sorting of your search results</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortierung der Suchergebnisse</translation>
     </message>
     <message>
         <source>latest</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuste</translation>
     </message>
     <message>
         <source>cheapest</source>
-        <translation type="unfinished"></translation>
+        <translation>Günstigste</translation>
     </message>
     <message>
         <source>Seller</source>
-        <translation type="unfinished"></translation>
+        <translation>Anbieter</translation>
     </message>
     <message>
         <source>Private or commercial seller</source>
-        <translation type="unfinished"></translation>
+        <translation>Privater oder gewerblicher Anbieter</translation>
     </message>
     <message>
         <source>private and commercial</source>
-        <translation type="unfinished"></translation>
+        <translation>Privat und Gewerblich</translation>
     </message>
     <message>
         <source>private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privat</translation>
     </message>
     <message>
         <source>commercial</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewerblich</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Offer Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Angebotstyp</translation>
     </message>
     <message>
         <source>offer and request</source>
-        <translation type="unfinished"></translation>
+        <translation>Angebot und Gesuch</translation>
     </message>
     <message>
         <source>offer</source>
-        <translation type="unfinished"></translation>
+        <translation>Angebot</translation>
     </message>
     <message>
         <source>request</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesuch</translation>
     </message>
     <message>
         <source>Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Preis</translation>
     </message>
     <message>
         <source>min</source>
-        <translation type="unfinished"></translation>
+        <translation>Min</translation>
     </message>
     <message>
         <source>€</source>
-        <translation type="unfinished"></translation>
+        <translation>€</translation>
     </message>
     <message>
         <source>max</source>
-        <translation type="unfinished"></translation>
+        <translation>Max</translation>
     </message>
     <message>
         <source>When adding max price all free items will disappear in search results</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei max Preis sind gratis Anzeigen nicht mehr sichtbar</translation>
     </message>
     <message>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ort</translation>
     </message>
     <message>
         <source>Germany</source>
-        <translation type="unfinished"></translation>
+        <translation>Deutschland</translation>
     </message>
     <message>
         <source>Select city or zip code</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle Ort oder PLZ</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <source>Add search radius to your city</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügt einen Suchradius der gewählten Stadt hinzu</translation>
+    </message>
+    <message>
+        <source>Delete all filter</source>
+        <translation>Alle Filter zurücksetzen</translation>
     </message>
     <message>
         <source>Entire city</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganzer Ort</translation>
+    </message>
+    <message>
+        <source>Sorting</source>
+        <translation>Sortierung</translation>
     </message>
 </context>
 <context>
     <name>ItemView</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Details</translation>
     </message>
     <message>
         <source>Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Merkmale</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Open item in Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Anzeige in Browser</translation>
     </message>
 </context>
 <context>
     <name>StartPageWithSearchResults</name>
     <message>
         <source>Items</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen</translation>
     </message>
     <message>
         <source>Search your product</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche dein gewünschtes Produkt</translation>
     </message>
     <message>
         <source>Search Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler bei der Suche</translation>
     </message>
     <message>
         <source>Maybe there are no results</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Suchergebnisse</translation>
     </message>
     <message>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>In Browser öffnen</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Focus Search Field</source>
-        <translation type="unfinished"></translation>
+        <translation>Fokus ins Suchfeld</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter</translation>
+    </message>
+    <message>
+        <source>No more results</source>
+        <translation>Keine weiteren Ergebnisse</translation>
     </message>
 </context>
 <context>
     <name>WebView</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
     <name>ZipSelection</name>
     <message>
         <source>Search for your city</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche deinen Ort</translation>
     </message>
     <message>
         <source>City or Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Ort oder PLZ</translation>
     </message>
     <message>
         <source>There are no results</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Suchergebnisse</translation>
     </message>
 </context>
 </TS>

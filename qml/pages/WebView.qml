@@ -17,21 +17,20 @@ Page {
     Row {
         id: webNavigation
         x: Theme.horizontalPageMargin
-        anchors.top: loadingBar.bottom
-        anchors.topMargin: Theme.paddingMedium
+        anchors {
+            top: loadingBar.bottom
+            topMargin: Theme.paddingMedium
+        }
         width: parent.width - 2 * x
         height: (webView.canGoForward
                  || webView.canGoBack) ? forwardButton.height + 2 * Theme.paddingMedium : 0
         spacing: Theme.paddingLarge
 
         Button {
-            id: backButton
             width: (parent.width - 2 * webNavigation.spacing) / 2
             text: qsTr("Back")
             enabled: webView.canGoBack ? true : false
-            onClicked: {
-                webView.goBack()
-            }
+            onClicked: webView.goBack()
         }
 
         Button {
@@ -39,22 +38,16 @@ Page {
             text: qsTr("Forward")
             width: (parent.width - 2 * webNavigation.spacing) / 2
             enabled: webView.canGoForward ? true : false
-            onClicked: {
-                webView.goForward()
-            }
+            onClicked: webView.goForward()
         }
     }
 
     Rectangle {
         id: loadingBar
         height: Theme.paddingMedium / 1.5
-        width: {
-            if (webView.loading)
-                parent.width / 110 * webView.loadProgress
-            else
-                parent.width
-        }
+        width: webView.loading ? parent.width / 110 * webView.loadProgress : parent.width
         anchors.top: webView.bottom
         color: webView.loading ? Theme.highlightColor : "transparent"
     }
+
 }
