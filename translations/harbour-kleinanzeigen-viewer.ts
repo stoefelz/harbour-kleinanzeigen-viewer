@@ -2,46 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>About_Page</name>
+    <name>About</name>
     <message>
-        <source>About EK-Viewer</source>
+        <source>About Kleinanzeigen Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ebay Kleinanzeigen viewer. My first app for Sailfish OS.</source>
+        <source>Kleinanzeigen Viewer. My first app for Sailfish OS.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>© Pascal Stöfelz 
- #nolife</source>
+        <source>© Pascal Stöfelz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Thanks</source>
+        <source>Kleinanzeigen Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This app uses EK Simple Parser (Thanks to myself)</source>
+        <source>Kleinanzeigen Parser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>EK Simple Parser</source>
+        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ebay Kleinanzeigen Viewer</source>
+        <source>Beautiful Soup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Ebay - Kleinanzeigen</source>
+        <source>Kleinanzeigen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Error_Page</name>
+    <name>Error</name>
     <message>
         <source>An error occured</source>
         <translation type="unfinished"></translation>
@@ -52,7 +55,7 @@
     </message>
 </context>
 <context>
-    <name>FilterPage</name>
+    <name>Filter</name>
     <message>
         <source>Filters</source>
         <translation type="unfinished"></translation>
@@ -129,31 +132,70 @@
         <source>max</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>FirstPage</name>
     <message>
-        <source>Search your product</source>
+        <source>When adding max price all free items will disappear in search results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in browser</source>
+        <source>City</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Focus Search Field</source>
+        <source>Germany</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load more</source>
+        <source>Select city or zip code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
+        <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add search radius to your city</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entire city</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete all filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ItemView</name>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open item in Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StartPageWithSearchResults</name>
+    <message>
+        <source>Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search your product</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -165,30 +207,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SilicaListView_for_Item</name>
-    <message>
-        <source>Details</source>
+        <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Features</source>
+        <source>Focus Search Field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Info</source>
+        <source>Load more</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open item in Browser</source>
+        <source>No more results</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -214,7 +249,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Maybe there are no results</source>
+        <source>There are no results</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

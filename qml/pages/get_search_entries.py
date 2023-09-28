@@ -1,126 +1,107 @@
 import requests
 import json
+import re
 from bs4 import BeautifulSoup
 
-global error
+# html.parser or lxml -> lxml needs pip3 lxml module
+html_parser = 'html.parser'
+# default image when no image is available
+default_image_url = 'https://www.stoefelz.com/no_image.svg'
 
-# returns the value of the first index in list, if not empty; should only have 1 index, but it doesnt matter
-
-def check_if_empty_return(string_list):
-    if len(string_list) != 0:
-        #\u200b fucks up the interpretation of the strings
-        if len(string_list) > 1000:
-            error = True
-        return string_list[0].text.lstrip().replace('\u200b', '')
+# returns the string, if not None
+# lstrip -> removes spaces and \n on left side of string
+# \u200b fucks up the interpretation of the strings
+def string_return_value(string):
+    if string is not None:
+        return string.text.lstrip().replace('\u200b', '')
     else:
-        return ""
+        return ''
 
-    # TODO für filter sollte sorting einfach in einen string umgewandelt werden, wo alle filter rein kommen, bsp: "/s/k0/reinland/kleidung"
-    # obwohl dann z.b. bei sorting zu beachten ist, dass "sortierung: blablabal" des is
-def get_search_entries(search_term, site = 1, sorting = "", seller = "", typ="", min_price = 0, max_price = -1):
+# returns array of search items
+def get_search_entries(search_term, search_arguments):
     try:
-        # filter
-        category = "/k0"
-        if sorting != "preis":
-            sorting = ""
-        if seller != "privat" and seller != "gewerblich":
-            seller = ""
-        if typ != "angebote" and typ != "gesuche":
-            typ = ""
-        try:
-            if int(min_price) <= 0 or int(min_price) > 100000:
-                min_price = 0
-        except:
-            min_price = 0
-        try:
-            if int(max_price) < 0 or int(max_price) > 100000:
-                max_price = ""
-        except:
-            max_price = ""
+        zip_code_id = search_arguments.get('zip_code_id') if search_arguments.get('zip_code_id') != None else ""
+        zip_radius = search_arguments.get('zip_radius') if search_arguments.get('zip_radius') != None else ""
+        site_number = search_arguments.get('site_number') if search_arguments.get('site_number') != None else ""
+        sorting = search_arguments.get('sorting') if search_arguments.get('sorting') != None else ""
+        seller = search_arguments.get('seller') if search_arguments.get('seller') != None else ""
+        typ = search_arguments.get('typ') if search_arguments.get('typ') != None else ""
+        min_price = search_arguments.get('min_price') if search_arguments.get('min_price') != None else ""
+        max_price = search_arguments.get('max_price') if search_arguments.get('max_price') != None else ""
+        category_id = search_arguments.get('category') if search_arguments.get('category') != None else ""
 
-      # example for link: https://www.ebay-kleinanzeigen.de/s-sortierung:preis/anbieter:privat/anzeige:angebote/preis:1:10/k0
-        url = "https://www.ebay-kleinanzeigen.de/s/sortierung:" + sorting + "/anbieter:" + seller + "/anzeige:" + typ + "/preis:" + str(min_price) + ":" + str(max_price) + "/seite:" + str(site) + "/" + search_term + category
-        print(url)
+        # example url:
+        # https://www.kleinanzeigen.de/s-suchanfrage.html?keywords=auto&categoryId=210&locationStr=Frankfurt+am+Main+-+Hessen&locationId=4292&radius=10&sortingField=PRICE_AMOUNT&adType=WANTED&posterType=COMMERCIAL&pageNum=1&action=find&maxPrice=20&minPrice=10&buyNowEnabled=false&shippingCarrier=
 
-            # TODO
-        default_image_url = "https://www.stoefelz.com/frontend/media/msg.png"
+        # url compositor
+        url = 'https://www.kleinanzeigen.de/s-suchanfrage.html?keywords='+search_term+'&categoryId='+category_id+'&locationStr=&locationId='+zip_code_id+'&radius='+zip_radius+'&sortingField='+sorting+'&adType='+typ+'&posterType='+seller+'&pageNum='+site_number+'&maxPrice='+max_price+'&minPrice='+min_price+'&buyNowEnabled=false&shippingCarrier='
 
-            # without headers ebay-kleinanzeigen blocks request
-        headers = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0' }
+        # without headers kleinanzeigen blocks request
+        headers = { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:115.0) Gecko/20100101 Firefox/115.0' }
         html_site = requests.get(url, headers=headers)
-        soup = BeautifulSoup(html_site.text, "html.parser")
+        soup = BeautifulSoup(html_site.text, html_parser)
 
-            # only for testing, code above must be commented
-        # with open("suche2.html") as fp:
-         #  soup = BeautifulSoup(fp, "lxml",)
+        # only for testing, code above must be commented
+        # with open('../Downloads/test.html') as fp:
+          # soup = BeautifulSoup(fp, html_parser)
 
         # list for return
-        list_with_data = []
-
-            # in every article tag is one complete search item
+        list_with_items = []
+        # in every article tag is one item
         articles = soup.find_all('article')
 
         for one_article in articles:
-            error = False
-            # for one search result
-            article_list = []
-
             # get id from attribute
             if one_article['data-adid'] is not None:
-                article_list.append(one_article['data-adid'])
+                item_id = one_article['data-adid']
             else:
-                print("no id found")
-                article_list.append("")
-
-            # get values from parsing correct class
-            heading = one_article.find_all("a", class_="ellipsis")
-            article_list.append(check_if_empty_return(heading))
-
-
-            text = one_article.find_all("p", class_="aditem-main--middle--description")
-            article_list.append(check_if_empty_return(text))
-
-            price = one_article.find_all("p", class_="aditem-main--middle--price-shipping--price")
-            article_list.append(check_if_empty_return(price))
-
-            zip_code = one_article.find_all("div", class_="aditem-main--top--left")
-            article_list.append(check_if_empty_return(zip_code))
-
-            create_date = one_article.find_all("div", class_="aditem-main--top--right")
-            article_list.append(check_if_empty_return(create_date))
-
-            # get picture url from class, but must check if there is a picture or not
-            picture = one_article.find_all("div", class_="imagebox")
-            if len(picture) != 0:
-
-                classes = picture[0]['class']
-                # classes returns string list of the class names
-                # searching for "is-nopic" then there is no image
-                checker = True
-
-                for one_class_name in classes:
-                    if one_class_name == "is-nopic":
-                        article_list.append(default_image_url)
-                        checker = False
-                        break
-
-                if checker == True:
-                    article_list.append(picture[0]['data-imgsrc'])
-
-            else:
-                article_list.append(default_image_url)
-
-            if error == True:
-                print("too long string")
                 continue
-            else:
-            # append it to the list for return
-                list_with_data.append(article_list)
 
-        # return list in json format
-        print("search answer: ")
-        print(list_with_data)
-        return json.dumps(list_with_data)
+            # heading
+            heading = one_article.find('a', class_='ellipsis')
+            heading = string_return_value(heading)
+
+            # info
+            info_text = one_article.find('p', class_='aditem-main--middle--description')
+            info_text = string_return_value(info_text)
+
+            # price
+            price = one_article.find('p', class_='aditem-main--middle--price-shipping--price')
+            price = string_return_value(price)
+
+            # zip code
+            zip_code_with_space = one_article.find('div', class_='aditem-main--top--left')
+            #removes line break in text
+            zip_code = re.sub('  .*  ', '', string_return_value(zip_code_with_space)).replace('\n', ' ')
+
+            # date
+            date = one_article.find('div', class_='aditem-main--top--right')
+            date = string_return_value(date)
+
+            # picture (can be empty)
+            picture_div = one_article.find('div', class_='imagebox')
+            try:
+                image_url = one_article.find('img')['src']
+            except:
+                image_url = default_image_url
+
+            item =  {
+                'id': item_id,
+                'heading': heading,
+                'description': info_text,
+                'price': price,
+                'zip-code': zip_code,
+                'date': date,
+                'image-url': image_url
+            }
+
+            # append item to the returned list
+            list_with_items.append(item)
+
+        #for debugging
+        print(url)
+        # return list in json format, ensure_ascii=False for Umlaute
+        return json.dumps(list_with_items, ensure_ascii=False)
 
     except:
         return json.dumps([])

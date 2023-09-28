@@ -2,19 +2,17 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: zipPage
     allowedOrientations: Orientation.All
 
     function getZipList(string) {
-
         var request = new XMLHttpRequest()
-        request.open('GET', 'https://www.ebay-kleinanzeigen.de/s-ort-empfehlungen.json?query=' + string, true);
+        request.open('GET', websiteUrl + '/s-ort-empfehlungen.json?query=' + string, true)
         request.onreadystatechange = function() {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status && request.status === 200) {
                     //Javascript Object from JSON
                     var zipList = JSON.parse(request.responseText)
-                    //Names of Indexes, because these are needed for EbayK Search
+                    //Names of Indexes, because these are needed for Kleinanzeigen Search
                     var zipIndex = Object.getOwnPropertyNames(zipList)
 
                     //add to List
@@ -31,7 +29,6 @@ Page {
                 }
             }
         }
-
         request.send()
     }
 
@@ -58,12 +55,7 @@ Page {
             }
 
             ViewPlaceholder {
-                enabled: {
-                    if (zipResultList.count == 0)
-                        true
-                    else
-                        false
-                }
+                enabled: zipResultList.count == 0 ? true: false
                 text: qsTr("Search for your city")
                 hintText: qsTr("There are no results")
             }
@@ -80,13 +72,16 @@ Page {
 
                 Label  {
                     x: Theme.horizontalPageMargin
-                    width: parent.width - (2*Theme.horizontalPageMargin)
+                    width: parent.width - (2 * Theme.horizontalPageMargin)
                     anchors.verticalCenter: parent.verticalCenter
                     text: cityName
                     elide: TruncationMode.Elide
                 }
 
                 onClicked: {
+                    filterProperties.zipJSONCode = jsonID.substring(0, 1) === "_" ? jsonID.substring(1) : jsonID
+                    filterProperties.zipName = cityName
+                    filterProperties.reloadSearch = true
                     pageStack.pop()
                 }
             }

@@ -10,33 +10,42 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = ek_viewer
+TARGET = harbour-kleinanzeigen-viewer
 
 CONFIG += sailfishapp
 
 PKGCONFIG += qt5embedwidget
 
-SOURCES += src/ek_viewer.cpp
+SOURCES += \
+    src/harbour-kleinanzeigen-viewer.cpp
 
-DISTFILES += qml/ek_viewer.qml \
+DISTFILES += \
+    harbour-kleinanzeigen-viewer.desktop \
+    icons/108x108/harbour-kleinanzeigen-viewer.png \
+    icons/128x128/harbour-kleinanzeigen-viewer.png \
+    icons/172x172/harbour-kleinanzeigen-viewer.png \
+    icons/86x86/harbour-kleinanzeigen-viewer.png \
+    icons/harbour-kleinanzeigen-viewer.png \
+    icons/no_image.svg \
     qml/cover/CoverPage.qml \
-    qml/pages/About_Page.qml \
-    qml/pages/Error_Page.qml \
-    qml/pages/FilterPage.qml \
-    qml/pages/FirstPage.qml \
+    qml/harbour-kleinanzeigen-viewer.qml \
+    qml/pages/About.qml \
+    qml/pages/Error.qml \
+    qml/pages/Filter.qml \
+    qml/pages/FilterProperties.qml \
+    qml/pages/ItemView.qml \
+    qml/pages/LoadItem.qml \
     qml/pages/PictureCarussel.qml \
-    qml/pages/SecondPage.qml \
-    qml/pages/SilicaListView_for_Item.qml \
+    qml/pages/PossibleFilterValues.qml \
+    qml/pages/StartPageWithSearchResults.qml \
     qml/pages/WebView.qml \
     qml/pages/ZipSelection.qml \
-    qml/pages/get_item_entry.py \
     qml/pages/get_search_entries.py \
-    rpm/ek_viewer.changes.in \
-    rpm/ek_viewer.changes.run.in \
-    rpm/ek_viewer.spec \
-    rpm/ek_viewer.yaml \
-    translations/*.ts \
-    ek_viewer.desktop
+    rpm/harbour-kleinanzeigen-viewer.changes.in \
+    rpm/harbour-kleinanzeigen-viewer.changes.run.in \
+    rpm/harbour-kleinanzeigen-viewer.spec \
+    rpm/harbour-kleinanzeigen-viewer.yaml \
+    translations/*.ts
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
@@ -48,4 +57,4 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/ek_viewer-de.ts
+TRANSLATIONS += translations/harbour-kleinanzeigen-viewer-de.ts

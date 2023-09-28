@@ -12,14 +12,13 @@ CoverBackground {
         }
 
         rotation: 3
-
         fillMode: Image.PreserveAspectCrop
-        opacity: 0.3
-        source: "ek_viewer.svg"
+        opacity: 0.8
+        source: "harbour-kleinanzeigen-viewer.png"
     }
 
     Label {
-        width: parent.width - 2*Theme.horizontalPageMargin
+        width: parent.width - 2 * Theme.horizontalPageMargin
            anchors {
                horizontalCenter: parent.horizontalCenter
                top: parent.top
@@ -27,15 +26,14 @@ CoverBackground {
 
            }
            color: Theme.highlightColor
-           text: qsTr("Ebay - Kleinanzeigen")
-           //font.pixelSize: Theme.fontSizeLarge
+           text: qsTr("Kleinanzeigen")
            font.weight: Font.DemiBold
            wrapMode: Text.WordWrap
 
        }
+
     CoverActionList {
         CoverAction {
-
             iconSource: "image://theme/icon-cover-search"
             onTriggered: {
                 while(pageStack.depth > 1) {

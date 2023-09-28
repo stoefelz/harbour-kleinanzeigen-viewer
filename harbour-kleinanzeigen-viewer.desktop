@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=harbour-kleinanzeigen-viewer
+Exec=harbour-kleinanzeigen-viewer
+Name=Kleinanzeigen
+
+[X-Sailjail]
+# Replace with your organization as a reverse domain name
+OrganizationName=com.stoefelz
+# ApplicationName does not have to be identical to Name
+ApplicationName=harbour-kleinanzeigen-viewer
+# Add the required permissions here
+Permissions=Internet

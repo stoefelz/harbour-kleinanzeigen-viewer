@@ -3,34 +3,31 @@ import Sailfish.Silica 1.0
 
 Page {
     allowedOrientations: Orientation.All
-    id: about_page
 
     SilicaFlickable {
         anchors.fill: parent
-        contentHeight: column.height
+        contentHeight: aboutText.height
         anchors.bottomMargin: Theme.paddingLarge * 2
 
         Column {
-            id: column
+            id: aboutText
             spacing: Theme.paddingLarge
-            width: parent.width - 2 * Theme.horizontalPageMargin
+            width: parent.width - Theme.horizontalPageMargin
             x: Theme.horizontalPageMargin
 
             PageHeader {
-                id: page_header
-                title: qsTr("About EK-Viewer")
+                title: qsTr("About Kleinanzeigen Viewer")
             }
 
             Image {
-                id: about_image
                 width: Theme.itemSizeHuge
                 height: Theme.itemSizeHuge
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "../cover/ek_viewer.svg" //"https://sailfishos.org/content/uploads/2021/02/SF4.svg"
+                source: "../cover/harbour-kleinanzeigen-viewer.png"
             }
 
             Label {
-                text: qsTr("Ebay Kleinanzeigen viewer. My first app for Sailfish OS.")
+                text: qsTr("Kleinanzeigen Viewer. My first app for Sailfish OS.")
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
                 horizontalAlignment: Text.AlignHCenter
@@ -38,15 +35,14 @@ Page {
             }
 
             Label {
-                text: qsTr("© Pascal Stöfelz \n #nolife")
+                text: qsTr("© Pascal Stöfelz")
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Label {
-                id: link_label
-                text: qsTr("Ebay Kleinanzeigen Viewer")
+                text: qsTr("Kleinanzeigen Viewer")
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
@@ -54,37 +50,43 @@ Page {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/ek_viewer"})
-                    }
+                    onClicked: pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/harbour-kleinanzeigen-viewer"})
                 }
             }
 
             SectionHeader {
-                text: qsTr("Thanks")
+                text: qsTr("Credits")
             }
 
             Label {
-                text: qsTr("This app uses EK Simple Parser (Thanks to myself)")
-                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)")
                 width: parent.width
-                horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
 
             }
 
             Label {
-                text: qsTr("EK Simple Parser")
-                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Kleinanzeigen Parser")
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 font.underline: true
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.github.com/stoefelz/ek_simple_parser"})
-                    }
+                    onClicked: pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.github.com/stoefelz/kleinanzeigen_parser"})
+                }
+            }
+
+            Label {
+                text: qsTr("Beautiful Soup")
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                font.underline: true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://www.crummy.com/software/BeautifulSoup/"})
+
                 }
             }
         }
