@@ -150,7 +150,7 @@
     </message>
     <message>
         <source>Add search radius to your city</source>
-        <translation>Fügt einen Suchradius der gewählten Stadt hinzu</translation>
+        <translation>Vergrößere den Suchradius</translation>
     </message>
     <message>
         <source>Delete all filter</source>
@@ -162,7 +162,7 @@
     </message>
     <message>
         <source>Sorting</source>
-        <translation>Sortierung</translation>
+        <translation>Sortieren nach</translation>
     </message>
 </context>
 <context>
@@ -185,18 +185,18 @@
     </message>
     <message>
         <source>Open item in Browser</source>
-        <translation>Öffne Anzeige in Browser</translation>
+        <translation>In Browser öffnen</translation>
     </message>
 </context>
 <context>
     <name>StartPageWithSearchResults</name>
     <message>
         <source>Items</source>
-        <translation>Anzeigen</translation>
+        <translation>Ergebnisse</translation>
     </message>
     <message>
         <source>Search your product</source>
-        <translation>Suche dein gewünschtes Produkt</translation>
+        <translation>Was suchst du?</translation>
     </message>
     <message>
         <source>Search Error</source>
@@ -216,11 +216,11 @@
     </message>
     <message>
         <source>Focus Search Field</source>
-        <translation>Fokus ins Suchfeld</translation>
+        <translation>Suche fokussieren</translation>
     </message>
     <message>
         <source>Load more</source>
-        <translation>Weiter</translation>
+        <translation>Mehr</translation>
     </message>
     <message>
         <source>No more results</source>

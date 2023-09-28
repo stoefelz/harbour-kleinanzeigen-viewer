@@ -50,7 +50,7 @@ Page {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/kleinanzeigen_viewer"})
+                    onClicked: pageStack.push(Qt.resolvedUrl("WebView.qml"), { "itemUrl": "https://github.com/stoefelz/harbour-kleinanzeigen-viewer"})
                 }
             }
 

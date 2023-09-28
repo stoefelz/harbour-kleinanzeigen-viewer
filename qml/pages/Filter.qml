@@ -38,7 +38,8 @@ Page {
                             }
                             Label {
                                 color: Theme.highlightColor
-                                text: filterProperties.zipName === "" ? qsTr("Germany") : filterProperties.zipName
+                                text: filterProperties.zipName
+                                      === "" ? qsTr("Germany") : filterProperties.zipName
                             }
                         }
                         Label {
@@ -48,22 +49,19 @@ Page {
                             text: qsTr("Select city or zip code")
                         }
                     }
-
                 }
 
                 IconButton {
                     icon.source: "image://theme/icon-m-clear"
                     anchors.right: parent.right
                     onClicked: {
-                        if(filterProperties.zipName !== "") {
+                        if (filterProperties.zipName !== "") {
                             filterProperties.zipJSONCode = ""
                             filterProperties.zipName = ""
                             filterProperties.zipRadius = ""
                             comboRadius.currentItem = noRadius
                             reloadSearch()
                         }
-
-
                     }
                 }
 
@@ -75,7 +73,8 @@ Page {
                 width: parent.width
                 label: qsTr("Radius")
                 description: qsTr("Add search radius to your city")
-                currentItem: filterProperties.zipRadius === "" ? noRadius : filterProperties.zipRadius
+                currentItem: filterProperties.zipRadius
+                             === "" ? noRadius : filterProperties.zipRadius
                 //should be only enabled when city is selected
                 enabled: filterProperties.zipJSONCode === "" ? false : true
 
@@ -94,12 +93,12 @@ Page {
                 }
 
                 onValueChanged: {
-                    if(comboRadius.currentItem == noRadius) {
+                    if (comboRadius.currentItem == noRadius) {
                         filterProperties.zipRadius = ""
-                    }
-                    else {
+                    } else {
                         //currentIndex -1 because noRadius takes index 0, but the Repeater list must start with index 0 again
-                        filterProperties.zipRadius = possibleFilterValues.zipRadiusValues[comboRadius.currentIndex-1]
+                        filterProperties.zipRadius
+                                = possibleFilterValues.zipRadiusValues[comboRadius.currentIndex - 1]
                     }
                     reloadSearch()
                 }
@@ -126,8 +125,7 @@ Page {
                 onValueChanged: {
                     if (comboSorting.currentItem == latest) {
                         filterProperties.sorting = possibleFilterValues.sortingValues.dateSorting
-                    }
-                    else {
+                    } else {
                         filterProperties.sorting = possibleFilterValues.sortingValues.priceSorting
                     }
                     reloadSearch()
@@ -140,13 +138,13 @@ Page {
                 label: qsTr("Seller")
                 description: qsTr("Private or commercial seller")
                 currentItem: {
-                    if (filterProperties.seller === possibleFilterValues.sellerValues.privateSeller) {
+                    if (filterProperties.seller
+                            === possibleFilterValues.sellerValues.privateSeller) {
                         privat
-                    }
-                    else if (filterProperties.seller === possibleFilterValues.sellerValues.commercialSeller) {
+                    } else if (filterProperties.seller
+                               === possibleFilterValues.sellerValues.commercialSeller) {
                         commercial
-                    }
-                    else {
+                    } else {
                         privatAndCommercial
                     }
                 }
@@ -169,11 +167,9 @@ Page {
                 onValueChanged: {
                     if (comboSeller.currentItem == privat) {
                         filterProperties.seller = possibleFilterValues.sellerValues.privateSeller
-                    }
-                    else if (comboSeller.currentItem == commercial) {
+                    } else if (comboSeller.currentItem == commercial) {
                         filterProperties.seller = possibleFilterValues.sellerValues.commercialSeller
-                    }
-                    else {
+                    } else {
                         filterProperties.seller = ""
                     }
                     reloadSearch()
@@ -188,11 +184,10 @@ Page {
                 currentItem: {
                     if (filterProperties.typ === possibleFilterValues.typeValues.offerType) {
                         offer
-                    }
-                    else if (filterProperties.typ === possibleFilterValues.typeValues.wantedType) {
+                    } else if (filterProperties.typ
+                               === possibleFilterValues.typeValues.wantedType) {
                         request
-                    }
-                    else {
+                    } else {
                         offerAndRequest
                     }
                 }
@@ -211,13 +206,11 @@ Page {
                     }
                 }
                 onValueChanged: {
-                    if (comboTyp.currentItem == offer){
+                    if (comboTyp.currentItem == offer) {
                         filterProperties.typ = possibleFilterValues.typeValues.offerType
-                    }
-                    else if (comboTyp.currentItem == request) {
+                    } else if (comboTyp.currentItem == request) {
                         filterProperties.typ = possibleFilterValues.typeValues.wantedType
-                    }
-                    else {
+                    } else {
                         filterProperties.typ = ""
                     }
                     reloadSearch()
@@ -248,19 +241,18 @@ Page {
                     }
                     strictValidation: true
                     text: {
-                        if (filterProperties.minPrice > 0 && filterProperties.minPrice < 1000000000) {
+                        if (filterProperties.minPrice > 0
+                                && filterProperties.minPrice < 1000000000) {
                             filterProperties.minPrice
-                        }
-                        else {
+                        } else {
                             ""
                         }
                     }
                     EnterKey.onClicked: focus = false
                     onTextChanged: {
-                        if(minPriceField.text === "") {
+                        if (minPriceField.text === "") {
                             filterProperties.minPrice = ""
-                        }
-                        else {
+                        } else {
                             filterProperties.minPrice = minPriceField.text.toString()
                         }
                         reloadSearch()
@@ -274,10 +266,9 @@ Page {
                     placeholderText: qsTr("max")
                     label: qsTr("max")
                     description: {
-                        if(maxPriceField.text.length === 0) {
+                        if (maxPriceField.text.length === 0) {
                             ""
-                        }
-                        else {
+                        } else {
                             qsTr("When adding max price all free items will disappear in search results")
                         }
                     }
@@ -291,19 +282,18 @@ Page {
                     }
                     strictValidation: true
                     text: {
-                        if (filterProperties.maxPrice >= 0 && filterProperties.maxPrice < 1000000000) {
+                        if (filterProperties.maxPrice >= 0
+                                && filterProperties.maxPrice < 1000000000) {
                             filterProperties.maxPrice
-                        }
-                        else {
+                        } else {
                             ""
                         }
                     }
                     EnterKey.onClicked: focus = false
                     onTextChanged: {
-                        if(maxPriceField.text === "") {
+                        if (maxPriceField.text === "") {
                             filterProperties.maxPrice = ""
-                        }
-                        else {
+                        } else {
                             filterProperties.maxPrice = maxPriceField.text.toString()
                         }
                         reloadSearch()
@@ -312,9 +302,7 @@ Page {
             }
         }
 
-
         PullDownMenu {
-            quickSelect: true
 
             MenuItem {
                 text: qsTr("Delete all filter")
@@ -333,24 +321,14 @@ Page {
                     comboSorting.currentItem = latest
                     comboSeller.currentItem = privatAndCommercial
                     comboTyp.currentItem = offerAndRequest
-
-
-
-
                 }
             }
         }
-
     }
-
-
 
     //without it, focus stays on fields if clicked in
     onActiveFocusChanged: {
         minPriceField.focus = false
         maxPriceField.focus = false
     }
-
-
-
 }
