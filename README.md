@@ -22,7 +22,7 @@ https://github.com/stoefelz/kleinanzeigen_parser
 Download the rpm and install the app - before the first start, execute:  
 ```
 pkcon refresh
-pkcon install python3-pip3
+pkcon install python3-pip
 devel-su pip3 install bs4
 ```
 
