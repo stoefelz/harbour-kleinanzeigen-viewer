@@ -3,8 +3,8 @@ import json
 import re
 from bs4 import BeautifulSoup
 
-# html.parser or lxml -> lxml needs pip3 lxml module
-html_parser = 'html.parser'
+# html.parser or lxml
+html_parser = 'lxml'
 # default image when no image is available
 default_image_url = 'https://www.stoefelz.com/no_image.svg'
 

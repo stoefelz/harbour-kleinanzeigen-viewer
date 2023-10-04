@@ -9,7 +9,7 @@ Name:       harbour-kleinanzeigen-viewer
 # << macros
 
 Summary:    Kleinanzeigen Viewer
-Version:    0.3
+Version:    0.4
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -19,7 +19,8 @@ Source100:  harbour-kleinanzeigen-viewer.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   pyotherside-qml-plugin-python3-qt5 >= 1.5
 Requires:   python3-requests
-Requires:   python3-pip
+Requires:   python3-lxml
+Requires:   python3-beautifulsoup
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -27,7 +28,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my Sailfish OS Application
+Viewer for Kleinanzeigen.de
 
 
 %prep

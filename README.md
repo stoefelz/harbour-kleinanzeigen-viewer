@@ -19,12 +19,9 @@ This app uses Kleinanzeigen Parser © by me
 https://github.com/stoefelz/kleinanzeigen_parser
 
 # Installing
-Download the rpm and install the app - before the first start, execute:  
-```
-pkcon refresh
-pkcon install python3-pip
-devel-su pip3 install bs4
-```
+
+You can find my app on <a href="https://openrepos.net/content/stoefelz/kleinanzeigende">Openrepos</a>.  
+Download the rpm and install the app - when you have not enabled my openrepos repository you must install the seperate python-beautifulsoup package form <a href="https://openrepos.net/content/stoefelz/python3-beautifulsoup-4">here</a>.
 
 # Screenshots
 <div style="display:flex;">
