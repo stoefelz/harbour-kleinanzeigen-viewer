@@ -21,7 +21,7 @@ https://github.com/stoefelz/kleinanzeigen_parser
 # Installing
 
 You can find my app on <a href="https://openrepos.net/content/stoefelz/kleinanzeigende">Openrepos</a>.  
-Download the rpm and install the app - when you have not enabled my openrepos repository you must install the seperate python-beautifulsoup package form <a href="https://openrepos.net/content/stoefelz/python3-beautifulsoup-4">here</a>.
+Download the rpm and install the app - when you have not enabled my openrepos repository you must install the seperate python-beautifulsoup package from <a href="https://github.com/stoefelz/python3-beautifulsoup4-sailfishos">here</a>.
 
 # Screenshots
 <div style="display:flex;">
