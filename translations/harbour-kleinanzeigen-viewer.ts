@@ -51,29 +51,6 @@
     </message>
 </context>
 <context>
-    <name>FavouriteOverview</name>
-    <message>
-        <source>Watchlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Removing from watchlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your watchlist is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unfortunately there are no automatic price updates</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Filter</name>
     <message>
         <source>Filters</source>
@@ -251,6 +228,29 @@
     </message>
     <message>
         <source>No more results</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Watchlist</name>
+    <message>
+        <source>Watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your watchlist is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing from watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfortunately there are no automatic price updates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

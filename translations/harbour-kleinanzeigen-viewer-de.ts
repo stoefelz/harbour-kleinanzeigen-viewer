@@ -51,29 +51,6 @@
     </message>
 </context>
 <context>
-    <name>FavouriteOverview</name>
-    <message>
-        <source>Watchlist</source>
-        <translation>Merkliste</translation>
-    </message>
-    <message>
-        <source>Removing from watchlist</source>
-        <translation>Von Merkliste löschen</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>Your watchlist is empty</source>
-        <translation>Deine Merkliste ist leer</translation>
-    </message>
-    <message>
-        <source>Unfortunately there are no automatic price updates</source>
-        <translation>Die Preise aktualisieren sich leider nicht automatisch</translation>
-    </message>
-</context>
-<context>
     <name>Filter</name>
     <message>
         <source>Filters</source>
@@ -252,6 +229,29 @@
     <message>
         <source>No more results</source>
         <translation>Keine weiteren Ergebnisse</translation>
+    </message>
+</context>
+<context>
+    <name>Watchlist</name>
+    <message>
+        <source>Watchlist</source>
+        <translation type="unfinished">Merkliste</translation>
+    </message>
+    <message>
+        <source>Your watchlist is empty</source>
+        <translation type="unfinished">Deine Merkliste ist leer</translation>
+    </message>
+    <message>
+        <source>Removing from watchlist</source>
+        <translation type="unfinished">Von Merkliste löschen</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Unfortunately there are no automatic price updates</source>
+        <translation type="unfinished">Die Preise aktualisieren sich leider nicht automatisch</translation>
     </message>
 </context>
 <context>
