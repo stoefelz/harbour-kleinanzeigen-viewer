@@ -2,7 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
-import "database.js" as DB
+import "../scripts/database.js" as DB
 
 SilicaFlickable {
 
@@ -224,20 +224,20 @@ SilicaFlickable {
 
 
         MenuItem {
-             property bool isFavourite
-            text: isFavourite ? qsTr("Remove from watchlist") : qsTr("Add to watchlist")
+             property bool isInWatchlist
+            text: isInWatchlist ? qsTr("Remove from watchlist") : qsTr("Add to watchlist")
             onClicked: {
-                if(isFavourite) {
-                   DB.deleteFavourite(itemObject["item-id"])
-                    isFavourite = false
+                if(isInWatchlist) {
+                   DB.deleteWatchlistItem(itemObject["item-id"])
+                    isInWatchlist = false
                 }
                 else {
                     //TODO small image is too large -> change ending for smaller image size
-                    DB.storeFavourite(itemObject["item-id"], itemObject["heading"], itemObject["zip-code"], itemObject["price"], itemObject["small-pictures"][0])
-                    isFavourite = true
+                    DB.storeWatchlistItem(itemObject["item-id"], itemObject["heading"], itemObject["zip-code"], itemObject["price"], itemObject["small-pictures"][0])
+                    isInWatchlist = true
                 }
             }
-            Component.onCompleted: isFavourite =  DB.existsFavourite(itemObject["item-id"])
+            Component.onCompleted: isInWatchlist =  DB.existsWatchlistItem(itemObject["item-id"])
 
         }
 

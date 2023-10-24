@@ -2,8 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
-import "startpage"
-import "database.js" as DB
+import "../components"
 
 Page {
     id: searchPage
@@ -21,6 +20,7 @@ Page {
     function focusSearch() {
         searchFieldProperty.forceActiveFocus()
     }
+
     //TODO -> no picture
     //TODO null abfrage
     //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
@@ -73,9 +73,9 @@ Page {
 
         model: ListModel {
             id: listOfSearchResult
-        }
+     }
 
-        delegate: ItemDelegate {}
+        delegate: SearchListDelegate {}
 
         PullDownMenu {
 
@@ -90,7 +90,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("Watchlist")
-                onClicked: pageStack.push(Qt.resolvedUrl("favourites/FavouriteOverview.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("Watchlist.qml"))
             }
 
         }
@@ -116,7 +116,7 @@ Page {
             id: python
 
             Component.onCompleted: {
-                addImportPath(Qt.resolvedUrl('.'))
+                addImportPath(Qt.resolvedUrl('../scripts/'))
 
                 setHandler('msg', function (returnMsg) {
                     console.log('python message ' + returnMsg)

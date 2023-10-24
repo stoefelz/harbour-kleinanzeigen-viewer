@@ -87,7 +87,7 @@ ListItem {
         //click on ListItem
         onClicked: {
             //go to item page
-            pageStack.push(Qt.resolvedUrl("../LoadItem.qml"), {"itemId": itemId})
+            pageStack.push(Qt.resolvedUrl("../pages/Item.qml"), {"itemId": itemId})
         }
 
 }

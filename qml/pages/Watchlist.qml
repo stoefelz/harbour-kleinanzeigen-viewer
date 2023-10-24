@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Nemo.Configuration 1.0
-import "../database.js" as DB
-import "../startpage"
+import "../scripts/database.js" as DB
+import "../components"
+import "../models"
 
 Page {
 
@@ -17,7 +18,7 @@ Page {
     property bool firstStart: true
 
     SilicaListView {
-        id: favouriteListView
+        id: watchlistView
         anchors.fill: parent
         opacity: firstStart ? 0.5 : 1.0
 
@@ -32,13 +33,13 @@ Page {
             text: qsTr("Your watchlist is empty")
         }
 
-        model: FavouriteModel {}
-        delegate: ItemDelegate {
-            function removeFavourite(itemId) {
+        model: WatchlistModel {}
+        delegate: SearchListDelegate {
+            function removeWatchlistItem(itemId) {
                 remorseAction(qsTr("Removing from watchlist"), function() {
-                    DB.deleteFavourite(itemId)
-                    favouriteListView.model.remove(index)
-                    if(favouriteListView.count === 0) {
+                    DB.deleteWatchlistItem(itemId)
+                    watchlistView.model.remove(index)
+                    if(watchlistView.count === 0) {
                         emptyWatchlist.enabled = true
                     }
                 })
@@ -48,7 +49,7 @@ Page {
                 MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
-                        removeFavourite(itemId)
+                        removeWatchlistItem(itemId)
                     }
                 }
             }
@@ -61,10 +62,10 @@ Page {
     }
 
     onStatusChanged: {
-        //when in itemview one favourite is removed -> model must be updated
+        //when in itemview one watchlist item is removed -> model must be updated
         if (status == PageStatus.Activating) {
-            favouriteListView.model.loadData()
-            if(favouriteListView.count === 0) {
+            watchlistView.model.loadData()
+            if(watchlistView.count === 0) {
                 emptyWatchlist.enabled = true
             }
         }

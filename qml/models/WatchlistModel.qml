@@ -1,15 +1,15 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../database.js" as DB
+import "../scripts/database.js" as DB
 
 ListModel {
-    id: favouriteModel
+    id: watchlistModel
 
     function loadData() {
-        favouriteModel.clear()
-        var results = DB.getAllFavourites()
+        watchlistModel.clear()
+        var results = DB.getAllWatchlistItems()
         for (var i = 0; i < results.length; i++) {
-            favouriteModel.append({
+            watchlistModel.append({
                         itemId: results[i].itemid,
                         heading: results[i].heading,
                         zip: results[i].zip,

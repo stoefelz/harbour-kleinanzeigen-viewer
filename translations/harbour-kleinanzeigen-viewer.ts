@@ -162,7 +162,7 @@
     </message>
 </context>
 <context>
-    <name>ItemView</name>
+    <name>ItemDetails</name>
     <message>
         <source>Details</source>
         <translation type="unfinished"></translation>
@@ -184,11 +184,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add to watchlist</source>
+        <source>Remove from watchlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove from watchlist</source>
+        <source>Add to watchlist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

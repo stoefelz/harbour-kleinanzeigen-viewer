@@ -25,7 +25,7 @@ Page {
         id: python
 
         Component.onCompleted: {
-            addImportPath(Qt.resolvedUrl('.'))
+            addImportPath(Qt.resolvedUrl('../scripts/'))
 
             setHandler('msg', function (returnMsg) {
                 console.log('python message ' + returnMsg)
@@ -54,7 +54,7 @@ Page {
                     pageLoader.source = "Error.qml"
                 }
                 else {
-                    pageLoader.source = "ItemView.qml"
+                    pageLoader.source = "../components/ItemDetails.qml"
                 }
             })
         }

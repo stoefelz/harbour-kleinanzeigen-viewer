@@ -162,7 +162,7 @@
     </message>
 </context>
 <context>
-    <name>ItemView</name>
+    <name>ItemDetails</name>
     <message>
         <source>Details</source>
         <translation>Details</translation>
@@ -184,12 +184,12 @@
         <translation>In Browser öffnen</translation>
     </message>
     <message>
-        <source>Add to watchlist</source>
-        <translation>Zu Merkliste hinzufügen</translation>
-    </message>
-    <message>
         <source>Remove from watchlist</source>
         <translation>Von Merkliste löschen</translation>
+    </message>
+    <message>
+        <source>Add to watchlist</source>
+        <translation>Zu Merkliste hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -235,23 +235,23 @@
     <name>Watchlist</name>
     <message>
         <source>Watchlist</source>
-        <translation type="unfinished">Merkliste</translation>
+        <translation>Merkliste</translation>
     </message>
     <message>
         <source>Your watchlist is empty</source>
-        <translation type="unfinished">Deine Merkliste ist leer</translation>
+        <translation>Deine Merkliste ist leer</translation>
     </message>
     <message>
         <source>Removing from watchlist</source>
-        <translation type="unfinished">Von Merkliste löschen</translation>
+        <translation>Von Merkliste löschen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Unfortunately there are no automatic price updates</source>
-        <translation type="unfinished">Die Preise aktualisieren sich leider nicht automatisch</translation>
+        <translation>Die Preise aktualisieren sich hier leider nicht automatisch</translation>
     </message>
 </context>
 <context>
