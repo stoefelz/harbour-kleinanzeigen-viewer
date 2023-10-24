@@ -54,14 +54,13 @@ Page {
                 IconButton {
                     icon.source: "image://theme/icon-m-clear"
                     anchors.right: parent.right
+                    visible: filterProperties.zipName !== ""
                     onClicked: {
-                        if (filterProperties.zipName !== "") {
-                            filterProperties.zipJSONCode = ""
-                            filterProperties.zipName = ""
-                            filterProperties.zipRadius = ""
-                            comboRadius.currentItem = noRadius
-                            reloadSearch()
-                        }
+                        filterProperties.zipJSONCode = ""
+                        filterProperties.zipName = ""
+                        filterProperties.zipRadius = ""
+                        comboRadius.currentItem = noRadius
+                        reloadSearch()
                     }
                 }
 

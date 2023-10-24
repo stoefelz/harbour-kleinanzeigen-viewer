@@ -27,10 +27,10 @@ Page {
             }
 
             Label {
-                text: qsTr("Kleinanzeigen Viewer. My first app for Sailfish OS.")
+                text: qsTr("Kleinanzeigen Viewer")
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
                 horizontalAlignment: Text.AlignHCenter
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
             }
 
@@ -60,7 +60,7 @@ Page {
 
             Label {
                 text: qsTr("This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)")
-                width: parent.width
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
 
             }

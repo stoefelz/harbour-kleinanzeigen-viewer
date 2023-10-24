@@ -2,6 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
+import "database.js" as DB
 
 SilicaFlickable {
 
@@ -11,22 +12,25 @@ SilicaFlickable {
 
     function fillModels() {
         for (var i = 0; i < itemObject["small-pictures"].length; ++i) {
-            pictureUrls.append({"imageUrl": itemObject["small-pictures"][i]})
+            pictureUrls.append({
+                                   "imageUrl": itemObject["small-pictures"][i]
+                               })
         }
 
         for (var i = 0; i < itemObject.details.length; ++i) {
             detailItemList.append({
-                "detailDescription": itemObject.details[i].key,
-                "detailContent": itemObject.details[i].value
-            })
+                                      "detailDescription": itemObject.details[i].key,
+                                      "detailContent": itemObject.details[i].value
+                                  })
         }
 
         for (var i = 0; i < itemObject.checktags.length; ++i) {
-            checkGridModel.append({"checkGridItem": itemObject.checktags[i]})
+            checkGridModel.append({
+                                      "checkGridItem": itemObject.checktags[i]
+                                  })
         }
     }
     //for loader qml -> requires following object with name "itemObject"
-
 
     //TODO schauen ob nicht verfügbar mehr
     Column {
@@ -36,8 +40,8 @@ SilicaFlickable {
         spacing: Theme.paddingMedium
 
         Label {
-          width: parent.width
-          height: Theme.paddingLarge * 1.5
+            width: parent.width
+            height: Theme.paddingLarge * 1.5
         }
 
         // picture carussel with picture count in text format
@@ -67,14 +71,14 @@ SilicaFlickable {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            pageStack.push(Qt.resolvedUrl("PictureCarussel.qml"), {
-                               "bigPicUrls": itemObject["large-pictures"],
-                               "currentIndex": picCarussel.currentIndex
-                            })
+                            pageStack.push(Qt.resolvedUrl(
+                                               "PictureCarussel.qml"), {
+                                               "bigPicUrls": itemObject["large-pictures"],
+                                               "currentIndex": picCarussel.currentIndex
+                                           })
                         }
                     }
                 }
-
             }
 
             Rectangle {
@@ -130,7 +134,6 @@ SilicaFlickable {
                 font.pixelSize: Theme.fontSizeSmall
                 width: parent.width
                 truncationMode: TruncationMode.Fade
-
             }
         }
 
@@ -155,7 +158,6 @@ SilicaFlickable {
                 label: detailDescription
                 value: detailContent
             }
-
         }
 
         SectionHeader {
@@ -201,31 +203,50 @@ SilicaFlickable {
             id: userinfo
             width: parent.width
             //commercial users does not have a username
-            text: itemObject["username"] === "" ? itemObject["userinfo"] : itemObject["username"] + ": " + itemObject["userinfo"]
+            text: itemObject["username"] === "" ? itemObject["userinfo"] : itemObject["username"]
+                                                  + ": " + itemObject["userinfo"]
             wrapMode: Text.WordWrap
         }
 
         Label {
-          width: parent.width
-          height: Theme.paddingLarge
+            width: parent.width
+            height: Theme.paddingLarge
         }
     }
 
     PullDownMenu {
 
+
         MenuItem {
             text: qsTr("Open item in Browser")
             onClicked: Qt.openUrlExternally(itemObject.link)
         }
+
+
+        MenuItem {
+             property bool isFavourite
+            text: isFavourite ? qsTr("Remove from watchlist") : qsTr("Add to watchlist")
+            onClicked: {
+                if(isFavourite) {
+                   DB.deleteFavourite(itemObject["item-id"])
+                    isFavourite = false
+                }
+                else {
+                    //TODO small image is too large -> change ending for smaller image size
+                    DB.storeFavourite(itemObject["item-id"], itemObject["heading"], itemObject["zip-code"], itemObject["price"], itemObject["small-pictures"][0])
+                    isFavourite = true
+                }
+            }
+            Component.onCompleted: isFavourite =  DB.existsFavourite(itemObject["item-id"])
+
+        }
+
+
     }
 
     VerticalScrollDecorator {}
 
     Component.onCompleted: {
         fillModels()
-        pageStack.pushAttached(Qt.resolvedUrl("WebView.qml"), {
-           "itemUrl": itemObject.link
-       })
-
     }
 }

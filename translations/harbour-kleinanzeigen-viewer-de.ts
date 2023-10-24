@@ -8,10 +8,6 @@
         <translation>Über Kleinanzeigen Viewer</translation>
     </message>
     <message>
-        <source>Kleinanzeigen Viewer. My first app for Sailfish OS.</source>
-        <translation>Kleinanzeigen Viewer. Meine erste App für Sailfish OS.</translation>
-    </message>
-    <message>
         <source>© Pascal Stöfelz</source>
         <translation>© Pascal Stöfelz</translation>
     </message>
@@ -52,6 +48,29 @@
     <message>
         <source>Please wait and try again later</source>
         <translation>Warte kurz und versuche es später nochmal.</translation>
+    </message>
+</context>
+<context>
+    <name>FavouriteOverview</name>
+    <message>
+        <source>Watchlist</source>
+        <translation>Merkliste</translation>
+    </message>
+    <message>
+        <source>Removing from watchlist</source>
+        <translation>Von Merkliste löschen</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>Your watchlist is empty</source>
+        <translation>Deine Merkliste ist leer</translation>
+    </message>
+    <message>
+        <source>Unfortunately there are no automatic price updates</source>
+        <translation>Die Preise aktualisieren sich leider nicht automatisch</translation>
     </message>
 </context>
 <context>
@@ -187,9 +206,17 @@
         <source>Open item in Browser</source>
         <translation>In Browser öffnen</translation>
     </message>
+    <message>
+        <source>Add to watchlist</source>
+        <translation>Zu Merkliste hinzufügen</translation>
+    </message>
+    <message>
+        <source>Remove from watchlist</source>
+        <translation>Von Merkliste löschen</translation>
+    </message>
 </context>
 <context>
-    <name>StartPageWithSearchResults</name>
+    <name>Main</name>
     <message>
         <source>Items</source>
         <translation>Ergebnisse</translation>
@@ -207,16 +234,16 @@
         <translation>Keine Suchergebnisse</translation>
     </message>
     <message>
-        <source>Open in browser</source>
-        <translation>In Browser öffnen</translation>
-    </message>
-    <message>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
         <source>Focus Search Field</source>
         <translation>Suche fokussieren</translation>
+    </message>
+    <message>
+        <source>Watchlist</source>
+        <translation>Merkliste</translation>
     </message>
     <message>
         <source>Load more</source>

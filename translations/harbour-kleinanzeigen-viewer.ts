@@ -8,10 +8,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Kleinanzeigen Viewer. My first app for Sailfish OS.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>© Pascal Stöfelz</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51,6 +47,29 @@
     </message>
     <message>
         <source>Please wait and try again later</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavouriteOverview</name>
+    <message>
+        <source>Watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing from watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your watchlist is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfortunately there are no automatic price updates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -187,9 +206,17 @@
         <source>Open item in Browser</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add to watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>StartPageWithSearchResults</name>
+    <name>Main</name>
     <message>
         <source>Items</source>
         <translation type="unfinished"></translation>
@@ -207,15 +234,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open in browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Focus Search Field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watchlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

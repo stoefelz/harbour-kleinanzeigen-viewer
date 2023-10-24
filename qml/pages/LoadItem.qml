@@ -46,13 +46,11 @@ Page {
         }
 
         function getItem(id) {
-            call('get_item.get_item', [id], function (returnValue) {
-                console.log(returnValue)
+            call('get_item.get_item', [id], function (returnValue) {          
                 itemObject = JSON.parse(returnValue)
-                console.log(itemObject)
-                console.log("answer from python script: " + itemObject)
+                itemObject["item-id"] = itemId
                 //if empty load error page
-                if (itemObject == undefined || itemObject.length === 0) {
+                if (itemObject === undefined || itemObject.length === 0) {
                     pageLoader.source = "Error.qml"
                 }
                 else {
