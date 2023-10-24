@@ -9,8 +9,6 @@ There are a few bugs and not all features of the website are working in this app
 Bugfixing  
 Zoom into images  
 Offline error message  
-Optimize RAM usage  
-Save items as favourites  
 Item categories in filter page  
 Automatic next page loading  
 
