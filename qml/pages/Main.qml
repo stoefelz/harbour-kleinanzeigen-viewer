@@ -212,7 +212,7 @@ Page {
             filterPageAttached = true
         }
 
-        if (status == PageStatus.Activating && filterProperties.reloadSearch) {
+        if (status == PageStatus.Active && filterProperties.reloadSearch) {
             python.startSearch(searchTerm, filterProperties.pageNumber)
             filterProperties.reloadSearch = false
         }
