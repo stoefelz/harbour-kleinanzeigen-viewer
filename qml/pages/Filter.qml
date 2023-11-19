@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import io.thp.pyotherside 1.5
 import "../components"
 
 Page {
@@ -27,45 +28,35 @@ Page {
                 title: qsTr("Filters")
             }
 
-            BackgroundItem {
-                Row {
-                    width: parent.width
-
-                    Column {
-                        Row {
-                            x: Theme.horizontalPageMargin
-                            Label {
-                                text: qsTr("City") + " "
-                            }
-                            Label {
-                                color: Theme.highlightColor
-                                text: filterProperties.zipName
-                                      === "" ? qsTr("Germany") : filterProperties.zipName
-                            }
-                        }
-                        Label {
-                            x: Theme.horizontalPageMargin
-                            color: Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeExtraSmallBase
-                            text: qsTr("Select city or zip code")
-                        }
-                    }
+            ComboBoxSelfMade {
+                property string descriptionText: qsTr("Category")
+                property string categoryDetailsDescription: filterProperties.categoryName
+                                                         === "" ? qsTr("All categories") : filterProperties.categoryName
+                property string categoryHint: qsTr("Select category")
+                property bool resetVisible: filterProperties.categoryName !== ""
+                onClicked:  pageStack.push(Qt.resolvedUrl("CategorySelection.qml"))
+                function resetFunction() {
+                    filterProperties.categoryName = ""
+                    filterProperties.categoryId = ""
+                    reloadSearch()
                 }
 
-                IconButton {
-                    icon.source: "image://theme/icon-m-clear"
-                    anchors.right: parent.right
-                    visible: filterProperties.zipName !== ""
-                    onClicked: {
-                        filterProperties.zipJSONCode = ""
-                        filterProperties.zipName = ""
-                        filterProperties.zipRadius = ""
-                        comboRadius.currentItem = noRadius
-                        reloadSearch()
-                    }
-                }
+            }
 
-                onClicked: pageStack.push(Qt.resolvedUrl("ZipSelection.qml"))
+            ComboBoxSelfMade {
+                property string descriptionText: qsTr("City")
+                property string categoryDetailsDescription: filterProperties.zipName
+                                                            === "" ? qsTr("Germany") : filterProperties.zipName
+                property string categoryHint: qsTr("Select city or zip code")
+                property bool resetVisible: filterProperties.zipName !== ""
+                onClicked:  pageStack.push(Qt.resolvedUrl("ZipSelection.qml"))
+                function resetFunction() {
+                    filterProperties.zipJSONCode = ""
+                    filterProperties.zipName = ""
+                    filterProperties.zipRadius = ""
+                    comboRadius.currentItem = noRadius
+                    reloadSearch()
+                }
             }
 
             ComboBox {
@@ -316,6 +307,8 @@ Page {
                     filterProperties.zipJSONCode = ""
                     filterProperties.zipName = ""
                     filterProperties.zipRadius = ""
+                    filterProperties.categoryId = ""
+                    filterProperties.categoryName = ""
                     filterProperties.reloadSearch = true
                     comboRadius.currentItem = noRadius
                     comboSorting.currentItem = latest
@@ -325,6 +318,51 @@ Page {
             }
         }
     }
+
+    Python {
+        id: python
+
+        Component.onCompleted: {
+            addImportPath(Qt.resolvedUrl('../scripts/'))
+
+            setHandler('msg', function (returnMsg) {
+                console.log('python message ' + returnMsg)
+            })
+
+            importModule('get_all_categories', function () {})
+
+        }
+
+        onError: {
+            console.log('python error: ' + traceback)
+        }
+
+        onReceived: {
+            console.log('python: ' + data)
+        }
+
+
+        function getAllCategories() {
+            call('get_all_categories.get_all_categories', [],
+                 function (returnValue) {
+                     var resultObject = JSON.parse(returnValue)
+                     for (var key in resultObject) {
+                         if(resultObject.hasOwnProperty(key)) {
+                             categoryModel.append({"categoryName": resultObject[key]["name"],
+                                                   "subCategories": JSON.stringify(resultObject[key]["subs"]),
+                                                   "superCategory": JSON.stringify({"name": resultObject[key]["name"], "id": key})
+                                                 })
+                         }
+                     }
+
+                 })
+        }
+    }
+
+    Component.onCompleted: {
+        python.getAllCategories()
+    }
+
 
     //without it, focus stays on fields if clicked in
     onActiveFocusChanged: {

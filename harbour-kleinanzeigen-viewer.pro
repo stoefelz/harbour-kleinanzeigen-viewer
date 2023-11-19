@@ -28,10 +28,13 @@ DISTFILES += \
     icons/86x86/harbour-kleinanzeigen-viewer.png \
     icons/harbour-kleinanzeigen-viewer.png \
     icons/no_image.svg \
+    qml/components/CategoryDelegate.qml \
+    qml/components/ComboBoxSelfMade.qml \
     qml/components/ZipItemDelegate.qml \
     qml/cover/CoverPage.qml \
     qml/harbour-kleinanzeigen-viewer.qml \
     qml/pages/About.qml \
+    qml/pages/CategorySelection.qml \
     qml/pages/Error.qml \
     qml/pages/Filter.qml \
     qml/pages/FilterProperties.qml \
@@ -40,6 +43,7 @@ DISTFILES += \
     qml/pages/Main.qml \
     qml/pages/PictureCarussel.qml \
     qml/pages/PossibleFilterValues.qml \
+    qml/pages/SubCategorySelection.qml \
     qml/pages/WebView.qml \
     qml/pages/ZipSelection.qml \
     qml/pages/database.js \

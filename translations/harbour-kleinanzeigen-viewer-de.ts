@@ -33,6 +33,13 @@
     </message>
 </context>
 <context>
+    <name>CategorySelection</name>
+    <message>
+        <source>Categories</source>
+        <translation>Kategorien</translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>Kleinanzeigen</source>
@@ -159,6 +166,18 @@
     <message>
         <source>Sorting</source>
         <translation>Sortieren nach</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>Kategorie</translation>
+    </message>
+    <message>
+        <source>Select category</source>
+        <translation>Wähle Kategorie</translation>
+    </message>
+    <message>
+        <source>All categories</source>
+        <translation>Alle Kategorien</translation>
     </message>
 </context>
 <context>

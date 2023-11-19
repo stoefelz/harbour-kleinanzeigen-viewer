@@ -33,6 +33,13 @@
     </message>
 </context>
 <context>
+    <name>CategorySelection</name>
+    <message>
+        <source>Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>Kleinanzeigen</source>
@@ -158,6 +165,18 @@
     </message>
     <message>
         <source>Delete all filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All categories</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

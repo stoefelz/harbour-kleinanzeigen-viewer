@@ -9,6 +9,9 @@ Item {
     property string zipJSONCode
     property string zipName
     property string zipRadius
+    property string categoryName
+    property string categoryId
     property bool reloadSearch
     property int pageNumber: 1
+
 }
