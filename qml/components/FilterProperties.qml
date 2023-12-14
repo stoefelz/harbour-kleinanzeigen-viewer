@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
 Item {
-    property string sorting
+    property int pageNumber
+    property int sorting
     property string seller
     property string typ
     property string minPrice
@@ -9,9 +10,11 @@ Item {
     property string zipJSONCode
     property string zipName
     property string zipRadius
-    property string categoryName
     property string categoryId
-    property bool reloadSearch
-    property int pageNumber: 1
-
+    property string categoryName
+    property int shippingCarrier
+    //true for only shipping, false for only pickup, null for both
+    property var shipping: null
+    property bool buynowOnly
+    property bool reloadSearch    
 }

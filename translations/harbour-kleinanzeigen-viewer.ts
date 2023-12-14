@@ -179,6 +179,54 @@
         <source>All categories</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipping possible or Only pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipping and Pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipping possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only Pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipping Carrier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select your shipping carrier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Carriers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buy now only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>nearest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currently not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemDetails</name>
