@@ -1,0 +1,3 @@
+[submodule "qml/kleinanzeigen_parser"]
+	path = qml/kleinanzeigen_parser
+	url = git@github.com:stoefelz/kleinanzeigen_parser.git

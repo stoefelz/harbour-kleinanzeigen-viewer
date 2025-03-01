@@ -25,7 +25,7 @@ Page {
         id: python
 
         Component.onCompleted: {
-            addImportPath(Qt.resolvedUrl('../scripts/'))
+            addImportPath(Qt.resolvedUrl('../kleinanzeigen_parser/'))
 
             setHandler('msg', function (returnMsg) {
                 console.log('python message ' + returnMsg)
