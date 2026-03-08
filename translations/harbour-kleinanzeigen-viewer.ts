@@ -242,11 +242,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load more</source>
+        <source>No internet connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No more results</source>
+        <source>Check Wifi or mobile data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

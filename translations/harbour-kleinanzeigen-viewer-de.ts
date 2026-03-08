@@ -242,12 +242,12 @@
         <translation>Merkliste</translation>
     </message>
     <message>
-        <source>Load more</source>
-        <translation>Mehr</translation>
+        <source>No internet connection</source>
+        <translation>Keine Internetverbindung</translation>
     </message>
     <message>
-        <source>No more results</source>
-        <translation>Keine weiteren Ergebnisse</translation>
+        <source>Check Wifi or mobile data</source>
+        <translation>Überprüfe WLAN oder mobile Daten</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,7 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
+import Nemo.Connectivity 1.0
 import io.thp.pyotherside 1.5
 import "../components"
 
@@ -16,10 +17,22 @@ Page {
     property PageBusyIndicator busyIndicatorProperty: null
     property string previousSearchResult
     property bool lastSearchPage
+    //to block reloading further results while already loading
+    property bool loadingFinished: true
 
     function focusSearch() {
         searchFieldProperty.forceActiveFocus()
     }
+
+    //to check online status
+    ConnectionHelper {
+        id: connectionHelper
+        onOnlineChanged: {
+            if(online) {
+                python.startSearch(searchTerm, filterProperties.pageNumber)
+            }
+        }
+     }
 
     //TODO -> no picture
     //TODO null abfrage
@@ -27,7 +40,16 @@ Page {
     SilicaListView {
         anchors.fill: parent
 
-        //TODO offline modus
+
+        //load automatic next results when on page end
+        onAtYEndChanged: {
+            if (atYEnd && loadingFinished && !lastSearchPage) {
+                loadingFinished = false
+                filterProperties.pageNumber += 1
+                python.startSearch(searchTerm, filterProperties.pageNumber)
+            }
+        }
+
         //header with search field and heading
         header: Column {
             width: parent.width
@@ -59,15 +81,16 @@ Page {
             PageBusyIndicator {
                 id: busyIndicator
                 running: true
-                visible: running ? true : false
+                visible: (running && connectionHelper.online) ? true : false
 
                 Component.onCompleted: busyIndicatorProperty = busyIndicator
             }
 
             ViewPlaceholder {
-                enabled: (resultsLength <= 0 && busyIndicator.running == false) ? true : false
-                text: qsTr("Search Error")
-                hintText: qsTr("Maybe there are no results")
+                id: searchError
+                enabled: (resultsLength <= 0 && (busyIndicator.running == false || !connectionHelper.online)) ? true : false
+                text: connectionHelper.online ? qsTr("Search Error") : qsTr("No internet connection")
+                hintText: connectionHelper.online ? qsTr("Maybe there are no results") : qsTr("Check Wifi or mobile data")
             }
         }
 
@@ -93,23 +116,6 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("Watchlist.qml"))
             }
 
-        }
-
-        PushUpMenu {
-            id: pushupMenu
-            quickSelect: true
-
-            MenuItem {
-                id: loadNextPage
-                text: enabled ? qsTr("Load more") : qsTr("No more results")
-                enabled:(resultsLength > 0 && busyIndicatorProperty.running === false && lastSearchPage === false) ? true : false
-
-                onClicked: {
-                    filterProperties.pageNumber += 1
-                    //TODO schlecht, weil in searchfield kann schon was anderes stehen, aber man möchte beim alten weiter
-                    python.startSearch(searchTerm, filterProperties.pageNumber)
-                }
-            }
         }
 
         Python {
@@ -143,9 +149,6 @@ Page {
                     previousSearchResult = ""
                     lastSearchPage = false
                     busyIndicatorProperty.running = true
-                }
-                else {
-                    pushupMenu.busy = true
                 }
 
                 //add search arguments as dictionary
@@ -200,7 +203,7 @@ Page {
                          previousSearchResult = JSON.stringify(resultObject)
 
                          busyIndicatorProperty.running = false
-                         pushupMenu.busy = false
+                         loadingFinished = true
                      })
             }
         }
