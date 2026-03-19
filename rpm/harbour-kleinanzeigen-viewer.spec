@@ -9,7 +9,7 @@ Name:       harbour-kleinanzeigen-viewer
 # << macros
 
 Summary:    Kleinanzeigen Viewer
-Version:    0.7
+Version:    26.3
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE

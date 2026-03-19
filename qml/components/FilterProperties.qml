@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 
 Item {
     property string sorting
@@ -11,7 +11,7 @@ Item {
     property string zipRadius
     property string categoryName
     property string categoryId
-    property bool reloadSearch
+    property bool reloadSearch: false
     property int pageNumber: 1
 
 }

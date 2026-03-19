@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
@@ -32,7 +32,6 @@ SilicaFlickable {
     }
     //for loader qml -> requires following object with name "itemObject"
 
-    //TODO schauen ob nicht verfügbar mehr
     Column {
         id: itemContent
         x: Theme.horizontalPageMargin
@@ -72,10 +71,10 @@ SilicaFlickable {
                         anchors.fill: parent
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl(
-                                               "PictureCarussel.qml"), {
-                                               "bigPicUrls": itemObject["large-pictures"],
-                                               "currentIndex": picCarussel.currentIndex
-                                           })
+                               "PictureCarussel.qml"), {
+                               "bigPicUrls": itemObject["large-pictures"],
+                               "currentIndex": picCarussel.currentIndex
+                           })
                         }
                     }
                 }
@@ -224,7 +223,7 @@ SilicaFlickable {
 
 
         MenuItem {
-             property bool isInWatchlist
+            property bool isInWatchlist
             text: isInWatchlist ? qsTr("Remove from watchlist") : qsTr("Add to watchlist")
             onClicked: {
                 if(isInWatchlist) {
@@ -232,15 +231,16 @@ SilicaFlickable {
                     isInWatchlist = false
                 }
                 else {
-                    //TODO small image is too large -> change ending for smaller image size
-                    DB.storeWatchlistItem(itemObject["item-id"], itemObject["heading"], itemObject["zip-code"], itemObject["price"], itemObject["small-pictures"][0])
+                    //smaller image size for db
+                    var smallImage = itemObject["small-pictures"][0]
+                    var smallerImage = smallImage.replace("$_59.AUTO", "$_35.AUTO")
+                    DB.storeWatchlistItem(itemObject["item-id"], itemObject["heading"], itemObject["zip-code"], itemObject["price"], smallerImage)
                     isInWatchlist = true
                 }
             }
             Component.onCompleted: isInWatchlist =  DB.existsWatchlistItem(itemObject["item-id"])
 
         }
-
 
     }
 

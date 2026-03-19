@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 Page {
@@ -59,7 +59,7 @@ Page {
             }
 
             Label {
-                text: qsTr("This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)")
+                text: qsTr("This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser")
                 width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
 

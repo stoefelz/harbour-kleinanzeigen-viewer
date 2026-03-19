@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import io.thp.pyotherside 1.5
 import "../components"
@@ -83,7 +83,7 @@ Page {
                     }
                 }
 
-                onValueChanged: {
+                onCurrentIndexChanged:  {
                     if (comboRadius.currentItem == noRadius) {
                         filterProperties.zipRadius = ""
                     } else {
@@ -113,7 +113,7 @@ Page {
                     }
                 }
 
-                onValueChanged: {
+                onCurrentIndexChanged: {
                     if (comboSorting.currentItem == latest) {
                         filterProperties.sorting = possibleFilterValues.sortingValues.dateSorting
                     } else {
@@ -155,7 +155,7 @@ Page {
                     }
                 }
 
-                onValueChanged: {
+                onCurrentIndexChanged: {
                     if (comboSeller.currentItem == privat) {
                         filterProperties.seller = possibleFilterValues.sellerValues.privateSeller
                     } else if (comboSeller.currentItem == commercial) {
@@ -196,7 +196,7 @@ Page {
                         text: qsTr("request")
                     }
                 }
-                onValueChanged: {
+                onCurrentIndexChanged:  {
                     if (comboTyp.currentItem == offer) {
                         filterProperties.typ = possibleFilterValues.typeValues.offerType
                     } else if (comboTyp.currentItem == request) {
@@ -232,7 +232,7 @@ Page {
                     }
                     strictValidation: true
                     text: {
-                        if (filterProperties.minPrice > 0
+                        if (filterProperties.minPrice >= 0
                                 && filterProperties.minPrice < 1000000000) {
                             filterProperties.minPrice
                         } else {
@@ -256,13 +256,14 @@ Page {
                     anchors.left: minPriceField.right
                     placeholderText: qsTr("max")
                     label: qsTr("max")
-                    description: {
+                    //behaviour was changed
+                    /*description: {
                         if (maxPriceField.text.length === 0) {
                             ""
                         } else {
                             qsTr("When adding max price all free items will disappear in search results")
                         }
-                    }
+                    }*/
                     rightItem: Label {
                         text: qsTr("€")
                     }

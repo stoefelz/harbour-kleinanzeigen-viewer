@@ -1,10 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import QtGraphicalEffects 1.0
 
 ListItem {
-        //yeah, i'll burn in hell
-        contentHeight: priceItem.height * 5
+        contentHeight: imageItem.height + 2 * Theme.paddingMedium
         clip: true
 
         //rectangle contains image, heading for item, price and zip code
@@ -23,6 +22,7 @@ ListItem {
             Image {
                 id: imageItem
                 source: imageUrl
+                asynchronous: true
                 height: Theme.itemSizeHuge
                 anchors.verticalCenter: parent.verticalCenter
                 width: imageItem.height
@@ -46,7 +46,6 @@ ListItem {
             //heading -> at kleinanzeigen the headings are max 70 characters (2022)
             Label {
                 width: parent.width - imageItem.width
-                //these anchors are from hell
                 anchors {
                     top: parent.top
                     bottom: priceItem.top
