@@ -1,229 +1,229 @@
-import QtQuick 2.2
-import Sailfish.Silica 1.0
-import QtGraphicalEffects 1.0
-import Nemo.Connectivity 1.0
-import io.thp.pyotherside 1.5
-import "../components"
+    import QtQuick 2.6
+    import Sailfish.Silica 1.0
+    import QtGraphicalEffects 1.0
+    import Nemo.Connectivity 1.0
+    import io.thp.pyotherside 1.5
+    import "../components"
 
-Page {
-    id: searchPage
-    allowedOrientations: Orientation.All
+    Page {
+        id: searchPage
+        allowedOrientations: Orientation.All
 
-    //default searchTerm is an blank because so you get the startsite kleinanzeigen items
-    property string searchTerm: " "
-    //to know if there is anything to show -> when 0: Error Page
-    property int resultsLength: 1
-    property bool filterPageAttached
-    property PageBusyIndicator busyIndicatorProperty: null
-    property string previousSearchResult
-    property bool lastSearchPage
-    //to block reloading further results while already loading
-    property bool loadingFinished: true
+        //default searchTerm is an blank because so you get the startsite kleinanzeigen items
+        property string searchTerm: " "
+        //to know if there is anything to show
+        property int resultsLength: 0
+        property bool filterPageAttached
+        property PageBusyIndicator busyIndicatorProperty: null
+        property string previousSearchResult
+        property bool lastSearchPage
+        //to block reloading further results while already loading
+        property bool loadingFinished: true
 
-    function focusSearch() {
-        searchFieldProperty.forceActiveFocus()
-    }
-
-    //to check online status
-    ConnectionHelper {
-        id: connectionHelper
-        onOnlineChanged: {
-            if(online) {
-                python.startSearch(searchTerm, filterProperties.pageNumber)
-            }
-        }
-     }
-
-    //TODO -> no picture
-    //TODO null abfrage
-    //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
-    SilicaListView {
-        anchors.fill: parent
-
-
-        //load automatic next results when on page end
-        onAtYEndChanged: {
-            if (atYEnd && loadingFinished && !lastSearchPage) {
-                loadingFinished = false
-                filterProperties.pageNumber += 1
-                python.startSearch(searchTerm, filterProperties.pageNumber)
-            }
+        function focusSearch() {
+            searchFieldProperty.forceActiveFocus()
         }
 
-        //header with search field and heading
-        header: Column {
-            width: parent.width
+        //to check online status
+        ConnectionHelper {
+            id: connectionHelper
+            onOnlineChanged: {
+                if(online) {
+                    loadingFinished = false
+                    python.startSearch(searchTerm, filterProperties.pageNumber)
+                }
+            }
+         }
 
-            PageHeader {
-                title: qsTr("Items")
+        //TODO -> no picture
+        //TODO null abfrage
+        //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
+        SilicaListView {
+            anchors.fill: parent
+            //load automatic next results when on page end
+            onAtYEndChanged: {
+                if (atYEnd && loadingFinished && !lastSearchPage && resultsLength > 0) {
+                    loadingFinished = false
+                    filterProperties.pageNumber += 1
+                    python.startSearch(searchTerm, filterProperties.pageNumber)
+                }
             }
 
-            SearchField {
-                id: searchField
+            //header with search field and heading
+            header: Column {
                 width: parent.width
 
-                placeholderText: qsTr("Search your product")
-                EnterKey.enabled: text.length > 0
-                EnterKey.iconSource: "image://theme/icon-m-search"
-
-                //click should initiate new search -> keyboard should loss focus and properties set to new search
-                EnterKey.onClicked: {
-                    focus = false
-                    filterProperties.pageNumber = 1
-                    searchTerm = searchField.text
-                    python.startSearch(searchField.text, filterProperties.pageNumber)
+                PageHeader {
+                    title: qsTr("Items")
                 }
 
-                //set searchField as property
-                Component.onCompleted: searchFieldProperty = searchField
-            }
+                SearchField {
+                    id: searchField
+                    width: parent.width
 
-            PageBusyIndicator {
-                id: busyIndicator
-                running: true
-                visible: (running && connectionHelper.online) ? true : false
+                    placeholderText: qsTr("Search your product")
+                    EnterKey.enabled: text.length > 0
+                    EnterKey.iconSource: "image://theme/icon-m-search"
 
-                Component.onCompleted: busyIndicatorProperty = busyIndicator
-            }
+                    //click should initiate new search -> keyboard should loss focus and properties set to new search
+                    EnterKey.onClicked: {
+                        focus = false
+                        filterProperties.pageNumber = 1
+                        searchTerm = searchField.text
+                        loadingFinished = false
+                        python.startSearch(searchField.text, filterProperties.pageNumber)
+                    }
 
-            ViewPlaceholder {
-                id: searchError
-                enabled: (resultsLength <= 0 && (busyIndicator.running == false || !connectionHelper.online)) ? true : false
-                text: connectionHelper.online ? qsTr("Search Error") : qsTr("No internet connection")
-                hintText: connectionHelper.online ? qsTr("Maybe there are no results") : qsTr("Check Wifi or mobile data")
-            }
-        }
-
-        model: ListModel {
-            id: listOfSearchResult
-     }
-
-        delegate: SearchListDelegate {}
-
-        PullDownMenu {
-
-            MenuItem {
-                text: qsTr("About")
-                onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
-
-            }
-            MenuItem {
-                text: qsTr("Focus Search Field")
-                onClicked: searchFieldProperty.forceActiveFocus()
-            }
-            MenuItem {
-                text: qsTr("Watchlist")
-                onClicked: pageStack.push(Qt.resolvedUrl("Watchlist.qml"))
-            }
-
-        }
-
-        Python {
-            id: python
-
-            Component.onCompleted: {
-                addImportPath(Qt.resolvedUrl('../kleinanzeigen_parser/'))
-
-                setHandler('msg', function (returnMsg) {
-                    console.log('python message ' + returnMsg)
-                })
-
-                importModule('get_search_entries', function () {})
-
-                //start first "search" when opening app
-                startSearch("", filterProperties.pageNumber)
-            }
-
-            onError: {
-                console.log('python error: ' + traceback)
-            }
-
-            onReceived: {
-                console.log('python: ' + data)
-            }
-
-            function startSearch(searchString, pageNumber) {
-                //clean results with new search (== page=1)
-                if (pageNumber === 1) {
-                    listOfSearchResult.clear()
-                    previousSearchResult = ""
-                    lastSearchPage = false
-                    busyIndicatorProperty.running = true
+                    //set searchField as property
+                    Component.onCompleted: searchFieldProperty = searchField
                 }
 
-                //add search arguments as dictionary
-                var filterArguments = {
-                    'site_number': filterProperties.pageNumber.toString()
+                PageBusyIndicator {
+                    id: busyIndicator
+                    running: true
+                    visible: (running && connectionHelper.online) ? true : false
+
+                    Component.onCompleted: busyIndicatorProperty = busyIndicator
                 }
-                if(filterProperties.sorting !== "")
-                    filterArguments['sorting'] = filterProperties.sorting
-                if(filterProperties.seller !== "")
-                    filterArguments['seller'] = filterProperties.seller
-                if(filterProperties.typ !== "")
-                    filterArguments['typ'] = filterProperties.typ
-                if(filterProperties.minPrice !== "")
-                    filterArguments['min_price'] = filterProperties.minPrice
-                if(filterProperties.maxPrice !== "")
-                    filterArguments['max_price'] = filterProperties.maxPrice
-                if(filterProperties.zipJSONCode !== "")
-                    filterArguments['zip_code_id'] = filterProperties.zipJSONCode
-                if(filterProperties.zipRadius !== "")
-                    filterArguments['zip_radius'] = filterProperties.zipRadius
-                if(filterProperties.categoryId !== "")
-                    filterArguments['category'] = filterProperties.categoryId
 
-                call('get_search_entries.get_search_entries',
-                     [searchString, filterArguments],
-                     function (returnValue) {
-                         var resultObject = JSON.parse(returnValue)
+                ViewPlaceholder {
+                    id: searchError
+                    enabled: (resultsLength <= 0 && (busyIndicator.running == false || !connectionHelper.online)) ? true : false
+                    text: connectionHelper.online ? qsTr("Search Error") : qsTr("No internet connection")
+                    hintText: connectionHelper.online ? qsTr("Maybe there are no results") : qsTr("Check Wifi or mobile data")
+                }
+            }
 
-                         if (JSON.stringify(resultObject) === previousSearchResult) {
-                             lastSearchPage = true
-                         }
-                         else {
-                             resultsLength = resultObject.length
-                             for (var i = 0; i < resultObject.length; i++) {
-                                 listOfSearchResult.append({
-                                      "itemId": resultObject[i]["id"],
-                                      "zip": resultObject[i]["zip-code"],
-                                      "date": resultObject[i]["date"],
-                                      "price": resultObject[i]["price"],
-                                      "heading": resultObject[i]["heading"],
-                                      "imageUrl": resultObject[i]["image-url"],
-                                  })
-                       /*          console.log(resultObject[i]["id"])
-                                 console.log(resultObject[i]["zip-code"])
-                                 console.log(resultObject[i]["date"])
-                                 console.log(resultObject[i]["price"])
-                                 console.log(resultObject[i]["heading"])
-                                 console.log(resultObject[i]["image-url"])*/
+            model: ListModel {
+                id: listOfSearchResult
+         }
+
+            delegate: SearchListDelegate {}
+
+            PullDownMenu {
+                id: pullDownMenu
+                MenuItem {
+                    text: qsTr("About")
+                    onClicked: pageStack.push(Qt.resolvedUrl("About.qml"))
+
+                }
+                MenuItem {
+                    text: qsTr("Focus Search Field")
+                    onClicked: searchFieldProperty.forceActiveFocus()
+                }
+                MenuItem {
+                    text: qsTr("Watchlist")
+                    onClicked: pageStack.push(Qt.resolvedUrl("Watchlist.qml"))
+                }
+
+            }
+
+            Python {
+                id: python
+
+                Component.onCompleted: {
+                    addImportPath(Qt.resolvedUrl('../kleinanzeigen_parser/'))
+
+                    setHandler('msg', function (returnMsg) {
+                        console.log('python message ' + returnMsg)
+                    })
+
+                    importModule('get_search_entries', function () {})
+
+                    //start first "search" when opening app
+                    //startSearch("", filterProperties.pageNumber)
+                }
+
+                onError: {
+                    console.log('python error: ' + traceback)
+                }
+
+                onReceived: {
+                    console.log('python: ' + data)
+                }
+
+                function startSearch(searchString, pageNumber) {
+                    //clean results with new search (== page=1)
+                    if (pageNumber === 1) {
+                        listOfSearchResult.clear()
+                        previousSearchResult = ""
+                        lastSearchPage = false
+                        busyIndicatorProperty.running = true
+                    }
+                    //add search arguments as dictionary
+                    var filterArguments = {
+                        'site_number': filterProperties.pageNumber.toString()
+                    }
+                    if(filterProperties.sorting !== "")
+                        filterArguments['sorting'] = filterProperties.sorting
+                    if(filterProperties.seller !== "")
+                        filterArguments['seller'] = filterProperties.seller
+                    if(filterProperties.typ !== "")
+                        filterArguments['typ'] = filterProperties.typ
+                    if(filterProperties.minPrice !== "")
+                        filterArguments['min_price'] = filterProperties.minPrice
+                    if(filterProperties.maxPrice !== "")
+                        filterArguments['max_price'] = filterProperties.maxPrice
+                    if(filterProperties.zipJSONCode !== "")
+                        filterArguments['zip_code_id'] = filterProperties.zipJSONCode
+                    if(filterProperties.zipRadius !== "")
+                        filterArguments['zip_radius'] = filterProperties.zipRadius
+                    if(filterProperties.categoryId !== "")
+                        filterArguments['category'] = filterProperties.categoryId
+
+                    call('get_search_entries.get_search_entries',
+                         [searchString, filterArguments],
+                         function (returnValue) {
+                             var resultObject = JSON.parse(returnValue)
+
+                             if (JSON.stringify(resultObject) === previousSearchResult) {
+                                 lastSearchPage = true
                              }
-                         }
+                             else {
+                                 resultsLength = resultObject.length
+                                 for (var i = 0; i < resultObject.length; i++) {
+                                     listOfSearchResult.append({
+                                          "itemId": resultObject[i]["id"],
+                                          "zip": resultObject[i]["zip-code"],
+                                          "date": resultObject[i]["date"],
+                                          "price": resultObject[i]["price"],
+                                          "heading": resultObject[i]["heading"],
+                                          "imageUrl": resultObject[i]["image-url"],
+                                      })
+                           /*          console.log(resultObject[i]["id"])
+                                     console.log(resultObject[i]["zip-code"])
+                                     console.log(resultObject[i]["date"])
+                                     console.log(resultObject[i]["price"])
+                                     console.log(resultObject[i]["heading"])
+                                     console.log(resultObject[i]["image-url"])*/
+                                 }
+                             }
 
-                         previousSearchResult = JSON.stringify(resultObject)
+                             previousSearchResult = JSON.stringify(resultObject)
 
-                         busyIndicatorProperty.running = false
-                         loadingFinished = true
-                     })
+                             busyIndicatorProperty.running = false
+                             loadingFinished = true
+                         })
+                }
             }
+
+            VerticalScrollDecorator {}
+        }
+        onStatusChanged: {
+
+            if (status == PageStatus.Active && !filterPageAttached) {
+                pageStack.pushAttached(Qt.resolvedUrl("Filter.qml"))
+                filterPageAttached = true
+            }
+
+            if (status == PageStatus.Active && filterProperties.reloadSearch && loadingFinished) {
+                loadingFinished = false
+                python.startSearch(searchTerm, filterProperties.pageNumber)
+                filterProperties.reloadSearch = false
+            }
+
+            searchFieldProperty.focus = false
         }
 
-        VerticalScrollDecorator {}
+
     }
-    onStatusChanged: {
-
-        if (status == PageStatus.Active && !filterPageAttached) {
-            pageStack.pushAttached(Qt.resolvedUrl("Filter.qml"))
-            filterPageAttached = true
-        }
-
-        if (status == PageStatus.Active && filterProperties.reloadSearch) {
-            python.startSearch(searchTerm, filterProperties.pageNumber)
-            filterProperties.reloadSearch = false
-        }
-
-        searchFieldProperty.focus = false
-    }
-
-
-}
