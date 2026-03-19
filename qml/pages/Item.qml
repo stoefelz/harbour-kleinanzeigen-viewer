@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import io.thp.pyotherside 1.5
 
@@ -6,7 +6,7 @@ Page {
     allowedOrientations: Orientation.All
     //item id gets by FirstPage
     property string itemId
-    property var itemObject: ({})
+    property var itemObject: null
 
     PageBusyIndicator {
         id: busyIndicator
@@ -39,6 +39,8 @@ Page {
 
         onError: {
             console.log('python error: ' + traceback)
+            pageLoader.source = "ItemError.qml"
+            busyIndicator.running = false
         }
 
         onReceived: {
@@ -46,14 +48,28 @@ Page {
         }
 
         function getItem(id) {
-            call('get_item.get_item', [id], function (returnValue) {          
-                itemObject = JSON.parse(returnValue)
-                itemObject["item-id"] = itemId
+            call('get_item.get_item', [id], function (returnValue) {
+                if (!returnValue || returnValue === "" || returnValue === "null" || returnValue === "{}") {
+                    console.log("ERROR: Empty or invalid response from Python")
+                    pageLoader.source = "ItemError.qml"
+                    return
+                }
+
+                try {
+                    itemObject = JSON.parse(returnValue)
+                } catch (error) {
+                    console.log("ERROR: Failed to parse JSON:", error)
+                    pageLoader.source = "ItemError.qml"
+                    return
+                }
+
                 //if empty load error page
-                if (itemObject === undefined || itemObject.length === 0) {
-                    pageLoader.source = "Error.qml"
+                if (!itemObject || itemObject == undefined || itemObject.length === 0) {
+                    pageLoader.source = "ItemError.qml"
                 }
                 else {
+                    itemObject["item-id"] = itemId
+                    console.log(itemObject["item-id"])
                     pageLoader.source = "../components/ItemDetails.qml"
                 }
             })
