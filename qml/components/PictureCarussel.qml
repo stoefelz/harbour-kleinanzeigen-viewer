@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 FullscreenContentPage {
@@ -25,8 +25,8 @@ FullscreenContentPage {
             Flickable {
                 id: flick
                 anchors.fill: parent
-                contentWidth: Math.max(width, image.paintedWidth * image.scale)
-                contentHeight: Math.max(height, image.paintedHeight * image.scale)
+                contentWidth: Math.max(flick.width, image.paintedWidth * image.scale)
+                contentHeight: Math.max(flick.height, image.paintedHeight * image.scale)
                 interactive: image.scale > 1.0
                 clip: true
 
@@ -50,8 +50,8 @@ FullscreenContentPage {
 
                     Image {
                         id: image
-                        width: flick.width
-                        height: flick.height
+                        width: slideshow.width
+                        height: slideshow.height
                         anchors.centerIn: parent
                         source: pictureUrl
                         fillMode: Image.PreserveAspectFit
