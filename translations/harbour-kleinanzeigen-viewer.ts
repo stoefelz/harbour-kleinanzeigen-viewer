@@ -20,15 +20,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Beautiful Soup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -49,11 +49,11 @@
 <context>
     <name>Error</name>
     <message>
-        <source>An error occured</source>
+        <source>Please wait and try again later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please wait and try again later</source>
+        <source>An error occurred</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -136,10 +136,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>When adding max price all free items will disappear in search results</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>City</source>
         <translation type="unfinished"></translation>
     </message>
@@ -208,6 +204,17 @@
     </message>
     <message>
         <source>Add to watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ItemError</name>
+    <message>
+        <source>Item cannot be shown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maybe this item does not exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

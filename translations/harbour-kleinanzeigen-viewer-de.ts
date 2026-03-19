@@ -20,16 +20,16 @@
         <translation>Kleinanzeigen Parser</translation>
     </message>
     <message>
-        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser (Thanks to myself)</source>
-        <translation>Diese App nutzt Beautiful Soup (Danke an Leonard Richardson und sein Team) und den Kleinanzeigen Parser (Danke an mich selbst)</translation>
-    </message>
-    <message>
         <source>Beautiful Soup</source>
         <translation>Beautiful Soup</translation>
     </message>
     <message>
         <source>Credits</source>
         <translation>Danksagung</translation>
+    </message>
+    <message>
+        <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser</source>
+        <translation>DieseDiese App nutzt Beautiful Soup (Danke an Leonard Richardson und sein Team) und den Kleinanzeigen Parser</translation>
     </message>
 </context>
 <context>
@@ -49,12 +49,12 @@
 <context>
     <name>Error</name>
     <message>
-        <source>An error occured</source>
-        <translation>Ein Fehler ist aufgetreten.</translation>
-    </message>
-    <message>
         <source>Please wait and try again later</source>
         <translation>Warte kurz und versuche es später nochmal.</translation>
+    </message>
+    <message>
+        <source>An error occurred</source>
+        <translation>Ein Fehler ist aufgetreten</translation>
     </message>
 </context>
 <context>
@@ -132,10 +132,6 @@
         <translation>Max</translation>
     </message>
     <message>
-        <source>When adding max price all free items will disappear in search results</source>
-        <translation>Bei max Preis sind gratis Anzeigen nicht mehr sichtbar</translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Ort</translation>
     </message>
@@ -209,6 +205,17 @@
     <message>
         <source>Add to watchlist</source>
         <translation>Zu Merkliste hinzufügen</translation>
+    </message>
+</context>
+<context>
+    <name>ItemError</name>
+    <message>
+        <source>Item cannot be shown</source>
+        <translation>Problem mit Anzeige</translation>
+    </message>
+    <message>
+        <source>Maybe this item does not exist anymore</source>
+        <translation>Vielleicht existiert diese Anzeige nicht mehr</translation>
     </message>
 </context>
 <context>
