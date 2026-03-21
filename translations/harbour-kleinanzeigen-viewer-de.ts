@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>This app uses Beautiful Soup (Thanks to Leonard Richardson and his team) and Kleinanzeigen Parser</source>
-        <translation>DieseDiese App nutzt Beautiful Soup (Danke an Leonard Richardson und sein Team) und den Kleinanzeigen Parser</translation>
+        <translation>Diese App nutzt Beautiful Soup (Danke an Leonard Richardson und sein Team) und den Kleinanzeigen Parser</translation>
     </message>
 </context>
 <context>
@@ -233,8 +233,16 @@
         <translation>Fehler bei der Suche</translation>
     </message>
     <message>
+        <source>No internet connection</source>
+        <translation>Keine Internetverbindung</translation>
+    </message>
+    <message>
         <source>Maybe there are no results</source>
         <translation>Keine Suchergebnisse</translation>
+    </message>
+    <message>
+        <source>Check Wifi or mobile data</source>
+        <translation>Check dein WLAN oder mobile Daten</translation>
     </message>
     <message>
         <source>About</source>
@@ -247,14 +255,6 @@
     <message>
         <source>Watchlist</source>
         <translation>Merkliste</translation>
-    </message>
-    <message>
-        <source>No internet connection</source>
-        <translation>Keine Internetverbindung</translation>
-    </message>
-    <message>
-        <source>Check Wifi or mobile data</source>
-        <translation>Überprüfe WLAN oder mobile Daten</translation>
     </message>
 </context>
 <context>
@@ -290,6 +290,10 @@
         <source>Forward</source>
         <translation>Weiter</translation>
     </message>
+    <message>
+        <source>Open in Browser</source>
+        <translation>In Browser öffnen</translation>
+    </message>
 </context>
 <context>
     <name>ZipSelection</name>
@@ -304,6 +308,13 @@
     <message>
         <source>There are no results</source>
         <translation>Keine Suchergebnisse</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-kleinanzeigen-viewer</name>
+    <message>
+        <source>App is offline</source>
+        <translation>App ist offline</translation>
     </message>
 </context>
 </TS>

@@ -233,7 +233,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>No internet connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Maybe there are no results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check Wifi or mobile data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -246,14 +254,6 @@
     </message>
     <message>
         <source>Watchlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No internet connection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check Wifi or mobile data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -290,6 +290,10 @@
         <source>Forward</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open in Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZipSelection</name>
@@ -303,6 +307,13 @@
     </message>
     <message>
         <source>There are no results</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>harbour-kleinanzeigen-viewer</name>
+    <message>
+        <source>App is offline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
