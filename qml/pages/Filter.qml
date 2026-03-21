@@ -4,9 +4,11 @@ import io.thp.pyotherside 1.5
 import "../components"
 
 Page {
-
+    id: filterPage
+    allowedOrientations: Orientation.All
+    property bool wasLoaded: false
     //Set page_numer = 1 and reload_search = true after every change, because search must be fully loaded again
-    function reloadSearch() {
+    function reloadProperties() {
         filterProperties.pageNumber = 1
         filterProperties.reloadSearch = true
     }
@@ -15,7 +17,6 @@ Page {
         id: possibleFilterValues
     }
 
-    allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: filterContent.height
@@ -38,7 +39,7 @@ Page {
                 function resetFunction() {
                     filterProperties.categoryName = ""
                     filterProperties.categoryId = ""
-                    reloadSearch()
+                    reloadProperties()
                 }
 
             }
@@ -55,7 +56,7 @@ Page {
                     filterProperties.zipName = ""
                     filterProperties.zipRadius = ""
                     comboRadius.currentItem = noRadius
-                    reloadSearch()
+                    reloadProperties()
                 }
             }
 
@@ -91,7 +92,7 @@ Page {
                         filterProperties.zipRadius
                                 = possibleFilterValues.zipRadiusValues[comboRadius.currentIndex - 1]
                     }
-                    reloadSearch()
+                    reloadProperties()
                 }
             }
 
@@ -115,11 +116,11 @@ Page {
 
                 onCurrentIndexChanged: {
                     if (comboSorting.currentItem == latest) {
-                        filterProperties.sorting = possibleFilterValues.sortingValues.dateSorting
+                        filterProperties.sorting = possibleFilterValues.dateSorting
                     } else {
-                        filterProperties.sorting = possibleFilterValues.sortingValues.priceSorting
+                        filterProperties.sorting = possibleFilterValues.priceSorting
                     }
-                    reloadSearch()
+                    reloadProperties()
                 }
             }
 
@@ -130,10 +131,10 @@ Page {
                 description: qsTr("Private or commercial seller")
                 currentItem: {
                     if (filterProperties.seller
-                            === possibleFilterValues.sellerValues.privateSeller) {
+                            === possibleFilterValues.privateSeller) {
                         privat
                     } else if (filterProperties.seller
-                               === possibleFilterValues.sellerValues.commercialSeller) {
+                               === possibleFilterValues.commercialSeller) {
                         commercial
                     } else {
                         privatAndCommercial
@@ -157,13 +158,13 @@ Page {
 
                 onCurrentIndexChanged: {
                     if (comboSeller.currentItem == privat) {
-                        filterProperties.seller = possibleFilterValues.sellerValues.privateSeller
+                        filterProperties.seller = possibleFilterValues.privateSeller
                     } else if (comboSeller.currentItem == commercial) {
-                        filterProperties.seller = possibleFilterValues.sellerValues.commercialSeller
+                        filterProperties.seller = possibleFilterValues.commercialSeller
                     } else {
                         filterProperties.seller = ""
                     }
-                    reloadSearch()
+                    reloadProperties()
                 }
             }
 
@@ -173,10 +174,9 @@ Page {
                 label: qsTr("Type")
                 description: qsTr("Offer Type")
                 currentItem: {
-                    if (filterProperties.typ === possibleFilterValues.typeValues.offerType) {
+                    if (filterProperties.typ === possibleFilterValues.offerType) {
                         offer
-                    } else if (filterProperties.typ
-                               === possibleFilterValues.typeValues.wantedType) {
+                    } else if (filterProperties.typ === possibleFilterValues.wantedType) {
                         request
                     } else {
                         offerAndRequest
@@ -198,13 +198,13 @@ Page {
                 }
                 onCurrentIndexChanged:  {
                     if (comboTyp.currentItem == offer) {
-                        filterProperties.typ = possibleFilterValues.typeValues.offerType
+                        filterProperties.typ = possibleFilterValues.offerType
                     } else if (comboTyp.currentItem == request) {
-                        filterProperties.typ = possibleFilterValues.typeValues.wantedType
+                        filterProperties.typ = possibleFilterValues.wantedType
                     } else {
                         filterProperties.typ = ""
                     }
-                    reloadSearch()
+                    reloadProperties()
                 }
             }
 
@@ -246,7 +246,7 @@ Page {
                         } else {
                             filterProperties.minPrice = minPriceField.text.toString()
                         }
-                        reloadSearch()
+                        reloadProperties()
                     }
                 }
 
@@ -288,7 +288,7 @@ Page {
                         } else {
                             filterProperties.maxPrice = maxPriceField.text.toString()
                         }
-                        reloadSearch()
+                        reloadProperties()
                     }
                 }
             }
@@ -352,18 +352,22 @@ Page {
                              categoryModel.append({"categoryName": resultObject[key]["name"],
                                                    "subCategories": JSON.stringify(resultObject[key]["subs"]),
                                                    "superCategory": JSON.stringify({"name": resultObject[key]["name"], "id": key})
-                                                 })
+                             })
                          }
                      }
-
-                 })
+                     //for reloading function later when online
+                     if(resultObject && resultObject.length > 0) {
+                         wasLoaded = true
+                     }
+             })
         }
     }
 
-    Component.onCompleted: {
-        python.getAllCategories()
+    onStatusChanged: {
+        if (!wasLoaded && !offline && status === PageStatus.Active) {
+            python.getAllCategories()
+        }
     }
-
 
     //without it, focus stays on fields if clicked in
     onActiveFocusChanged: {
