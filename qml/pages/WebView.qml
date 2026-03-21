@@ -5,6 +5,9 @@ import Sailfish.WebView 1.0
 Page {
     // itemUrl is handed over from previous page
     property string itemUrl: websiteUrl
+    SilicaFlickable {
+        anchors.fill: parent
+
 
     WebView {
         id: webView
@@ -48,6 +51,14 @@ Page {
         width: webView.loading ? parent.width / 110 * webView.loadProgress : parent.width
         anchors.top: webView.bottom
         color: webView.loading ? Theme.highlightColor : "transparent"
+    }
+
+    PullDownMenu {
+        MenuItem {
+            text: qsTr("Open in Browser")
+            onClicked: Qt.openUrlExternally(webView.url)
+        }
+    }
     }
 
 }
