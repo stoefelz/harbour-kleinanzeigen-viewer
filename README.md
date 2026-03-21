@@ -2,15 +2,12 @@
 <img alt="logo" src="icons/172x172/harbour-kleinanzeigen-viewer.png" width="120" />
 
 Basic Kleinanzeigen.de App for Sailfish OS  
-Search, a few filters and item view is working  
+Search, a few filters, item view and very basic watchlist is working  
 There are a few bugs and not all features of the website are working in this app, but this is only for my free time - don't expect too many updates  
 
 **Roadmap**  
 Bugfixing  
-Zoom into images  
-Offline error message  
-Item categories in filter page  
-Automatic next page loading  
+add features to Watchlist
 
 ---
 This app uses Kleinanzeigen Parser © by me  
@@ -29,8 +26,6 @@ Download the rpm and install the app - when you have not enabled my openrepos re
 
 </div>
 <p>
-
-The main goal of this project is to get a rough idea of how to create a Sailfish OS app. 
 
 
 
