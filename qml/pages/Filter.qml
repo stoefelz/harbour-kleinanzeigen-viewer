@@ -356,7 +356,7 @@ Page {
                          }
                      }
                      //for reloading function later when online
-                     if(resultObject && resultObject.length > 0) {
+                     if(resultObject.hasOwnProperty(key)) {
                          wasLoaded = true
                      }
              })

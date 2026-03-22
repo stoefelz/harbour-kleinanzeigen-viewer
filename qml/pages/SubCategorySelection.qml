@@ -28,6 +28,7 @@ Page {
                 filterProperties.categoryName = categoryName
                 filterProperties.categoryId = categoryId
                 filterProperties.reloadSearch = true
+                filterProperties.pageNumber = 1
                 pageStack.pop()
             }
         }
