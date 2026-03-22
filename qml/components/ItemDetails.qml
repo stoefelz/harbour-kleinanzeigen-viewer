@@ -103,11 +103,20 @@ SilicaFlickable {
             width: parent.width
 
             Label {
+                property string status: {
+                    if(itemObject.status === "deleted")
+                        return qsTr("DELETED ")
+                    else if (itemObject.status === "paused")
+                        return qsTr("RESERVED ")
+                    else
+                        return ""
+                }
+
                 id: heading
                 width: parent.width
-                text: itemObject.heading
+                text: status + itemObject.heading
                 font.pixelSize: Theme.fontSizeLarge
-                color: Theme.highlightColor
+                color: status === "" ? Theme.highlightColor : "#FF0000"
                 wrapMode: Text.WordWrap
             }
 
@@ -133,6 +142,29 @@ SilicaFlickable {
                 font.pixelSize: Theme.fontSizeSmall
                 width: parent.width
                 truncationMode: TruncationMode.Fade
+            }
+        }
+
+        Item {
+            width: parent.width
+            height: (direktKaufen.visible || buyerprotection.visible) ? direktKaufen.height : 0
+
+            Label {
+                id: direktKaufen
+                anchors.left: parent.left
+                text: qsTr("✅ Direkt kaufen")
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                visible: itemObject.buynow
+            }
+
+            Label {
+                id: buyerprotection
+                anchors.right: parent.right
+                text: qsTr("Buyers protection: +") + itemObject.buynowfee/100 + "€"
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                visible: itemObject["buynowfee"] !== ""
             }
         }
 
@@ -204,6 +236,12 @@ SilicaFlickable {
             //commercial users does not have a username
             text: itemObject["username"] === "" ? itemObject["userinfo"] : itemObject["username"]
                                                   + ": " + itemObject["userinfo"]
+            wrapMode: Text.WordWrap
+        }
+
+        Label {
+            width: parent.width
+            text: itemObject["userbadges"]
             wrapMode: Text.WordWrap
         }
 
