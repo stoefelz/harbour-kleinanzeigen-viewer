@@ -35,7 +35,9 @@ Requires:
   - python3-requests
   - python3-lxml
   # in openrepos in my repo available
-  - python3-beautifulsoup
+  - python3-beautifulsoup4
+  - python3-soupsieve
+  - python3-typing-extensions
 
 # All installed files
 Files:
