@@ -20,17 +20,17 @@ ApplicationWindow {
     ListModel {
         id: categoryModel
     }
+
     Notification {
         id: offlineNotification
         body: qsTr("App is offline")
-        expireTimeout: 10000
+        expireTimeout: 3000
     }
+
     ThemeEffect {
        id: longBuzz
-
        effect: ThemeEffect.PressStrong
    }
-
 
     initialPage: Component { Main{ } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
@@ -42,7 +42,6 @@ ApplicationWindow {
         onOnlineChanged: {
             if(online) {
                 offline = false
-                //python.startSearch(searchTerm, filterProperties.pageNumber)
             }
        }
 
