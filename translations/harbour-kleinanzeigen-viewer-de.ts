@@ -206,6 +206,22 @@
         <source>Add to watchlist</source>
         <translation>Zu Merkliste hinzufügen</translation>
     </message>
+    <message>
+        <source>✅ Direkt kaufen</source>
+        <translation>✅ Direkt kaufen</translation>
+    </message>
+    <message>
+        <source>Buyers protection: +</source>
+        <translation>Käuferschutz: +</translation>
+    </message>
+    <message>
+        <source>DELETED </source>
+        <translation>GELÖSCHT </translation>
+    </message>
+    <message>
+        <source>RESERVED </source>
+        <translation>RESERVIERT </translation>
+    </message>
 </context>
 <context>
     <name>ItemError</name>

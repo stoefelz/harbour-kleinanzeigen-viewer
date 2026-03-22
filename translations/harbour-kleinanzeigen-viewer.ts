@@ -206,6 +206,22 @@
         <source>Add to watchlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>✅ Direkt kaufen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buyers protection: +</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DELETED </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RESERVED </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemError</name>
