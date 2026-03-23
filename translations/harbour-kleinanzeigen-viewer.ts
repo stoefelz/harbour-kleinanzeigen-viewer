@@ -175,6 +175,10 @@
         <source>All categories</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Buy now</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemDetails</name>

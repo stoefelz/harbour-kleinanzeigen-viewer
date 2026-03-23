@@ -177,6 +177,10 @@ Page {
                     filterArguments['zip_radius'] = filterProperties.zipRadius
                 if(filterProperties.categoryId !== "")
                     filterArguments['category'] = filterProperties.categoryId
+                if(filterProperties.buynow)
+                    filterArguments['buynow'] = "true"
+                else
+                    filterArguments['buynow'] = "false"
 
                 call('get_search_entries.get_search_entries',
                      [searchString, filterArguments],

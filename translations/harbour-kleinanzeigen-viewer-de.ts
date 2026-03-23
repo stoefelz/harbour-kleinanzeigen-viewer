@@ -175,6 +175,10 @@
         <source>All categories</source>
         <translation>Alle Kategorien</translation>
     </message>
+    <message>
+        <source>Buy now</source>
+        <translation>Direkt kaufen</translation>
+    </message>
 </context>
 <context>
     <name>ItemDetails</name>

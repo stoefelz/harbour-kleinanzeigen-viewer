@@ -208,6 +208,15 @@ Page {
                 }
             }
 
+            TextSwitch {
+                id: buynowCheck
+                text: qsTr("Buy now")
+                onCheckedChanged: {
+                   buynowCheck.checked ? filterProperties.buynow = true : filterProperties.buynow = false
+                   reloadProperties()
+                }
+            }
+
             SectionHeader {
                 text: qsTr("Price")
             }
@@ -311,10 +320,12 @@ Page {
                     filterProperties.categoryId = ""
                     filterProperties.categoryName = ""
                     filterProperties.reloadSearch = true
+                    filterProperties.buynow = false
                     comboRadius.currentItem = noRadius
                     comboSorting.currentItem = latest
                     comboSeller.currentItem = privatAndCommercial
                     comboTyp.currentItem = offerAndRequest
+                    buynowCheck.checked = false
                 }
             }
         }
