@@ -243,6 +243,7 @@ SilicaFlickable {
             width: parent.width
             text: itemObject["userbadges"]
             wrapMode: Text.WordWrap
+            visible: itemObject["userbadges"]
         }
 
         Label {

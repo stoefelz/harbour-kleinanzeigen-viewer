@@ -13,5 +13,5 @@ Item {
     property string categoryId
     property bool reloadSearch: false
     property int pageNumber: 1
-
+    property bool buynow: false
 }
