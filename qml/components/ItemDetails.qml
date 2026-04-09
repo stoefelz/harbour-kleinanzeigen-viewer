@@ -9,7 +9,6 @@ SilicaFlickable {
     property int detailListLength: itemObject.details.length
     property int checkListLength: itemObject.checktags.length
     contentHeight: itemContent.height
-
     function fillModels() {
         for (var i = 0; i < itemObject["small-pictures"].length; ++i) {
             pictureUrls.append({
@@ -147,23 +146,35 @@ SilicaFlickable {
 
         Item {
             width: parent.width
-            height: (direktKaufen.visible || buyerprotection.visible) ? direktKaufen.height : 0
+            height: shipping.height;
 
             Label {
                 id: direktKaufen
                 anchors.left: parent.left
                 text: qsTr("✅ Direkt kaufen")
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                color: Theme.secondaryHighlightColor
                 visible: itemObject.buynow
             }
 
             Label {
+                id: shipping
+                anchors.right: parent.right
+                text: itemObject["shipping"]
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryHighlightColor
+            }
+        }
+
+        Item {
+            width: parent.width
+            height: buyerprotection.visible ? buyerprotection.height : 0
+            Label {
                 id: buyerprotection
                 anchors.right: parent.right
-                text: qsTr("Buyers protection: +") + itemObject.buynowfee/100 + "€"
+                text: qsTr("+ buyers protection ") + itemObject.buynowfee/100 + " €"
                 font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                color: Theme.secondaryHighlightColor
                 visible: itemObject["buynowfee"] !== ""
             }
         }
@@ -243,7 +254,7 @@ SilicaFlickable {
             width: parent.width
             text: itemObject["userbadges"]
             wrapMode: Text.WordWrap
-            visible: itemObject["userbadges"]
+            visible: itemObject["userbadges"] !== ""
         }
 
         Label {
@@ -259,7 +270,6 @@ SilicaFlickable {
             text: qsTr("Open item in Browser")
             onClicked: Qt.openUrlExternally(itemObject.link)
         }
-
 
         MenuItem {
             property bool isInWatchlist
