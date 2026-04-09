@@ -9,4 +9,4 @@ Item {
     readonly property string offerType: "OFFER"
     readonly property string wantedType: "WANTED"
     readonly property var zipRadiusValues: ["5", "10", "20", "30", "50", "100", "150", "200"]
-    }
+}

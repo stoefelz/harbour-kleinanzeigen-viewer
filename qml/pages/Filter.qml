@@ -208,6 +208,46 @@ Page {
                 }
             }
 
+            ComboBox {
+                id: comboShipping
+                width: parent.width
+                label: qsTr("Shipping")
+                description: qsTr("Shipping or pickup")
+                currentItem: {
+                    if (filterProperties.shipping === "true") {
+                        shipping
+                    } else if (filterProperties.shipping === "false") {
+                        pickup
+                    } else {
+                        shippingAndPickup
+                    }
+                }
+                menu: ContextMenu {
+                    MenuItem {
+                        id: shippingAndPickup
+                        text: qsTr("shipping and pickup")
+                    }
+                    MenuItem {
+                        id: shipping
+                        text: qsTr("only shipping")
+                    }
+                    MenuItem {
+                        id: pickup
+                        text: qsTr("only pickup")
+                    }
+                }
+                onCurrentIndexChanged:  {
+                    if (comboShipping.currentItem == shipping) {
+                        filterProperties.shipping = "true"
+                    } else if (comboShipping.currentItem == pickup) {
+                        filterProperties.shipping = "false"
+                    } else {
+                        filterProperties.shipping = ""
+                    }
+                    reloadProperties()
+                }
+            }
+
             TextSwitch {
                 id: buynowCheck
                 text: qsTr("Buy now")
@@ -321,11 +361,14 @@ Page {
                     filterProperties.categoryName = ""
                     filterProperties.reloadSearch = true
                     filterProperties.buynow = false
+                    filterProperties.shipping = ""
                     comboRadius.currentItem = noRadius
                     comboSorting.currentItem = latest
                     comboSeller.currentItem = privatAndCommercial
                     comboTyp.currentItem = offerAndRequest
                     buynowCheck.checked = false
+                    comboShipping.currentItem = shippingAndPickup
+
                 }
             }
         }

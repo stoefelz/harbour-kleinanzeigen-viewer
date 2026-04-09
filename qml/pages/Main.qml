@@ -181,6 +181,8 @@ Page {
                     filterArguments['buynow'] = "true"
                 else
                     filterArguments['buynow'] = "false"
+                if(filterProperties.shipping != "")
+                    filterArguments['shipping'] = filterProperties.shipping
 
                 call('get_search_entries.get_search_entries',
                      [searchString, filterArguments],

@@ -14,4 +14,5 @@ Item {
     property bool reloadSearch: false
     property int pageNumber: 1
     property bool buynow: false
+    property string shipping
 }
