@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.stoefelz.kleinanzeigende
+Exec=/usr/bin/harbour-kleinanzeigen-viewer

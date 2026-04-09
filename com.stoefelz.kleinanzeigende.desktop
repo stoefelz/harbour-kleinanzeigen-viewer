@@ -2,8 +2,14 @@
 Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-kleinanzeigen-viewer
-Exec=harbour-kleinanzeigen-viewer
+Exec=harbour-kleinanzeigen-viewer %U
+DBusActivatable=true
 Name=Kleinanzeigen
+MimeType=x-url-handler/kleinanzeigen.de;x-url-handler/www.kleinanzeigen.de;
+
+X-Maemo-Service=com.stoefelz.kleinanzeigende
+X-Maemo-Object-Path=/
+X-Maemo-Method=com.stoefelz.kleinanzeigende.openUrl
 
 [X-Sailjail]
 # Replace with your organization as a reverse domain name
