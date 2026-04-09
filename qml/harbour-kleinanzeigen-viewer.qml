@@ -64,7 +64,7 @@ ApplicationWindow {
 
     //when receiving url via dbus
     function handleNewUrl(url) {
-        processUrl(url)
+        handleUrl(url)
         appWindow.activate()
     }
 
