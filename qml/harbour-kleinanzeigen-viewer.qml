@@ -10,8 +10,10 @@ import "models"
 ApplicationWindow {
     id: appWindow
     readonly property string websiteUrl: "https://www.kleinanzeigen.de"
+    property string startupUrlValue: typeof startupUrl !== 'undefined' ? startupUrl : ""
     property SearchField searchFieldProperty: null;
     property bool offline: false
+
     //to have access to all filter properties all time
     FilterProperties {
         id: filterProperties
@@ -21,6 +23,7 @@ ApplicationWindow {
         id: categoryModel
     }
 
+    //for notificaton
     Notification {
         id: offlineNotification
         body: qsTr("App is offline")
@@ -51,4 +54,31 @@ ApplicationWindow {
             longBuzz.play()
         }
      }
+
+    //start with url only on beginning
+    Component.onCompleted: {
+        if (typeof startupUrl !== 'undefined' && startupUrl !== "") {
+            handleUrl(startupUrl)
+        }
+    }
+
+    //when receiving url via dbus
+    function handleNewUrl(url) {
+        processUrl(url)
+        appWindow.activate()
+    }
+
+    function handleUrl(url) {
+        // remove protocol and domain
+        var path = url.replace(/^https?:\/\/[^\/]+/, '')
+
+        // search for item id
+        var match = path.match(/\/(\d{10})-/)
+
+        //open item
+        if (match && match[1]) {
+            var itemId = match[1]
+            pageStack.push(Qt.resolvedUrl("pages/Item.qml"), {"itemId": itemId})
+        }
+  }
 }
