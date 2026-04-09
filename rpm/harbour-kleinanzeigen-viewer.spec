@@ -9,7 +9,7 @@ Name:       harbour-kleinanzeigen-viewer
 # << macros
 
 Summary:    Kleinanzeigen Viewer
-Version:    26.3
+Version:    26.4
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
@@ -69,7 +69,8 @@ desktop-file-install --delete-original       \
 %{_datadir}/%{name}/translations
 %{_bindir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/com.stoefelz.kleinanzeigende.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/dbus-1/services/com.stoefelz.kleinanzeigende.service
 # >> files
 # << files

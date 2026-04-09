@@ -1,6 +1,6 @@
 Name: harbour-kleinanzeigen-viewer
 Summary: Kleinanzeigen Viewer
-Version: 26.3
+Version: 26.4
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
@@ -44,8 +44,8 @@ Files:
   - '%{_datadir}/%{name}/translations'
   - '%{_bindir}/%{name}'
   - '%{_datadir}/%{name}'
-  - '%{_datadir}/applications/%{name}.desktop'
+  - '%{_datadir}/applications/com.stoefelz.kleinanzeigende.desktop'
   - '%{_datadir}/icons/hicolor/*/apps/%{name}.png'
-
+  - '%{_datadir}/dbus-1/services/com.stoefelz.kleinanzeigende.service'
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle
