@@ -204,11 +204,11 @@
     <name>ItemDetails</name>
     <message>
         <source>DELETED </source>
-        <translation>GELÖSCHT</translation>
+        <translation>GELÖSCHT </translation>
     </message>
     <message>
         <source>RESERVED </source>
-        <translation>RESERVIERT</translation>
+        <translation>RESERVIERT </translation>
     </message>
     <message>
         <source>✅ Direkt kaufen</source>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <source>+ buyers protection </source>
-        <translation>+ Käuferschutz</translation>
+        <translation>+ Käuferschutz für </translation>
     </message>
     <message>
         <source>Details</source>

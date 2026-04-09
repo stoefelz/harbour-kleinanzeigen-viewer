@@ -3,18 +3,49 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
 
+    function checkPageStack(objectName) {
+        if(pageStack.currentPage && pageStack.currentPage.objectName === objectName) {
+            return true
+        }
+        return false
+    }
+
     Image {
-        width: parent.width / 2
+        id: coverImage
+        width: (checkPageStack("ItemPage"))
+                   ? parent.width / 1.5
+                   : parent.width / 2
         height: width
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
+            verticalCenterOffset: Theme.paddingMedium
         }
-
         rotation: 3
-        fillMode: Image.PreserveAspectCrop
-        opacity: 0.8
-        source: "harbour-kleinanzeigen-viewer.png"
+        fillMode: Image.PreserveAspectFit
+        opacity: 0.9
+        source: {
+            //for updating on new page
+            var dummy = pageStack.depth;
+            if (checkPageStack("ItemPage") && pageStack.currentPage.coverImage !== "") {
+                return pageStack.currentPage.coverImage
+            }
+            return "harbour-kleinanzeigen-viewer.png";
+        }
+    }
+
+    // white border for items
+    Rectangle {
+        width: coverImage.paintedWidth * 1.15
+        height: coverImage.paintedHeight * 1.15
+        anchors {
+            horizontalCenter: coverImage.horizontalCenter
+            verticalCenter: coverImage.verticalCenter
+        }
+        rotation: coverImage.rotation
+        color: "white"
+        z: coverImage.z - 1
+        visible: checkPageStack("ItemPage") && pageStack.currentPage.coverImage !== ""
     }
 
     Label {
@@ -23,25 +54,33 @@ CoverBackground {
                horizontalCenter: parent.horizontalCenter
                top: parent.top
                topMargin: Theme.paddingLarge
-
            }
            color: Theme.highlightColor
-           text: qsTr("Kleinanzeigen")
+           text: {
+               var dummy = pageStack.depth;
+               if (checkPageStack("ItemPage")) {
+                   return pageStack.currentPage.coverName
+               }
+               else if(checkPageStack("MainPage") && pageStack.currentPage.searchTerm !== "" && pageStack.currentPage.searchTerm !== " ") {
+                   return pageStack.currentPage.searchTerm
+               }
+               return qsTr("Kleinanzeigen");
+           }
            font.weight: Font.DemiBold
-           wrapMode: Text.WordWrap
-
+           wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+           maximumLineCount: 2
+           elide: Text.ElideRight
        }
 
     CoverActionList {
         CoverAction {
             iconSource: "image://theme/icon-cover-search"
             onTriggered: {
-                while(pageStack.depth > 1) {
-                    pageStack.pop()
-                    pageStack.completeAnimation()
-                }
+                pageStack.pop(null, PageStackAction.Immediate)
                 appWindow.activate()
-                pageStack.currentPage.focusSearch()
+                if(checkPageStack("MainPage")) {
+                    pageStack.currentPage.focusSearch()
+                }
             }
         }
     }

@@ -7,6 +7,10 @@ Page {
     //item id gets by FirstPage
     property string itemId
     property var itemObject: null
+    //for cover
+    property string objectName: "ItemPage"
+    property string coverImage: ""
+    property string coverName: ""
 
     PageBusyIndicator {
         id: busyIndicator

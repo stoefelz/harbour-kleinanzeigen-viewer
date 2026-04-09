@@ -10,6 +10,9 @@ SilicaFlickable {
     property int checkListLength: itemObject.checktags.length
     contentHeight: itemContent.height
     function fillModels() {
+        coverName = itemObject.heading
+        coverImage = itemObject["small-pictures"][0] ? itemObject["small-pictures"][0] : ""
+
         for (var i = 0; i < itemObject["small-pictures"].length; ++i) {
             pictureUrls.append({
                                    "imageUrl": itemObject["small-pictures"][i]

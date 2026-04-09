@@ -8,7 +8,7 @@ Page {
     id: searchPage
     allowedOrientations: Orientation.All
     //default searchTerm is an blank because so you get the startsite kleinanzeigen items
-    property string searchTerm: " "
+
     //to know if there is anything to show
     property int resultsLength: 0
     property bool filterPageAttached
@@ -16,6 +16,9 @@ Page {
     property bool lastSearchPage
     //to block reloading further results while already loading
     property bool loadingFinished: true
+    property string searchTerm: " "
+    //for cover
+    property string objectName: "MainPage"
 
     function focusSearch() {
         searchFieldProperty.forceActiveFocus()
