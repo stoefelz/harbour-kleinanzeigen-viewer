@@ -179,9 +179,45 @@
         <source>Buy now</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipping or pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>shipping and pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>only shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>only pickup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ItemDetails</name>
+    <message>
+        <source>DELETED </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RESERVED </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>✅ Direkt kaufen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+ buyers protection </source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Details</source>
         <translation type="unfinished"></translation>
@@ -208,22 +244,6 @@
     </message>
     <message>
         <source>Add to watchlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>✅ Direkt kaufen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Buyers protection: +</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DELETED </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RESERVED </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

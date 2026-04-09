@@ -179,9 +179,45 @@
         <source>Buy now</source>
         <translation>Direkt kaufen</translation>
     </message>
+    <message>
+        <source>Shipping</source>
+        <translation>Versand</translation>
+    </message>
+    <message>
+        <source>Shipping or pickup</source>
+        <translation>Versand oder Abholung</translation>
+    </message>
+    <message>
+        <source>shipping and pickup</source>
+        <translation>Versand und Abholung</translation>
+    </message>
+    <message>
+        <source>only shipping</source>
+        <translation>nur Versand</translation>
+    </message>
+    <message>
+        <source>only pickup</source>
+        <translation>nur Abholung</translation>
+    </message>
 </context>
 <context>
     <name>ItemDetails</name>
+    <message>
+        <source>DELETED </source>
+        <translation>GELÖSCHT</translation>
+    </message>
+    <message>
+        <source>RESERVED </source>
+        <translation>RESERVIERT</translation>
+    </message>
+    <message>
+        <source>✅ Direkt kaufen</source>
+        <translation>✅ Direkt kaufen</translation>
+    </message>
+    <message>
+        <source>+ buyers protection </source>
+        <translation>+ Käuferschutz</translation>
+    </message>
     <message>
         <source>Details</source>
         <translation>Details</translation>
@@ -209,22 +245,6 @@
     <message>
         <source>Add to watchlist</source>
         <translation>Zu Merkliste hinzufügen</translation>
-    </message>
-    <message>
-        <source>✅ Direkt kaufen</source>
-        <translation>✅ Direkt kaufen</translation>
-    </message>
-    <message>
-        <source>Buyers protection: +</source>
-        <translation>Käuferschutz: +</translation>
-    </message>
-    <message>
-        <source>DELETED </source>
-        <translation>GELÖSCHT </translation>
-    </message>
-    <message>
-        <source>RESERVED </source>
-        <translation>RESERVIERT </translation>
     </message>
 </context>
 <context>
