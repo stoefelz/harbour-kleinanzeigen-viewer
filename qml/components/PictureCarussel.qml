@@ -5,6 +5,7 @@ FullscreenContentPage {
     allowedOrientations: Orientation.All
     property var bigPicUrls
     property int currentIndex
+    property string objectName: "PictureGalleryPage"
 
     function fillModel() {
         for (var i = 0; i < bigPicUrls.length; ++i) {
@@ -58,6 +59,7 @@ FullscreenContentPage {
                         fillMode: Image.PreserveAspectFit
                         scale: 1.0
                         transformOrigin: Item.Center
+                        asynchronous: true
 
                         onScaleChanged: {
                             var newContentWidth = Math.max(flick.width, image.paintedWidth * scale)

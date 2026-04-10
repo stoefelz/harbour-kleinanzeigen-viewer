@@ -261,10 +261,9 @@ Page {
                 text: qsTr("Price")
             }
 
-            Rectangle {
+            Item {
                 width: parent.width
                 height: minPriceField.height
-                color: "transparent"
 
                 TextField {
                     id: minPriceField

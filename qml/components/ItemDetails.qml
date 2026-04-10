@@ -5,10 +5,11 @@ import io.thp.pyotherside 1.5
 import "../scripts/database.js" as DB
 
 SilicaFlickable {
-
     property int detailListLength: itemObject.details.length
     property int checkListLength: itemObject.checktags.length
     contentHeight: itemContent.height
+    layer.enabled: true
+
     function fillModels() {
         coverName = itemObject.heading
         coverImage = itemObject["small-pictures"][0] ? itemObject["small-pictures"][0] : ""
@@ -64,10 +65,10 @@ SilicaFlickable {
                 delegate: Image {
                     id: imageItem
                     source: imageUrl
-
                     width: parent.width
                     height: parent.height
                     fillMode: Image.PreserveAspectFit
+                    asynchronous: true
 
                     MouseArea {
                         anchors.fill: parent

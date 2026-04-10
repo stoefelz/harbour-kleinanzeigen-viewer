@@ -12,14 +12,14 @@ CoverBackground {
 
     Image {
         id: coverImage
-        width: (checkPageStack("ItemPage"))
-                   ? parent.width / 1.5
+        width: (checkPageStack("ItemPage") && pageStack.currentPage.coverImage !== "")
+                   ? parent.width / 1.6
                    : parent.width / 2
         height: width
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
-            verticalCenterOffset: Theme.paddingMedium
+            verticalCenterOffset: Theme.paddingSmall
         }
         rotation: 3
         fillMode: Image.PreserveAspectFit
@@ -76,11 +76,11 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-search"
             onTriggered: {
-                pageStack.pop(null, PageStackAction.Immediate)
+                do {
+                    pageStack.pop(null, PageStackAction.Immediate)
+                } while(!checkPageStack("MainPage"))
                 appWindow.activate()
-                if(checkPageStack("MainPage")) {
-                    pageStack.currentPage.focusSearch()
-                }
+                pageStack.currentPage.focusSearch()
             }
         }
     }

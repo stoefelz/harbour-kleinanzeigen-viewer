@@ -298,6 +298,17 @@
     </message>
 </context>
 <context>
+    <name>SearchListDelegate</name>
+    <message>
+        <source>Remove from watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to watchlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Watchlist</name>
     <message>
         <source>Watchlist</source>

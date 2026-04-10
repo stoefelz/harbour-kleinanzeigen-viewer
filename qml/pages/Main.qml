@@ -1,6 +1,5 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-import QtGraphicalEffects 1.0
 import io.thp.pyotherside 1.5
 import "../components"
 
@@ -28,6 +27,7 @@ Page {
     //TODO lade symbol -> bis pythonoterside zeichen gibt, dass fertig
     SilicaListView {
         anchors.fill: parent
+        cacheBuffer: Screen.height * 2
         //load automatic next results when on page end
         onAtYEndChanged: {
             if (atYEnd && loadingFinished && !lastSearchPage && resultsLength > 0) {
@@ -91,7 +91,6 @@ Page {
             //for animation performance
             antialiasing: true
             layer.enabled: true
-            layer.smooth: true
             layer.effect: null
 
             NumberAnimation on x {
