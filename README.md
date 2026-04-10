@@ -7,13 +7,13 @@ There are a few bugs and not all features of the website are working in this app
 
 **Roadmap**  
 Bugfixing  
-More filter__
-Watchlist refresh items__
-User profile view__
-Show old prices__
-Open more links__
-Better zoom animation__
-Share function__
+More filter  
+Watchlist refresh items  
+User profile view  
+Show old prices  
+Open more links  
+Better zoom animation  
+Share function  
 
 
 ---
