@@ -7,7 +7,14 @@ There are a few bugs and not all features of the website are working in this app
 
 **Roadmap**  
 Bugfixing  
-add features to Watchlist
+More filter__
+Watchlist refresh items__
+User profile view__
+Show old prices__
+Open more links__
+Better zoom animation__
+Share function__
+
 
 ---
 This app uses Kleinanzeigen Parser © by me  
@@ -20,10 +27,10 @@ Download the rpm and install the app - when you have not enabled my openrepos re
 
 # Screenshots
 <div style="display:flex;">
-  <img alt="App image" src="screenshots/search.jpg" width="22%">
-  <img alt="App image" src="screenshots/filter.jpg" width="22%">
-  <img alt="App image" src="screenshots/itemView.jpg" width="22%">
-
+  <img alt="Search image" src="screenshots/search.png" width="22%">
+  <img alt="Filter image" src="screenshots/filter.png" width="22%">
+  <img alt="Item View image" src="screenshots/itemView.png" width="22%">
+  <img alt="Merkliste image" src="screenshots/merkliste.png" width="22%">
 </div>
 <p>
 
