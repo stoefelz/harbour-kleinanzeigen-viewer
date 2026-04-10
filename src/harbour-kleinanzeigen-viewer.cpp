@@ -4,6 +4,7 @@
 #include <sailfishapp.h>
 #include <QGuiApplication>
 #include <QQuickView>
+#include <QQuickItem>
 #include <QQmlContext>
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
