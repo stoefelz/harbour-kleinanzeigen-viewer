@@ -10,7 +10,7 @@ ListModel {
         var results = DB.getAllWatchlistItems()
         for (var i = 0; i < results.length; i++) {
             watchlistModel.append({
-                        itemId: results[i].itemid,
+                        itemId: String(results[i].itemid),
                         heading: results[i].heading,
                         zip: results[i].zip,
                         price: results[i].price,

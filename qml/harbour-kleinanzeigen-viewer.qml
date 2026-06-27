@@ -77,8 +77,10 @@ ApplicationWindow {
 
         //open item
         if (match && match[1]) {
-            var itemId = match[1]
-            pageStack.push(Qt.resolvedUrl("pages/Item.qml"), {"itemId": itemId})
+            var itemId = String(match[1])
+            console.log("\n")
+            console.log(match[1])
+            pageStack.push(Qt.resolvedUrl("pages/Item.qml"), {"itemId": String(itemId)})
         }
   }
 }

@@ -198,7 +198,7 @@ Page {
                              resultsLength = resultObject.length
                              for (var i = 0; i < resultObject.length; i++) {
                                  listOfSearchResult.append({
-                                      "itemId": resultObject[i]["id"],
+                                      "itemId": String(resultObject[i]["id"]),
                                       "zip": resultObject[i]["zip-code"],
                                       "date": resultObject[i]["date"],
                                       "price": resultObject[i]["price"],

@@ -77,7 +77,7 @@ ListItem {
     onClicked: {
         //go to item page
         if(!offline)
-            pageStack.push(Qt.resolvedUrl("../pages/Item.qml"), {"itemId": itemId})
+            pageStack.push(Qt.resolvedUrl("../pages/Item.qml"), {"itemId": String(itemId)})
     }
     menu: ContextMenu {
         on_OpenChanged: {
