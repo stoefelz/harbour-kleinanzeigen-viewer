@@ -1,7 +1,7 @@
 Name: harbour-kleinanzeigen-viewer
 Summary: Kleinanzeigen Viewer
 Version: 26.6
-Release: 2
+Release: 3
 # The contents of the Group field should be one of the groups listed here:
 # https://github.com/mer-tools/spectacle/blob/master/data/GROUPS
 Group: Qt/Qt
@@ -37,7 +37,7 @@ Requires:
   # in openrepos in my repo available
   - python3-beautifulsoup4 >= 4.12
   - python3-soupsieve >= 2.6
-  - python3-typing-extensions >= 4.13
+  - python3-typing-extensions >= 4.16
 
 # All installed files
 Files:
